@@ -63,18 +63,47 @@
                         android:textSize="17dp"
                         android:inputType="text"
                         android:text="사용자 이메일"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/donation_back"
+                android:padding="5dp"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="50dp">
+                    <TextView
+                        android:id="@+id/mypage_Tv_donation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17dp"
+                        android:inputType="text"
+                        android:text="기부금 : "/>
 
                     <TextView
                         android:id="@+id/mypage_Tv_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textSize="17dp"
                         android:inputType="text"
-                        android:text="기부금 : 누적 기부금"/>
+                        android:text="누적 기부금"
+                        android:textStyle="bold"
+                        android:textColor="#0558FF"
+                        android:textSize="17dp" />
                 </LinearLayout>
-            </LinearLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="기부하기"
+                    android:backgroundTint="#84A7E4"/>
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,14 +115,14 @@
                     android:id="@+id/mypage_Tv_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:text="공지사항 / 이벤트" />
 
                 <TextView
                     android:id="@+id/mypage_Tv_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:layout_marginTop="5dp"
                     android:text="자주 묻는 질문" />
 
@@ -101,7 +130,7 @@
                     android:id="@+id/mypage_Tv_agree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:layout_marginTop="5dp"
                     android:text="약관보기" />
             </LinearLayout>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication">
         <activity
+            android:name=".LodingActivity"
+            android:exported="false" />
+        <activity
             android:name=".BMIActivity"
             android:exported="false" />
         <activity
