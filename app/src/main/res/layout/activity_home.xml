@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 랭킹 화면 -->
+<!-- 홈 화면 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/rank_Tv_titlename"
+        android:id="@+id/home_Tv_titlename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textAlignment="center"
-        android:text="랭킹"
+        android:text="앱 이름"
         android:textSize="40dp"
         android:textColor="#84A7E4"
         android:textStyle="bold" />
@@ -28,21 +28,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 랭킹(점수) "
+            android:text="내 기부 현황 : "
             android:textSize="20dp"/>
 
         <TextView
-            android:id="@+id/rank_Tv_money"
+            android:id="@+id/home_Tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="랭킹"/>
+            android:text="기부금액"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
@@ -52,7 +52,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="전체 사용자 랭킹"/>
+            android:text="체크리스트"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:padding="15dp"
+        android:background="@drawable/donation_back">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="광고!!"/>
     </LinearLayout>
 
 </LinearLayout>

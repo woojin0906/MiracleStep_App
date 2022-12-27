@@ -6,13 +6,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private RankActivity rankActivity;
     private RunningActivity runningActivity;
+    private MypageActivity mypageActivity;
+    private HomeActivity homeActivity;
+
     private Button buttonRank;
     private Button buttonRunning;
+    private Button buttonInfo;
+    private ImageButton buttonHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         rankActivity = new RankActivity();
         runningActivity = new RunningActivity();
+        mypageActivity = new MypageActivity();
+        homeActivity = new HomeActivity();
 
         // 프래그먼트 매니저 획득
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -29,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
         //프래그먼트를 올리거나 교체하는 작업을 Transaction이라고 합니다.
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //프래그먼트를 FrameLayout의 자식으로 등록해줍니다.
-        fragmentTransaction.add(R.id.fragmentFrame, rankActivity);
+        fragmentTransaction.add(R.id.fragmentFrame, homeActivity);
         //commit을 하면 자식으로 등록된 프래그먼트가 화면에 보여집니다.
         fragmentTransaction.commit();
 
-        buttonRank = findViewById(R.id.buttonRank);
-        buttonRunning = findViewById(R.id.buttonRunning);
+        buttonRank = findViewById(R.id.main_rankBtn);
+        buttonRunning = findViewById(R.id.main_runningBtn);
+        buttonInfo = findViewById(R.id.main_infoBtn);
+        buttonHome = findViewById(R.id.main_HomeBtn);
 
         buttonRank.setOnClickListener(v -> {
             FragmentManager fm1 = getSupportFragmentManager();
@@ -48,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft2 = fragmentManager.beginTransaction();
             ft2.replace(R.id.fragmentFrame, runningActivity);
             ft2.commit();
+        });
+
+        buttonInfo.setOnClickListener(v -> {
+            FragmentManager fm3 = getSupportFragmentManager();
+            FragmentTransaction ft3 = fragmentManager.beginTransaction();
+            ft3.replace(R.id.fragmentFrame, mypageActivity);
+            ft3.commit();
+        });
+
+        buttonHome.setOnClickListener(v -> {
+            FragmentManager fm4 = getSupportFragmentManager();
+            FragmentTransaction ft4 = fragmentManager.beginTransaction();
+            ft4.replace(R.id.fragmentFrame, homeActivity);
+            ft4.commit();
         });
 
     }

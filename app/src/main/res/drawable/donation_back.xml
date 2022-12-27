@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xml : 홈 화면 기부금액 테두리 설정 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:start="2dp"
+        android:end="2dp"
+        android:top="2dp"
+        android:bottom="2dp" >
+
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp"
+                android:color="#10000000" />
+            <solid android:color="#ffffff"/>
+            <corners
+                android:topLeftRadius="15dp"
+                android:topRightRadius="15dp"
+                android:bottomLeftRadius="15dp"
+                android:bottomRightRadius="15dp" />
+        </shape>
+    </item>
+</layer-list>

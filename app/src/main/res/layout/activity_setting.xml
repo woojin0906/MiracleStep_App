@@ -16,8 +16,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="40dp"
                 android:text="설정"
-                android:textColor="@color/black"
-                android:textSize="30dp"
+                android:textColor="#84A7E4"
+                android:textStyle="bold"
+                android:textSize="35dp"
                 android:gravity="center"/>
 
             <LinearLayout
@@ -26,22 +27,22 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="30dp">
                 <TextView
                     android:id="@+id/setting_Tv_info"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:text="회원정보/프로필 수정 >" />
 
                 <TextView
                     android:id="@+id/setting_Tv_BMI"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:text="키/몸무게 수정 >"
                     android:background="@drawable/setting_backgound"/>
@@ -49,9 +50,9 @@
                 <TextView
                     android:id="@+id/setting_Tv_Version"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:text="버전정보 >"
                     android:background="@drawable/setting_backgound"/>
@@ -59,18 +60,18 @@
                 <TextView
                     android:id="@+id/setting_Tv_Logout"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:text="로그아웃 >"
                     android:background="@drawable/setting_backgound"/>
                 <TextView
                     android:id="@+id/setting_Tv_Exit"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:text="탈퇴하기 >"
                     android:background="@drawable/mypage_backgound"/>

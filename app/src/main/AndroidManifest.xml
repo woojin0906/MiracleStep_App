@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication">
         <activity
+            android:name=".BMIActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingActivity"
             android:exported="true" />
         <activity
@@ -21,7 +30,6 @@
         <activity
             android:name=".MypageActivity"
             android:exported="true" />
-
         <activity
             android:name=".PasswordActivity"
             android:exported="true" />

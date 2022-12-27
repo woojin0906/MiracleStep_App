@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MypageActivity extends Fragment {
+public class HomeActivity extends Fragment {
 
     @Nullable
     @Override

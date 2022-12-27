@@ -22,25 +22,58 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#84A7E4">
 
         <Button
-            style="@style/Widget.MaterialComponents.Button"
-            android:id="@+id/buttonRank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_runningBtn"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="러닝"
+            android:background="#00ff0000"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_battleBtn"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="대결"
+            android:background="#00ff0000"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_HomeBtn"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:src="@drawable/home"
+            android:background="#00ff0000"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:id="@+id/main_rankBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="랭킹 프래그먼트" />
+            android:text="랭크"
+            android:background="#00ff0000"
+            android:layout_gravity="center_vertical"/>
 
         <Button
-            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonRunning"
+            android:id="@+id/main_infoBtn"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:text="러닝 프래그먼트"/>
+            android:text="정보"
+            android:background="#00ff0000"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
