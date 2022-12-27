@@ -10,6 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication">
         <activity
+            android:name=".SettingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RankActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RunningActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MypageActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".PasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".JoinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

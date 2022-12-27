@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xml : 마이페이지 TextView 뒷 배경 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape
+            android:shape="rectangle">
+
+            <solid android:color="#30000000" />
+
+        </shape>
+    </item>
+
+    <item android:top="1dp" android:bottom="1dp">
+        <shape
+            android:shape="rectangle">
+
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

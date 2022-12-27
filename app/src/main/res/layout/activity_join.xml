@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 회원가입 화면 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/join_Tv_titlename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="회원가입"
+        android:textAlignment="center"
+        android:textColor="#84A7E4"
+        android:textSize="45dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/join_Et_id"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:inputType="textEmailAddress"
+        android:hint="아이디(이메일 형식)" />
+
+    <EditText
+        android:id="@+id/join_Et_password"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="비밀번호"
+        android:inputType="numberPassword" />
+
+    <EditText
+        android:id="@+id/join_Et_passwordConfirm"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="비밀번호 확인"
+        android:inputType="numberPassword" />
+
+    <EditText
+        android:id="@+id/join_Et_name"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:inputType="textPersonName"
+        android:hint="이름" />
+
+    <EditText
+        android:id="@+id/join_Et_phone"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="전화번호"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/join_joinBtn"
+        android:layout_width="272dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="#84A7E4"
+        android:onClick="onClick"
+        android:text="가입하기"
+        android:textSize="24sp" />
+
+</LinearLayout>

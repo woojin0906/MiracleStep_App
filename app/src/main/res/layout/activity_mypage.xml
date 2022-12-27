@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 마이페이지 화면 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:id="@+id/mypage_Tv_titlename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="앱 이름"
+                    android:textColor="#84A7E4"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
+            <!-- x 표시 추가예정 -->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp">
+
+                <ImageView
+                    android:id="@+id/mypage_imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+                    <TextView
+                        android:id="@+id/mypage_Tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="사용자 이름 >"/>
+
+                    <TextView
+                        android:id="@+id/mypage_Tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textSize="17dp"
+                        android:inputType="text"
+                        android:text="사용자 이메일"/>
+
+                    <TextView
+                        android:id="@+id/mypage_Tv_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textSize="17dp"
+                        android:inputType="text"
+                        android:text="기부금 : 누적 기부금"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:background="@drawable/mypage_backgound">
+                <TextView
+                    android:id="@+id/mypage_Tv_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="공지사항 / 이벤트" />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_marginTop="5dp"
+                    android:text="자주 묻는 질문" />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_agree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_marginTop="5dp"
+                    android:text="약관보기" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:id="@+id/mypage_Tv_customerCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="19dp"
+                    android:textStyle="bold"
+                    android:text="앱 이름 고객센터" />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_ex1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="17dp"
+                    android:text="앱 이용 관련 상담만 가능합니다." />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_ex2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="17dp"
+                    android:text="전화상담은 10:00부터 18:00까지 가능합니다.(주말 및 공휴일 휴무)" />
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
