@@ -20,44 +20,43 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/peopleBtn"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_marginRight="10dp"
                 android:text="사람"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
-                android:backgroundTint="#84A7E4"
-                android:background="@drawable/btnback"
+                android:background="@drawable/btnclickback"
                 android:onClick="onClick" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/environmentBtn"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_marginRight="10dp"
                 android:text="환경"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/white"
+                android:background="@drawable/btnback"
                 android:onClick="onClick" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/animalBtn"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:text="동물"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/white"
+                android:background="@drawable/btnback"
                 android:onClick="onClick"/>
         </LinearLayout>
     </LinearLayout>
