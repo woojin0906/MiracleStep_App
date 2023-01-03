@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.android.volley:volley:1.2.1'    // 서버 통신 관련 라이브러리(2023-01-01 이수)
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
