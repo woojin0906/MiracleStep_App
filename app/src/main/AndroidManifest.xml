@@ -33,9 +33,6 @@
             android:name=".DonationPostActivity"
             android:exported="false" />
         <activity
-            android:name=".DonationWriteActivity"
-            android:exported="false" />
-        <activity
             android:name=".LodingActivity"
             android:exported="false" />
         <activity
