@@ -17,7 +17,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import kr.co.company.healthapplication.Request.LoginRequest;
+import kr.co.company.healthapplication.request.LoginRequest;
 
 // 로그인 액티비티 클래스 (2023-01-02 이수)
 public class LoginActivity extends AppCompatActivity {

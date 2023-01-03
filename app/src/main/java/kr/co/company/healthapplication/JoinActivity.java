@@ -22,7 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import kr.co.company.healthapplication.Request.JoinRequest;
+import kr.co.company.healthapplication.request.JoinRequest;
 
 // 회원가입 액티비티 클래스 (2023-01-02 이수)
 public class JoinActivity extends AppCompatActivity {

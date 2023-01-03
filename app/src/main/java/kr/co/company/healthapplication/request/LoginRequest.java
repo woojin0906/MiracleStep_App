@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication.Request;
+package kr.co.company.healthapplication.request;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
