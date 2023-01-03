@@ -1,94 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 로그인 화면 -->
+<!-- 로그인 화면 (2023-01-01 이수 수정함.)-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#84A7E4" />
-
-    <TextView
-        android:id="@+id/login_Tv_titlename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-130dp"
-        android:text="앱이름"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="522dp" />
-
-    <EditText
-        android:id="@+id/login_Et_id"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-450dp"
-        android:inputType="textEmailAddress"
-        android:hint="아이디" />
-
-    <EditText
-        android:id="@+id/login_Et_password"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:inputType="numberPassword"
-        android:hint="비밀번호" />
-
+    <!-- 상단 로그인 화면 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="10dp">
-        <CheckBox
-            android:id="@+id/login_CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="자동 로그인" />
+        android:layout_height="150dp"
+        android:background="#84A7E4" >
 
-        <Button
-            android:id="@+id/login_password_changeBtn"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="#84A7E4"
-            android:onClick="onClick"
-            android:text="비밀번호찾기"
-            android:textSize="18dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Miracle Step"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- 로그인 중단 화면(세로배치) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="#84A7E4"
+        android:textSize="70px"
+        android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginRight="50dp"
+            android:gravity="left"
+            android:text="아이디"
+            android:textSize="40px"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textSize="40px"
+            android:inputType="textEmailAddress"
+            android:hint="아이디를 입력해주세요." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginRight="50dp"
+            android:gravity="left"
+            android:text="비밀번호"
+            android:textSize="40px"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textSize="40px"
+            android:inputType="textPassword"
+            android:hint="비밀번호를 입력해주세요." />
+
+        <!-- 중간에 가로 배치 레이아웃임. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="-10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
+            <CheckBox
+                android:id="@+id/cbIdSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="35px"
+                android:text="아이디 저장"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvFindPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 재설정"
+                android:textSize="35px"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
     <Button
-        android:id="@+id/login_loginBtn"
-        android:layout_width="280dp"
-        android:layout_height="65dp"
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
         android:backgroundTint="#84A7E4"
         android:onClick="onClick"
         android:text="로그인"
-        android:textSize="30dp" />
+        android:textStyle="bold"
+        android:textSize="40px" />
 
     <Button
-        android:id="@+id/login_joinBtn"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
         android:backgroundTint="#84A7E4"
         android:onClick="onClick"
         android:text="회원가입"
-        android:textSize="27dp" />
+        android:textSize="40px" />
 
 </LinearLayout>
