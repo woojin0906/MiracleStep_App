@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+    <!-- background -->
+    <solid
+        android:color="@color/white" />
+    <padding
+        android:left="45px"
+        android:top="15px"
+        android:right="60px"
+        android:bottom="15px" />
+    <corners
+        android:topLeftRadius="30dp"
+        android:topRightRadius="30dp"/>
+</shape>

@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/home_Tv_titlename"
+        android:id="@+id/tvTitleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textAlignment="center"
-        android:text="앱 이름"
+        android:text="Miracle Step"
         android:textSize="40dp"
         android:textColor="#84A7E4"
         android:textStyle="bold" />
@@ -28,17 +28,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 기부 현황 : "
+            android:text="내 기부 걸음 : "
             android:textSize="20dp"/>
 
         <TextView
-            android:id="@+id/home_Tv_email"
+            android:id="@+id/tvMyDonationStep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="기부금액"/>
+            android:text="34166"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CheckList"
+        android:gravity="center"
+        android:textSize="10pt"
+        android:textStyle="italic"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,8 +56,8 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:padding="15dp"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
         android:background="@drawable/donation_back">
         <TextView
             android:layout_width="match_parent"
@@ -64,10 +74,17 @@
         android:layout_marginTop="30dp"
         android:padding="15dp"
         android:background="@drawable/donation_back">
-        <TextView
-            android:layout_width="match_parent"
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="광고!!"/>
+            android:layout_gravity="center"
+            ads:adSize="FULL_BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+        <!-- TestID : ca-app-pub-3940256099942544/6300978111 -->
+
     </LinearLayout>
 
 </LinearLayout>
