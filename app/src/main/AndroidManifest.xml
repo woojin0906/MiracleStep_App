@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication"
         android:usesCleartextTraffic="true"> <!-- Android 9 버전부터 http 보안관련 문제 때문에 옵션 추가(2023-01-02 이수) -->
+        
         <activity
             android:name=".TestActivity"
             android:exported="false">
@@ -19,6 +20,21 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".DonationActivity"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity
+            android:name=".DonationPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DonationWriteActivity"
+            android:exported="false" />
         <activity
             android:name=".LodingActivity"
             android:exported="false" />
@@ -58,9 +74,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 기부 캠페인 글 화면 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+
+
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="223dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bear2"/>
+
+                <TextView
+                    android:id="@+id/titleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="'따뜻한 플레이' 캠페인(제목)"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="17dp"
+                    android:text="Google Play(단체명)"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textSize="17dp"
+                    android:text="캠페인 기간"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:text="2023/01/02~2023/03/02" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textSize="17dp"
+                    android:text="목표 걸음"/>
+
+                <TextView
+                    android:id="@+id/maxStep"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:text="100,000,000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textSize="17dp"
+                    android:text="기부된 걸음"/>
+
+                <TextView
+                    android:id="@+id/nowStep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="5dp"
+                    android:text="75,084,212"
+                    android:textColor="#125EE4"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/contentTitleName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:textSize="17dp"
+                android:text="북극곰을 지켜주세요."
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="5dp"
+                    android:textSize="17dp"
+                    android:text="최근 20년 사이 북극의 빙하 면적은 50% 감소하였습니다. 북극은 북극곰의 주 서식지이자 사냥터지만 이 순간에도 녹아내리는 빙하로 인해 북극곰은 갈 곳을 잃었습니다. 빙하가 녹으면 인류 재앙으로 돌아옵니다. 지구온난화로 북극의 온도는 빠르게 상승하고 빙하는 더욱 빠르게 녹아가고 있습니다. 빙하가 무너져 내리는 경고를 결코 무시해서는 안 됩니다."
+                    />
+            </ScrollView>
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/donationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:backgroundTint="#365BE3"
+            android:onClick="onClick"
+            android:text="걸음기부하기"
+            android:textSize="21dp" />
+
+    </LinearLayout>
+</LinearLayout>

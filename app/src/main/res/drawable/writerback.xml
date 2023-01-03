@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xml : 글 등록 화면 테두리 설정 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:start="2dp"
+        android:end="2dp"
+        android:top="2dp"
+        android:bottom="2dp" >
+
+    <shape android:shape="rectangle">
+        <stroke android:width="2dp"
+            android:color="@color/black" />
+        <solid android:color="#ffffff"/>
+        <corners
+            android:topLeftRadius="20dp"
+            android:topRightRadius="20dp"
+            android:bottomLeftRadius="20dp"
+            android:bottomRightRadius="20dp" />
+    </shape>
+    </item>
+</layer-list>
