@@ -45,6 +45,7 @@ public class JoinActivity extends AppCompatActivity {
         etWeight = findViewById(R.id.etWeight);
         btnJoin = findViewById(R.id.btnJoin);
         dpBirth = findViewById(R.id.dpBirth);
+
         dpBirth.init(2010, 01, 01, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -68,7 +69,6 @@ public class JoinActivity extends AppCompatActivity {
                 // 모든 정보 입력 확인
                 if(userId.equals("") || userPassword.equals("") || userName.equals("") || userPhoneNumber.equals("")
                         || etHeight.getText().toString().equals("") || etWeight.getText().toString().equals("")) {
-
                     Toast.makeText(getApplicationContext(), "모든 정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
