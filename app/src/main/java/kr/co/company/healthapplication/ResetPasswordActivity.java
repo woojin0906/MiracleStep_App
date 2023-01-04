@@ -2,15 +2,24 @@ package kr.co.company.healthapplication;
 
 import static javax.mail.Session.getDefaultInstance;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
 import org.apache.commons.lang3.RandomStringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Locale;
 import java.util.Properties;
@@ -23,13 +32,16 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import kr.co.company.healthapplication.request.MemberCheckRequest;
+import kr.co.company.healthapplication.request.ResetPasswordRequest;
+
 // SMTP 프로토콜(Simple Mail Transfer Protocol)을 이용하여
 // 이메일에 인증번호 전송하는 클래스. (2023-01-04 이수)
 public class ResetPasswordActivity extends AppCompatActivity {
-    private LinearLayout authLayout;
+    private LinearLayout layoutAuthNumber, layoutResetPassword;
     private TextView tvCountDown;
-    private EditText etEmail, etAuthNumber;
-    private Button btnSendingEmail, btnAuthNumCheck;
+    private EditText etEmail, etAuthNumber, etResetPassword;
+    private Button btnSendingEmail, btnAuthNumCheck, btnResetPassword;
     private String authNumber;
 
     private CountDownTimer mCountDownTimer;
@@ -41,21 +53,27 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+        // 인증번호 이메일에 전송하기
         etEmail = findViewById(R.id.etId);
-        etAuthNumber = findViewById(R.id.etAuthNumber);
         btnSendingEmail = findViewById(R.id.btnSendingEmail);
+
+        // 인증번호 체크하기
+        layoutAuthNumber = findViewById(R.id.layoutAuth);
+        etAuthNumber = findViewById(R.id.etAuthNumber);
         btnAuthNumCheck = findViewById(R.id.btnAuthNumCheck);
         tvCountDown = findViewById(R.id.tvCountDown);
-        authLayout = findViewById(R.id.layoutAuth);
+
+        // 비밀번호 재설정하기
+        layoutResetPassword = findViewById(R.id.layoutResetPassword);
+        etResetPassword = findViewById(R.id.etResetPassword);
+        btnResetPassword = findViewById(R.id.btnResetPassword);
 
         // 인증번호 전송하기.
         btnSendingEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString();
-                authNumber = sendEmail(email);
-                authLayout.setVisibility(View.VISIBLE);
-                startTimer();   // 타이머 시작.
+                memberCheck(email);
             }
         });
 
@@ -63,9 +81,102 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnAuthNumCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("반환된 인증번호", authNumber);
+                String inputNumber = etAuthNumber.getText().toString();
+                // 인증 성공인 경우.
+                if(inputNumber.equals(authNumber)) {
+                    layoutResetPassword.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(),"인증이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
+                    btnAuthNumCheck.setEnabled(false);  // 인증번호 체크버튼 비활성화.
+                    layoutResetPassword.setVisibility(View.VISIBLE);
+                }
+                // 인증 실패인 경우.
+                else {
+                    Toast.makeText(getApplicationContext(),"인증이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"이메일 인증을 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                    btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
+                    btnAuthNumCheck.setEnabled(false); // 인증번호 체크버튼 비활성화.
+                }
 
             }
         });
+
+        // 비밀번호 재설정하기.
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String resetPassword = etResetPassword.getText().toString();
+                insertResetPassword(resetPassword);
+
+            }
+        });
+    }
+
+    // 비밀번호 재설정하는 메소드
+    private void insertResetPassword(String password) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+
+                    // 비밀번호 재설정이 완료된 경우.
+                    if(success) {
+                        Toast.makeText(getApplicationContext(),"비밀번호 재설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    // 비밀번호 재설정이 실패된 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(),"비밀번호 재설정이 실패되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"비밀번호 재설정에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        ResetPasswordRequest reset = new ResetPasswordRequest(password, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ResetPasswordActivity.this);
+        queue.add(reset);
+    }
+
+    // 해당 이메일이 회원인지 확인하는 메서드
+    private void memberCheck(String email) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+
+                    // 회원 검색이 성공한 경우.
+                    if(success) {
+                        Toast.makeText(getApplicationContext(),"이메일이 확인되었습니다.", Toast.LENGTH_SHORT).show();
+                        
+                        // 이메일에 인증번호를 전송.
+                        sendEmail(email);
+                        layoutAuthNumber.setVisibility(View.VISIBLE);
+                        btnAuthNumCheck.setEnabled(true);  // 인증번호 체크버튼 활성화.
+                        Toast.makeText(getApplicationContext(),"인증번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        startTimer();   // 타이머 시작.
+                    }
+
+                    // 회원 검색이 실패한 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(),"이메일 확인이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"이메일 확인에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        MemberCheckRequest memberCheck = new MemberCheckRequest(email, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ResetPasswordActivity.this);
+        queue.add(memberCheck);
     }
 
     // 타이머 시작.
@@ -73,15 +184,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
+                //btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
 
             @Override
             public void onFinish() {
-                btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
-                authLayout.setVisibility(View.INVISIBLE);
+                //btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
+                btnAuthNumCheck.setEnabled(false);  // 인증번호 체크버튼 비활성화.
+                layoutAuthNumber.setVisibility(View.INVISIBLE);
             }
         }.start();
     }
@@ -119,6 +231,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         // 4. Apache Commons Lang 라이브러리를 사용해서 랜덤의 인증번호 난수를 6자리로 설정함.
         authNumber = RandomStringUtils.randomNumeric(6);
+        Log.d("인증번호",authNumber);
 
         try {
             // 5. Message 클래스의 객체를 사용하여 수신자와 내용, 제목의 메시지를 작성한다.
