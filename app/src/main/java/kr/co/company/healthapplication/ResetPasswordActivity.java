@@ -46,7 +46,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnSendingEmail = findViewById(R.id.btnSendingEmail);
         btnAuthNumCheck = findViewById(R.id.btnAuthNumCheck);
         tvCountDown = findViewById(R.id.tvCountDown);
-        authLayout = findViewById(R.id.authLayout);
+        authLayout = findViewById(R.id.layoutAuth);
 
         // 인증번호 전송하기.
         btnSendingEmail.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
                 authNumber = sendEmail(email);
                 authLayout.setVisibility(View.VISIBLE);
-                startTimer();
+                startTimer();   // 타이머 시작.
             }
         });
 
