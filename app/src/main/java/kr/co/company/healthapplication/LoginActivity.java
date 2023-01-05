@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,6 +23,7 @@ import kr.co.company.healthapplication.request.LoginRequest;
 public class LoginActivity extends AppCompatActivity {
     private EditText etId, etPwd;
     private Button btnLogin, btnJoin;
+    private TextView tvFindPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         etPwd = findViewById(R.id.etPwd);
         btnLogin = findViewById(R.id.btnLogin);
         btnJoin = findViewById(R.id.btnJoin);
+        tvFindPwd = findViewById(R.id.tvFindPwd);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,13 +46,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("아이디", userId);
-                            Log.d("비번", userPassword);
-                            Log.d("통신 확인 ", response);
                             JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                             boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
-                            String jsonString = jsonObject.toString();
-                            Log.d("확인", jsonString);
+                            //String jsonString = jsonObject.toString();
+                            //Log.d("전송여부", jsonString);
 
                             // 로그인에 성공한 경우.
                             if(success) {
@@ -84,6 +83,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(LoginActivity.this, JoinActivity.class);
+                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);    // 액티비티 이동 시 애니메이션 제거.
+                startActivity(intent);
+            }
+        });
+
+        tvFindPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);    // 액티비티 이동 시 애니메이션 제거.
                 startActivity(intent);
             }
         });
