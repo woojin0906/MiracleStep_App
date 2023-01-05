@@ -44,10 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
-            android:text="아이디"
+            android:text="E-mail"
             android:textSize="40px"
             android:textStyle="bold" />
 
@@ -59,17 +59,17 @@
             android:layout_marginRight="50dp"
             android:textSize="40px"
             android:inputType="textEmailAddress"
-            android:hint="아이디(이메일 형식)를 입력해주세요." />
+            android:hint="이메일을 입력해주세요." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
-            android:text="비밀번호"
+            android:text="Password"
             android:textSize="40px"
             android:textStyle="bold" />
 
@@ -88,10 +88,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
-            android:text="비밀번호 확인"
+            android:text="Confirm Password"
             android:textSize="40px"
             android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
             android:text="이름"
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
             android:text="전화번호"
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
             android:text="키"
@@ -175,8 +175,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="53dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
             android:text="몸무게"
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginRight="50dp"
             android:gravity="left"
             android:text="생년월일"

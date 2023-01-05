@@ -27,10 +27,6 @@ public class JoinRequest extends StringRequest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formatedNow = now.format(formatter);
 
-        Log.d("전화번호", UserPhoneNumber);
-        Log.d("운동날짜", formatedNow);
-        Log.d("생년월일", userBirth+"");
-
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("userPassword", userPassword);

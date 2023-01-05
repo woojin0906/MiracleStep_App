@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.co.company.healthapplication">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,8 +10,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication"
-        android:usesCleartextTraffic="true"> <!-- Android 9 버전부터 http 보안관련 문제 때문에 옵션 추가(2023-01-02 이수) -->
-        
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".TOSActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <!-- popup 효과를 위해 옵션 추가(2023-01-05 전우진) -->
+        <activity
+            android:name=".DonationPopupActivity"
+            android:exported="true"
+            android:theme="@style/popupTheme"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".TestActivity"
             android:exported="false">
@@ -22,11 +42,11 @@
         </activity>
         <activity
             android:name=".DonationActivity"
-            android:exported="true">
-    </activity>
+            android:exported="true" />
         <activity
             android:name=".DonationPostActivity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".LodingActivity"
             android:exported="false" />
@@ -50,9 +70,6 @@
             android:exported="true" />
         <activity
             android:name=".MypageActivity"
-            android:exported="true" />
-        <activity
-            android:name=".PasswordActivity"
             android:exported="true" />
         <activity
             android:name=".JoinActivity"
