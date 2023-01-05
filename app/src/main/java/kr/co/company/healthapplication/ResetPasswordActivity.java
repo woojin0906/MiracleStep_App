@@ -85,11 +85,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String inputNumber = etAuthNumber.getText().toString();
                 // 인증 성공인 경우.
                 if(inputNumber.equals(authNumber)) {
-                    layoutResetPassword.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(),"인증이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
                     btnAuthNumCheck.setEnabled(false);  // 인증번호 체크버튼 비활성화.
+                    mCountDownTimer.cancel();   // 타이머 종료.
+                    mCountDownTimer = null;
                     layoutResetPassword.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(),"인증이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 }
                 // 인증 실패인 경우.
                 else {
@@ -152,6 +153,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                     // 회원 검색이 성공한 경우.
                     if(success) {
+                        //mCountDownTimer.start();   // 타이머 시작.
                         startTimer();   // 타이머 시작.
                         sendEmail(email);   // 이메일에 인증번호를 전송.
                         layoutAuthNumber.setVisibility(View.VISIBLE);
@@ -176,18 +178,23 @@ public class ResetPasswordActivity extends AppCompatActivity {
     // 타이머 시작.
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            // 수행 간격마다 호출되는 함수
             @Override
             public void onTick(long millisUntilFinished) {
                 btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
+                btnAuthNumCheck.setEnabled(true);  // 인증번호 체크버튼 활성화.
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
 
+            // millisInFuture 시간까지 모두 종료시 호출되는 함수
             @Override
             public void onFinish() {
                 btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
                 btnAuthNumCheck.setEnabled(false);  // 인증번호 체크버튼 비활성화.
                 layoutAuthNumber.setVisibility(View.INVISIBLE);
+                mCountDownTimer.cancel();   // 타이머 종료.
+                mCountDownTimer = null;
             }
         }.start();
     }
