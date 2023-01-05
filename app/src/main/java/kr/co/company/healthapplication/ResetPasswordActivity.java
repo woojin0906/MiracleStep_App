@@ -147,8 +147,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
-                    String jsonString = jsonObject.toString();
-                    START_TIME_IN_MILLIS = 300000;
+                    //String jsonString = jsonObject.toString();
+                    //START_TIME_IN_MILLIS = 300000;
 
                     // 회원 검색이 성공한 경우.
                     if(success) {
