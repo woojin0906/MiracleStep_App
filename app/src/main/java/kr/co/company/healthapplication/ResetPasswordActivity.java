@@ -81,7 +81,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnAuthNumCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("반환된 인증번호", authNumber);
                 String inputNumber = etAuthNumber.getText().toString();
                 // 인증 성공인 경우.
                 if(inputNumber.equals(authNumber)) {

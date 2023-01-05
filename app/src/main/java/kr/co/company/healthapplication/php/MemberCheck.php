@@ -8,7 +8,7 @@
   /* (2) DB에 저장할 객체 선언. */
   $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
 
-  /* (3) 현재 DB에 저장된 아이디와 비밀번호를 검색함. */  // ss는 String이 두 개라서 ss가 들어감.
+  /* (3) 현재 DB에 저장된 아이디와 비밀번호를 검색함. */
   $statement = mysqli_prepare($con, "SELECT * FROM User WHERE UserID = ?");
   mysqli_stmt_bind_param($statement, "s", $userID);
   mysqli_stmt_execute($statement);
