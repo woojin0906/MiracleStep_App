@@ -211,7 +211,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     public String sendEmail(String email) {
         // 1. 발신자의 메일 계정과 비밀번호 설정
         String user = "201945058@itc.ac.kr";    // E-Mail 계정 => (임시 이메일 작성함. / 2023-01-04 이수)
-        String password = "dlwns125@"; //"비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)";    // 패스워드 => 보안에 주의해주세요(ㅠㅠ)
+        String password = "비밀번호"; //"비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)";    // 패스워드 => 보안에 주의해주세요(ㅠㅠ)
         Properties props = new Properties();
 
         // 2. Property에 SMTP 서버 정보를 설정한다. => gmail에 맞춰서 설정해두었습니다.
