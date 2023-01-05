@@ -11,8 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication"
-        android:usesCleartextTraffic="true"> <!-- Android 9 버전부터 http 보안관련 문제 때문에 옵션 추가(2023-01-02 이수) -->
-        
+        android:usesCleartextTraffic="true">
+
+        <!-- popup 효과를 위해 옵션 추가(2023-01-05 전우진) -->
+        <activity
+            android:name=".DonationPopupActivity"
+            android:exported="true"
+            android:theme="@style/popupTheme"
+            android:screenOrientation="portrait"/>
+
+        <!-- Android 9 버전부터 http 보안관련 문제 때문에 옵션 추가(2023-01-02 이수) -->
         <activity
             android:name=".TestActivity"
             android:exported="false">
@@ -31,7 +39,8 @@
     </activity>
         <activity
             android:name=".DonationPostActivity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".LodingActivity"
             android:exported="false" />
