@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                             boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
                             //String jsonString = jsonObject.toString();
+                            //Log.d("전송여부", jsonString);
 
                             // 로그인에 성공한 경우.
                             if(success) {

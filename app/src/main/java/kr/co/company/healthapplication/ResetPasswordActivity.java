@@ -45,7 +45,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private String authNumber;
 
     private CountDownTimer mCountDownTimer;
-    private static final long START_TIME_IN_MILLIS = 300000;
+    private static long START_TIME_IN_MILLIS = 300000;;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
     @Override
@@ -94,11 +94,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 // 인증 실패인 경우.
                 else {
                     Toast.makeText(getApplicationContext(),"인증이 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(),"이메일 인증을 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                     btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
                     btnAuthNumCheck.setEnabled(false); // 인증번호 체크버튼 비활성화.
                 }
-
             }
         });
 
@@ -108,7 +106,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String resetPassword = etResetPassword.getText().toString();
                 insertResetPassword(resetPassword);
-
             }
         });
     }
@@ -125,7 +122,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     // 비밀번호 재설정이 완료된 경우.
                     if(success) {
                         Toast.makeText(getApplicationContext(),"비밀번호 재설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-
                     }
 
                     // 비밀번호 재설정이 실패된 경우.
@@ -151,17 +147,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String jsonString = jsonObject.toString();
+                    START_TIME_IN_MILLIS = 300000;
 
                     // 회원 검색이 성공한 경우.
                     if(success) {
-                        Toast.makeText(getApplicationContext(),"이메일이 확인되었습니다.", Toast.LENGTH_SHORT).show();
-                        
-                        // 이메일에 인증번호를 전송.
-                        sendEmail(email);
+                        startTimer();   // 타이머 시작.
+                        sendEmail(email);   // 이메일에 인증번호를 전송.
                         layoutAuthNumber.setVisibility(View.VISIBLE);
                         btnAuthNumCheck.setEnabled(true);  // 인증번호 체크버튼 활성화.
-                        Toast.makeText(getApplicationContext(),"인증번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        startTimer();   // 타이머 시작.
                     }
 
                     // 회원 검색이 실패한 경우.
@@ -184,14 +178,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                //btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
+                btnSendingEmail.setEnabled(false);  // 이메일 인증 전송버튼 비활성화.
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
 
             @Override
             public void onFinish() {
-                //btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
+                btnSendingEmail.setEnabled(true);  // 이메일 인증 전송버튼 활성화.
                 btnAuthNumCheck.setEnabled(false);  // 인증번호 체크버튼 비활성화.
                 layoutAuthNumber.setVisibility(View.INVISIBLE);
             }
@@ -211,7 +205,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     public String sendEmail(String email) {
         // 1. 발신자의 메일 계정과 비밀번호 설정
         String user = "201945058@itc.ac.kr";    // E-Mail 계정 => (임시 이메일 작성함. / 2023-01-04 이수)
-        String password = "비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)";    // 패스워드 => 보안에 주의해주세요(ㅠㅠ)
+        String password = "dlwns125@"; //"비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)";    // 패스워드 => 보안에 주의해주세요(ㅠㅠ)
         Properties props = new Properties();
 
         // 2. Property에 SMTP 서버 정보를 설정한다. => gmail에 맞춰서 설정해두었습니다.

@@ -15,6 +15,7 @@ public class MemberCheckRequest extends StringRequest {
     public MemberCheckRequest(String email, Response.Listener<String> responseListener) {
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, responseListener, null);
+
         map = new HashMap<>();
         map.put("userID", email);
     }
