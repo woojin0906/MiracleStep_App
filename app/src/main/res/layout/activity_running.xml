@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 러닝 화면 -->
+<!-- 러닝 화면 (2023-01-03 인범 수정함.)-->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/distance"
+                android:id="@+id/tvDistance"
                 android:text="0.00km"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -94,7 +94,7 @@
                 android:gravity="center"/>
             <!--만보기-->
             <TextView
-                android:id="@+id/stepCount"
+                android:id="@+id/tvStepCount"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -104,7 +104,7 @@
                 android:gravity="center"/>
             <!--칼로리-->
             <TextView
-                android:id="@+id/kcal"
+                android:id="@+id/tvKcal"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="0.0kcal"
