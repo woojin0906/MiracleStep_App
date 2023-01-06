@@ -57,12 +57,15 @@
                 android:textSize="15dp"/>
         </LinearLayout>
     </LinearLayout>
+
+    <!-- 운동기록 레이아웃 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius_bottom"
         android:layout_gravity="bottom"
         android:orientation="vertical"
+        android:layout_marginBottom="50dp"
         android:elevation="20dp">
 
         <Chronometer
@@ -148,6 +151,7 @@
 
         </LinearLayout>
 
+        <!-- 버튼 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
