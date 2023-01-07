@@ -14,10 +14,9 @@ public class MainActivity extends AppCompatActivity {
     private RunningActivity runningActivity;
     private MypageActivity mypageActivity;
     private HomeActivity homeActivity;
+    private DonationActivity donationActivity;
 
-    private Button buttonRank;
-    private Button buttonRunning;
-    private Button buttonInfo;
+    private Button buttonRank, buttonRunning, buttonInfo, buttonDonation;
     private ImageButton buttonHome;
 
     @Override
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         runningActivity = new RunningActivity();
         mypageActivity = new MypageActivity();
         homeActivity = new HomeActivity();
+        donationActivity = new DonationActivity();
 
         // 프래그먼트 매니저 획득
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -41,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
         //commit을 하면 자식으로 등록된 프래그먼트가 화면에 보여집니다.
         fragmentTransaction.commit();
 
-        buttonRank = findViewById(R.id.main_rankBtn);
-        buttonRunning = findViewById(R.id.main_runningBtn);
-        buttonInfo = findViewById(R.id.main_infoBtn);
-        buttonHome = findViewById(R.id.main_HomeBtn);
+        buttonRank = findViewById(R.id.rankBtn);
+        buttonRunning = findViewById(R.id.runningBtn);
+        buttonInfo = findViewById(R.id.infoBtn);
+        buttonHome = findViewById(R.id.homeBtn);
+        buttonDonation = findViewById(R.id.donationBtn);
 
         buttonRank.setOnClickListener(v -> {
             FragmentManager fm1 = getSupportFragmentManager();
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft4 = fragmentManager.beginTransaction();
             ft4.replace(R.id.fragmentFrame, homeActivity);
             ft4.commit();
+        });
+
+        buttonDonation.setOnClickListener(v -> {
+            FragmentManager fm5 = getSupportFragmentManager();
+            FragmentTransaction ft5 = fragmentManager.beginTransaction();
+            ft5.replace(R.id.fragmentFrame, donationActivity);
+            ft5.commit();
         });
 
     }

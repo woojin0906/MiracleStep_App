@@ -28,9 +28,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_runningBtn"
+            android:id="@+id/runningBtn"
             android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:text="러닝"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
@@ -38,17 +38,17 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_battleBtn"
+            android:id="@+id/donationBtn"
             android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text="대결"
+            android:layout_margin="0dp"
+            android:text="캠페인"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_HomeBtn"
+            android:id="@+id/homeBtn"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:src="@drawable/home"
@@ -56,10 +56,10 @@
             android:layout_gravity="center_vertical"/>
 
         <Button
-            android:id="@+id/main_rankBtn"
+            android:id="@+id/rankBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:text="랭크"
             android:background="#00ff0000"
@@ -68,9 +68,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_infoBtn"
+            android:id="@+id/infoBtn"
             android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:text="정보"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
