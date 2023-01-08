@@ -5,176 +5,282 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miracle Step"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#84A7E4"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:inputType="text"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:textStyle="bold"
+        android:text="내 정보 수정 >"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:background="@drawable/donation_back"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Miracle Step"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:textColor="#84A7E4"
-                android:textSize="35dp"
-                android:textStyle="bold" />
-
+            <ImageView
+                android:id="@+id/mypage_imageView"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="15dp"
+                android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
-
-                <ImageView
-                    android:id="@+id/mypage_imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_background" />
-
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginRight="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/mypage_Tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17dp"
+                        android:textSize="15dp"
+                        android:inputType="text"
+                        android:text="사용자 이메일 : "/>
+                    <TextView
+                        android:id="@+id/tvUserID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:textStyle="bold"
                         android:inputType="text"
-                        android:text="사용자 이름 >"/>
+                        android:text="아이디"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/mypage_Tv_email"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textSize="17dp"
+                        android:layout_height="match_parent"
                         android:inputType="text"
-                        android:text="사용자 이메일"/>
+                        android:text="사용자 이름 : "
+                        android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/tvUserPW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="이름"/>
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp"
-                android:background="@drawable/donation_back"
-                android:padding="5dp"
-                android:gravity="center">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginRight="50dp">
-                    <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="left"
-                        android:layout_weight="1">
-                        <TextView
-                            android:id="@+id/mypage_Tv_donation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="17dp"
-                            android:inputType="text"
-                            android:text="기부금 : "/>
-
-                        <TextView
-                            android:id="@+id/mypage_Tv_money"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:text="누적 기부금"
-                            android:textStyle="bold"
-                            android:textColor="#0558FF"
-                            android:textSize="17dp" />
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/btnDonationReceipts"
+                        android:textSize="15dp"
+                        android:inputType="text"
+                        android:text="현재 사용 가능한 걸음 수 : "/>
+                    <TextView
+                        android:id="@+id/tvUserDStep"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="기부내역"
-                        android:backgroundTint="#84A7E4"/>
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="걸음 수"/>
                 </LinearLayout>
-
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="20dp"
-                android:padding="10dp"
-                android:background="@drawable/mypage_backgound">
-                <TextView
-                    android:id="@+id/mypage_Tv_event"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:text="공지사항 / 이벤트" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/mypage_Tv_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"
-                    android:text="자주 묻는 질문" />
-
-                <TextView
-                    android:id="@+id/mypage_Tv_agree"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"
-                    android:text="약관보기" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/donation_back"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:id="@+id/mypage_Tv_customerCenter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="19dp"
-                    android:textStyle="bold"
-                    android:text="앱 이름 고객센터" />
-
-                <TextView
-                    android:id="@+id/mypage_Tv_ex1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="17dp"
-                    android:text="앱 이용 관련 상담만 가능합니다." />
-
-                <TextView
-                    android:id="@+id/mypage_Tv_ex2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textSize="17dp"
-                    android:text="전화상담은 10:00부터 18:00까지 가능합니다.(주말 및 공휴일 휴무)" />
-            </LinearLayout>
-            <Button
-                android:id="@+id/btnLogOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
-                android:backgroundTint="#84A7E4"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="키 : "
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="현재 키"
+                    android:textColor="#0558FF"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="몸무게 : "
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/mypage_Tv_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="현재 몸무게"
+                    android:textColor="#0558FF"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="BMI : "
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/mypage_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="bmi 치수"
+                    android:textColor="#0558FF"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:background="@drawable/donation_back"
+        android:padding="5dp"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/mypage_Tv_donation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"
+                    android:inputType="text"
+                    android:text="기부금 : "/>
+
+                <TextView
+                    android:id="@+id/mypagey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="누적 기부금"
+                    android:textStyle="bold"
+                    android:textColor="#0558FF"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDonationReceipts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기부내역 확인"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginRight="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/mypage_Tv_customerCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:text="앱 이름 고객센터" />
+
+            <TextView
+                android:id="@+id/mypage_Tv_ex1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="17dp"
+                android:text="앱 이용 관련 상담만 가능합니다." />
+
+            <TextView
+                android:id="@+id/mypage_Tv_ex2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="17dp"
+                android:text="전화상담은 10:00부터 18:00까지 가능합니다.(주말 및 공휴일 휴무)" />
+        </LinearLayout>
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:backgroundTint="#84A7E4"/>
 </LinearLayout>
