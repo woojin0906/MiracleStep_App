@@ -1,17 +1,18 @@
 package kr.co.company.healthapplication;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageButton;
-
 public class MainActivity extends AppCompatActivity {
 
     private RankActivity rankActivity;
-    private RunningActivity runningActivity;
     private MypageActivity mypageActivity;
     private HomeActivity homeActivity;
     private DonationActivity donationActivity;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rankActivity = new RankActivity();
-        runningActivity = new RunningActivity();
         mypageActivity = new MypageActivity();
         homeActivity = new HomeActivity();
         donationActivity = new DonationActivity();
@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
             ft1.commit();
         });
 
-        buttonRunning.setOnClickListener(v -> {
-            FragmentManager fm2 = getSupportFragmentManager();
-            FragmentTransaction ft2 = fragmentManager.beginTransaction();
-            ft2.replace(R.id.fragmentFrame, runningActivity);
-            ft2.commit();
+        buttonRunning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MainActivity.this, RunActivity.class);
+                startActivity(intent);
+            }
         });
 
         buttonInfo.setOnClickListener(v -> {

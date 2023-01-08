@@ -1,12 +1,14 @@
 package kr.co.company.healthapplication;
 
 import android.Manifest;
-import android.content.ContentValues;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,11 +37,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private DatabaseOpenHelper helper;
     private SQLiteDatabase db;
-    int version = 1;
+    private int version = 1;
+    private String sql;
+    private Cursor cursor;
 
-    String sql;
-    Cursor cursor;
-
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String rememberID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,20 @@ public class LoginActivity extends AppCompatActivity {
             requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        rememberID = pref.getString("UserID", "_");   // String 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
+
+        Log.d("로그인 화면", "완료");
+        if(!rememberID.equals("_")) {
+            Log.d("여기가 들어가면 안되는데", "완료");
+            Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("UserID", rememberID);
+            startActivity(intent);
+            finish();
+        }
+
         etId = findViewById(R.id.etId);
         etPwd = findViewById(R.id.etPwd);
         btnLogin = findViewById(R.id.btnLogin);
@@ -57,11 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         tvFindPwd = findViewById(R.id.tvFindPwd);
         cbIdSave = findViewById(R.id.cbIdSave);
 
+
         try {
             // 아이디 저장 불러오기
             sql = "SELECT * FROM " + helper.UserIDSave;
             cursor = db.rawQuery(sql, null);
             etId.setText(cursor.getString(0));
+            cbIdSave.isChecked();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                             // 로그인에 성공한 경우.
                             if(success) {
                                 String userID = jsonObject.getString("userID");
-                                String userPassword = jsonObject.getString("userPassword");
+                                //String userPassword = jsonObject.getString("userPassword");
 
                                 try {
                                     // 아이디 저장버튼을 누른 경우.
@@ -98,10 +118,14 @@ public class LoginActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
+                                editor.putString("UserID", userId);
+                                editor.apply();
+
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID", userID);
                                 startActivity(intent);
+                                finish();
                             }
                             // 로그인에 실패한 경우.
                             else {
