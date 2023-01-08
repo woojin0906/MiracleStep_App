@@ -10,22 +10,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
 
-                <TextView
-                    android:id="@+id/mypage_Tv_titlename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="앱 이름"
-                    android:textColor="#84A7E4"
-                    android:textSize="35dp"
-                    android:textStyle="bold" />
-            <!-- x 표시 추가예정 -->
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Miracle Step"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#84A7E4"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,30 +74,39 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginRight="50dp">
-                    <TextView
-                        android:id="@+id/mypage_Tv_donation"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17dp"
-                        android:inputType="text"
-                        android:text="기부금 : "/>
+                        android:orientation="horizontal"
+                        android:gravity="left"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/mypage_Tv_donation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17dp"
+                            android:inputType="text"
+                            android:text="기부금 : "/>
 
-                    <TextView
-                        android:id="@+id/mypage_Tv_money"
+                        <TextView
+                            android:id="@+id/mypage_Tv_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="누적 기부금"
+                            android:textStyle="bold"
+                            android:textColor="#0558FF"
+                            android:textSize="17dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnDonationReceipts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:text="누적 기부금"
-                        android:textStyle="bold"
-                        android:textColor="#0558FF"
-                        android:textSize="17dp" />
+                        android:layout_marginLeft="20dp"
+                        android:text="기부내역"
+                        android:backgroundTint="#84A7E4"/>
                 </LinearLayout>
-                <Button
-                    android:id="@+id/btnLogOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="로그아웃"
-                    android:backgroundTint="#84A7E4"/>
 
             </LinearLayout>
             <LinearLayout
@@ -166,5 +170,11 @@
                     android:textSize="17dp"
                     android:text="전화상담은 10:00부터 18:00까지 가능합니다.(주말 및 공휴일 휴무)" />
             </LinearLayout>
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:backgroundTint="#84A7E4"/>
         </LinearLayout>
 </LinearLayout>

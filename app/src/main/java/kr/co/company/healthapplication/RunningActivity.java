@@ -86,8 +86,6 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
     private boolean running;
     private int m; // 시간(분)
 
-
-
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
@@ -166,7 +164,6 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
         if (stepCountSensor == null) {
             Toast.makeText(getActivity(), "No Step Sensor", Toast.LENGTH_SHORT).show();
         }
-
 
         // T Map
         tMapView = new TMapView(getActivity());
