@@ -14,13 +14,13 @@
     $userPassword = isset($_POST["userPassword"]) ? $_POST["userPassword"] : "";
 
 /* (3) 현재 DB에 저장된 아이디와 비밀번호를 검색함. */  // ss는 String이 두 개라서 ss가 들어감.
-    $statement = mysqli_prepare($con, "SELECT * FROM User WHERE UserID = ? AND UserPassword = ?");
+    $statement = mysqli_prepare($con, "SELECT UserID FROM User WHERE UserID = ? AND UserPassword = ?");
     mysqli_stmt_bind_param($statement, "ss", $userID, $userPassword);
     mysqli_stmt_execute($statement);
 
 /* (4) DB안에 해당 아이디와 비밀번호가 일치하면 User테아블 정보 다 가져오기. */
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $userID, $userPassword, $userName, $userPhoneNumber, $userDstep);
+    mysqli_stmt_bind_result($statement, $userID);
 
     $response = array();
     $response["success"] = false;
