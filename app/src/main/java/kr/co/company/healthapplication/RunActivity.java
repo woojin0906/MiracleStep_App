@@ -2,7 +2,9 @@ package kr.co.company.healthapplication;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -25,6 +27,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
@@ -69,10 +74,10 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     // 걸음수
     private SensorManager sensorManager;
     private Sensor stepCountSensor;
-    private TextView stepCount;
+    private TextView tvStepCount;
     private static int currentSteps = 0;
     private double countKcal=0.0;
-    private TextView distance, kcal;
+    private TextView tvDistance, tvKcal;
     private int result = 0;
 
     // 스톱워치(시간)
@@ -82,7 +87,65 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private boolean running;
     private int m; // 시간(분)
 
+    // 운동 기록
+    private int runTime;
+    private double runDistance;
+    private int runStepCount;
+    private double runKcal;
 
+    // Preferences Shared
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String userId;
+
+
+    @Override
+    public void onBackPressed() { // 뒤로가기 버튼 클릭 시
+        // 1. 러닝 정지
+        result = 0;
+        chrono.stop();
+        pauseOffset = SystemClock.elapsedRealtime() - chrono.getBase();
+        running = false;
+
+        // 2. 러닝 기록 가져오기
+        runTime = m;
+        runDistance = Double.parseDouble(tvDistance.getText().toString());
+        runStepCount = Integer.parseInt(tvStepCount.getText().toString());
+        runKcal = Double.parseDouble(tvKcal.getText().toString());
+
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        userId = pref.getString("UserID", "_");   // String 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
+
+        //3. 기록 DB에 저장
+        // JSON 오브젝트를 활용하여 회원가입 요청을 하는 메서드
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+
+                    // 운동기록 저장 성공인 경우.
+                    if (success) {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 완료.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 운동기록 저장 실패인 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 실패.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 서버로 Volley를 이용해서 요청을 함.
+        RunRequest runRequest = new RunRequest(userId, runTime, runDistance, runStepCount, runKcal, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
+        queue.add(runRequest);
+    }
 
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -145,8 +208,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         }
 
         //걸음수
-        stepCount = findViewById(R.id.tvStepCount);
-        kcal = findViewById(R.id.tvKcal);
+        tvStepCount = findViewById(R.id.tvStepCount);
+        tvKcal = findViewById(R.id.tvKcal);
         // 활동 퍼미션 체크
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
@@ -264,9 +327,9 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                 if (event.values[0] == 1.0f) {
                     // 센서 이벤트가 발생할때 마다 걸음수 증가
                     currentSteps++;
-                    stepCount.setText(String.valueOf(currentSteps));
+                    tvStepCount.setText(String.valueOf(currentSteps));
                     countKcal = currentSteps * 0.04;
-                    kcal.setText((String.format("%.2f", countKcal) + "kcal"));
+                    tvKcal.setText((String.format("%.2f", countKcal) + "kcal"));
                 }
             }
 
