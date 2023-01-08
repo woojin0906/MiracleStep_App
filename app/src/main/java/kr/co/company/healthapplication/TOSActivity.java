@@ -17,28 +17,28 @@ public class TOSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tos);
 
         // 체크박스 findViewById() 메소드
-        final CheckBox cb1 = (CheckBox)findViewById(R.id.allAgree);
-        final CheckBox cb2 = (CheckBox)findViewById(R.id.agreeone);
-        final CheckBox cb3 = (CheckBox)findViewById(R.id.agreetwo);
-        final CheckBox cb4 = (CheckBox)findViewById(R.id.agreethree);
+        final CheckBox cbAllAgree = findViewById(R.id.allAgree);
+        final CheckBox cbAgree1 = findViewById(R.id.agreeone);
+        final CheckBox cbAgree2 = findViewById(R.id.agreetwo);
+        final CheckBox cbAgree3 = findViewById(R.id.agreethree);
 
         // AgreeButton -> 동의하기 버튼 클릭리스너
-        Button AgreeButton = (Button)findViewById(R.id.AgreeButton);
+        Button AgreeButton = findViewById(R.id.AgreeButton);
         AgreeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 전체 동의 또는 필수항목이 true인 경우 JoinActivity로 이동
-                if (cb1.isChecked() == true || (cb2.isChecked() == true && cb3.isChecked() == true)) {
+                if (cbAllAgree.isChecked() == true || (cbAgree1.isChecked() == true && cbAgree2.isChecked() == true)) {
                     Intent intent = new Intent(TOSActivity.this, JoinActivity.class);
                     Toast.makeText(getApplicationContext(), "동의 되었습니다.", Toast.LENGTH_SHORT).show();
+                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);    // 액티비티 이동 시 애니메이션 제거.
                     startActivity(intent);
-                    finish();
                     // 항목별 경우의 수에 따라 필수 항목 동의하라는 Toast 메시지 기능 제공
-                } else if (cb2.isChecked() == true || cb3.isChecked() == true || cb4.isChecked() == true) {
+                } else if (cbAgree1.isChecked() == true || cbAgree2.isChecked() == true || cbAgree3.isChecked() == true) {
                     Toast.makeText(getApplicationContext(), "필수 항목 동의 해주십시오.", Toast.LENGTH_SHORT).show();
-                } else if ((cb2.isChecked() == true && cb4.isChecked() == true) || (cb3.isChecked() == true && cb4.isChecked() == true)) {
+                } else if ((cbAgree1.isChecked() == true && cbAgree3.isChecked() == true) || (cbAgree2.isChecked() == true && cbAgree3.isChecked() == true)) {
                     Toast.makeText(getApplicationContext(), "필수 항목 동의 해주십시오.", Toast.LENGTH_SHORT).show();
-                } else if (cb2.isChecked() == false || cb3.isChecked() == false) {
+                } else if (cbAgree1.isChecked() == false || cbAgree2.isChecked() == false) {
                     Toast.makeText(getApplicationContext(), "필수 항목 동의 해주십시오.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -49,14 +49,14 @@ public class TOSActivity extends AppCompatActivity {
         allAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cb1.isChecked() == true) {
-                    cb2.setChecked(true);
-                    cb3.setChecked(true);
-                    cb4.setChecked(true);
+                if(cbAllAgree.isChecked() == true) {
+                    cbAgree1.setChecked(true);
+                    cbAgree2.setChecked(true);
+                    cbAgree3.setChecked(true);
                 } else {
-                    cb2.setChecked(false);
-                    cb3.setChecked(false);
-                    cb4.setChecked(false);
+                    cbAgree1.setChecked(false);
+                    cbAgree2.setChecked(false);
+                    cbAgree3.setChecked(false);
                 }
             }
         });
@@ -66,11 +66,11 @@ public class TOSActivity extends AppCompatActivity {
         agreeone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cb2.isChecked() == false) {
-                    cb1.setChecked(false);
+                if(cbAgree1.isChecked() == false) {
+                    cbAllAgree.setChecked(false);
                 } else {
-                    if(cb3.isChecked() == true && cb4.isChecked() == true){
-                        cb1.setChecked(true);
+                    if(cbAgree2.isChecked() == true && cbAgree3.isChecked() == true){
+                        cbAllAgree.setChecked(true);
                     }
                 }
             }
@@ -81,11 +81,11 @@ public class TOSActivity extends AppCompatActivity {
         agreetwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cb3.isChecked() == false) {
-                    cb1.setChecked(false);
+                if(cbAgree2.isChecked() == false) {
+                    cbAllAgree.setChecked(false);
                 } else {
-                    if(cb2.isChecked() == true && cb4.isChecked() == true){
-                        cb1.setChecked(true);
+                    if(cbAgree1.isChecked() == true && cbAgree3.isChecked() == true){
+                        cbAllAgree.setChecked(true);
                     }
                 }
             }
@@ -96,11 +96,11 @@ public class TOSActivity extends AppCompatActivity {
         agreethree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cb4.isChecked() == false) {
-                    cb1.setChecked(false);
+                if(cbAgree3.isChecked() == false) {
+                    cbAllAgree.setChecked(false);
                 } else {
-                    if(cb2.isChecked() == true && cb3.isChecked() == true){
-                        cb1.setChecked(true);
+                    if(cbAgree1.isChecked() == true && cbAgree2.isChecked() == true){
+                        cbAllAgree.setChecked(true);
                     }
                 }
             }
