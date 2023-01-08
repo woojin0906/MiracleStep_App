@@ -1,11 +1,18 @@
 package kr.co.company.healthapplication;
 
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.pow;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -33,6 +40,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
 import org.json.JSONArray;
@@ -77,7 +85,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private TextView tvStepCount;
     private static int currentSteps = 0;
     private double countKcal=0.0;
-    private TextView tvDistance, tvKcal;
+    private TextView tvDistance;
+    private TextView tvKcal;
     private int result = 0;
 
     // 스톱워치(시간)
@@ -88,15 +97,21 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private int m; // 시간(분)
 
     // 운동 기록
-    private int runTime;
-    private double runDistance;
-    private int runStepCount;
-    private double runKcal;
+    private String runTime;
+    private String runDistance;
+    private String runStepCount;
+    private String runKcal;
 
     // Preferences Shared
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private String userId;
+
+    // 거리계산 식
+    private int count = 0;
+    private double[] lon = new double[1000];
+    private double[] lat = new double[1000];
+    private double total = 0.0;
 
 
     @Override
@@ -108,10 +123,10 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         running = false;
 
         // 2. 러닝 기록 가져오기
-        runTime = m;
-        runDistance = Double.parseDouble(tvDistance.getText().toString());
-        runStepCount = Integer.parseInt(tvStepCount.getText().toString());
-        runKcal = Double.parseDouble(tvKcal.getText().toString());
+        runTime = String.valueOf(m);
+        runDistance = tvDistance.getText().toString();
+        runStepCount = tvStepCount.getText().toString();
+        runKcal = tvKcal.getText().toString();
 
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
@@ -125,6 +140,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String jsonString = jsonObject.toString();
+                    Log.d("전송여부", jsonString);
 
                     // 운동기록 저장 성공인 경우.
                     if (success) {
@@ -145,6 +162,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         RunRequest runRequest = new RunRequest(userId, runTime, runDistance, runStepCount, runKcal, responseListener);
         RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
         queue.add(runRequest);
+
+        finish();
     }
 
     @SuppressLint("WrongViewCast")
@@ -153,6 +172,11 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+
+        // id값 가져오기
+        tvStepCount = findViewById(R.id.tvStepCount);
+        tvDistance = findViewById(R.id.tvDistance);
+        tvKcal = findViewById(R.id.tvKcal);
 
         // 날씨 이미지 뷰
         ivWeather = findViewById(R.id.ivWeather);
@@ -207,9 +231,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             }
         }
 
-        //걸음수
-        tvStepCount = findViewById(R.id.tvStepCount);
-        tvKcal = findViewById(R.id.tvKcal);
         // 활동 퍼미션 체크
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
@@ -343,11 +364,44 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
 
     }
 
-    // T Map 위치 이동시 발생 메서드
+    // 지속적으로 위치를 받아와 설정해줌
     @Override
     public void onLocationChange(Location location) {
         tMapView.setLocationPoint(location.getLongitude(), location.getLatitude());
         tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+        double Longitude = location.getLongitude(); //경도
+        double Latitude = location.getLatitude();   //위도
+        alTMapPoint.add( new TMapPoint(Latitude, Longitude)); //가져온 경도,위도를 Point에 추가
+
+        TMapPolyLine tMapPolyLine = new TMapPolyLine();
+        tMapPolyLine.setLineColor(Color.RED);
+        tMapPolyLine.setLineWidth(10);
+        for( int i=0; i<alTMapPoint.size(); i++ ) {
+            tMapPolyLine.addLinePoint( alTMapPoint.get(i) );
+        }
+        tMapView.addTMapPolyLine("Line", tMapPolyLine); // point값을 polyLine로 그림
+
+
+        if(count == 0){
+            lon[0] = Longitude;
+            lat[0] = Latitude;
+            lon[1] = Longitude;
+            lat[1] = Latitude;
+        }else{
+            lon[count] = Longitude;     // count로 매번 포인트마다 위도/경도를 대입
+            lat[count] = Latitude;
+            double d2r = (Math.PI / 180D);
+            double dlong = (lon[count] - lon[count-1]) * d2r;
+            double dlat = (lat[count] - lat[count-1]) * d2r;
+            double a = pow(sin(dlat/2.0), 2) + cos(lat[count-1]*d2r) * cos(lat[count]*d2r) * pow(sin(dlong/2.0), 2);
+            double c = 2 * atan2(sqrt(a), sqrt(1-a));
+            double d = 6367 * c;
+
+            total += d;
+            tvDistance.setText((String.format("%.2f", total)+"km"));    // km단위로 거리 출력
+        }
+        count++;
+
     }
 
     // 날씨 구하는 메서드

@@ -27,7 +27,7 @@
 
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
@@ -49,55 +49,60 @@
             android:text="34166"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Daily Checklist"
-        android:gravity="center"
-        android:textSize="9pt"
-        android:textStyle="italic"
-        />
-
-    <!--체크리스트 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:background="@drawable/donation_back">
-        <!-- 리사이클 뷰 등록 -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCheckList"
-            android:padding="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarFadeDuration="0"
-            android:scrollbarSize="5dp"
-            android:scrollbarThumbVertical="@android:color/darker_gray"
-            android:scrollbars="vertical"
-            android:layout_weight="1">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:text="Daily Checklist"
+            android:gravity="center"
+            android:textSize="9pt"
+            android:textStyle="italic"
+            />
+
+        <!--체크리스트 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:background="@drawable/donation_back">
+            <!-- 리사이클 뷰 등록 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCheckList"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarSize="5dp"
+                android:scrollbarThumbVertical="@android:color/darker_gray"
+                android:scrollbars="vertical"
+                android:layout_weight="1">
+            </androidx.recyclerview.widget.RecyclerView>
 
 
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- 광고 -->
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="FULL_BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+        <!-- TestID : ca-app-pub-3940256099942544/6300978111 -->
     </LinearLayout>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <!-- 광고 -->
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="70dp"
-        ads:adSize="FULL_BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
-    <!-- TestID : ca-app-pub-3940256099942544/6300978111 -->
-
 </LinearLayout>

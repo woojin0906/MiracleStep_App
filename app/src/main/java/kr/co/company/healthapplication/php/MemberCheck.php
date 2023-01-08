@@ -2,7 +2,7 @@
   // 비밀번호 재설정화면에서 회원여부를 확인하는 php (2023-01-05)
 
   /* (1) 서버 DB에 연결.*/
-  $con = mysqli_connect("localhost", "miraclestep", "비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)", "miraclestep");
+  $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
   mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
   /* (2) DB에 저장할 객체 선언. */

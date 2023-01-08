@@ -15,7 +15,7 @@ public class RunRequest extends StringRequest {
     final static private String URL = "http://miraclestep.ivyro.net/Run.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
-    public RunRequest(String userId, int runTime, double runDistance, int runStep, double runKcal, Response.Listener<String> listener){
+    public RunRequest(String userId, String runTime, String runDistance, String runStep, String runKcal, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
@@ -27,17 +27,17 @@ public class RunRequest extends StringRequest {
         map = new HashMap<>();
         map.put("userID", userId);
         map.put("runDate", nowDate);
-        map.put("runTime", runTime+"");
-        map.put("runDistance", runDistance+"");
-        map.put("runStep", runStep+"");
-        map.put("runKcal", runKcal+"");
+        map.put("runTime", runTime);
+        map.put("runDistance", runDistance);
+        map.put("runStep", runStep);
+        map.put("runKcal", runKcal);
 
         Log.d("아이디", userId);
         Log.d("일정", nowDate);
-        Log.d("타임", String.valueOf(runTime));
-        Log.d("거리", String.valueOf(runDistance));
-        Log.d("걸음", String.valueOf(runStep));
-        Log.d("칼로리", String.valueOf(runKcal));
+        Log.d("타임", runTime);
+        Log.d("거리", runDistance);
+        Log.d("걸음", runStep);
+        Log.d("칼로리", runKcal);
     }
 
     @Override
