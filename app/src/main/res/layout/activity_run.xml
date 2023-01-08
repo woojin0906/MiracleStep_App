@@ -85,9 +85,9 @@
             android:orientation="horizontal">
             <!-- 거리 -->
             <TextView
+                android:id="@+id/tvDistance"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDistance"
                 android:text="0.00km"
                 android:textSize="20sp"
                 android:textStyle="bold"
