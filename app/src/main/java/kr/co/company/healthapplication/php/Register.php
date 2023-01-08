@@ -8,7 +8,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호를 입력할 자리입니다.(깃허브 올릴 때에는 안적을께요~)", "miraclestep");
+    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
 /* (2) DB에 저장할 객체 선언. */
@@ -28,14 +28,17 @@
 
     $userHeight = isset($_POST["userHeight"]) ? $_POST["userHeight"] : "";
     $userWeight = isset($_POST["userWeight"]) ? $_POST["userWeight"] : "";
+
     $userBirth = isset($_POST["userBirth"]) ? $_POST["userBirth"] : "";
     $userBirth=str_replace(".","-",$userBirth);
     $userBirth=str_replace("/","-",$userBirth);
     $userBirth = date('Ymd', strtotime($userBirth));
+    
+    $userImg = "img";
 
 /* (3) DB안에 insert하는 문장. (User, UserInfo) */
-    $statement1 = mysqli_prepare($con, "INSERT INTO User VALUES (?,?,?,?,?)");
-    mysqli_stmt_bind_param($statement1, "ssssi", $userID, $userPassword, $userName, $UserPhoneNumber, $userDstep);
+    $statement1 = mysqli_prepare($con, "INSERT INTO User VALUES (?,?,?,?,?,?)");
+    mysqli_stmt_bind_param($statement1, "ssssis", $userID, $userPassword, $userName, $UserPhoneNumber, $userDstep, $userImg);
     mysqli_stmt_execute($statement1);
 
     $statement2 = mysqli_prepare($con, "INSERT INTO UserInfo VALUES (?,?,?,?,?)");
