@@ -13,9 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -23,11 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.skt.Tmap.TMapGpsManager;
@@ -50,7 +46,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 // 러닝 액티비티 (2023-01-07 인범 수정)
-public class RunningActivity extends Fragment implements SensorEventListener, TMapGpsManager.onLocationChangedCallback {
+public class RunActivity extends AppCompatActivity implements SensorEventListener, TMapGpsManager.onLocationChangedCallback {
 
     // 날씨
     public static String weather121313 = "현재 날씨는 맑은 상태입니다.";
@@ -88,15 +84,15 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
 
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_running, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_run);
 
         // 날씨 이미지 뷰
-        ivWeather = rootView.findViewById(R.id.ivWeather);
-        tvTemperatures = rootView.findViewById(R.id.tvTemperatures);
-        tvWeather = rootView.findViewById(R.id.tvWeather);
+        ivWeather = findViewById(R.id.ivWeather);
+        tvTemperatures = findViewById(R.id.tvTemperatures);
+        tvWeather = findViewById(R.id.tvWeather);
 
         Glide.with(this).load(R.mipmap.sun).into(ivWeather);
 
@@ -147,26 +143,26 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
         }
 
         //걸음수
-        stepCount = rootView.findViewById(R.id.tvStepCount);
-        kcal = rootView.findViewById(R.id.tvKcal);
+        stepCount = findViewById(R.id.tvStepCount);
+        kcal = findViewById(R.id.tvKcal);
         // 활동 퍼미션 체크
-        if(ContextCompat.checkSelfPermission(getActivity(),
+        if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
 
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
         // 걸음 센서 연결
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
         // 디바이스에 걸음 센서의 존재 여부 체크
         if (stepCountSensor == null) {
-            Toast.makeText(getActivity(), "No Step Sensor", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
         }
 
         // T Map
-        tMapView = new TMapView(getActivity());
+        tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey(API_Key);
 
         // Initial Setting
@@ -176,17 +172,17 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
         tMapView.setLanguage(TMapView.LANGUAGE_KOREAN);
 
         // T Map View Using Linear Layout
-        LinearLayout linearLayoutTmap = rootView.findViewById(R.id.linearLayoutTmap);
+        LinearLayout linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
         linearLayoutTmap.addView(tMapView);
 
         // GPS using T Map
-        tMapGPS = new TMapGpsManager(getActivity());
+        tMapGPS = new TMapGpsManager(this);
 
         // Initial Setting
         tMapGPS.setMinTime(100);    // 일정 시간마다 리셋
-        tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋
-        tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
-        //tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
+        tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋s
+        //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
+        tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
 
         // 화면중심을 단말의 현재위치로 이동
         tMapView.setTrackingMode(true);
@@ -196,11 +192,11 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
 
 
         // 스톱워치(시간)
-        chrono = rootView.findViewById(R.id.chrono);
+        chrono = findViewById(R.id.chrono);
         chrono.setFormat("%s");
 
-        startBtn = rootView.findViewById(R.id.startBtn);
-        stopBtn = rootView.findViewById(R.id.stopBtn);
+        startBtn = findViewById(R.id.startBtn);
+        stopBtn = findViewById(R.id.stopBtn);
 
         //시작버튼
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -240,8 +236,6 @@ public class RunningActivity extends Fragment implements SensorEventListener, TM
             }
         });
 
-
-        return rootView;
     }
 
     //걸음수
