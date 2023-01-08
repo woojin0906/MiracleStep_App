@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/runningBtn"
             android:layout_weight="1"
-            android:layout_margin="8dp"
             android:text="러닝"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
@@ -40,7 +39,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/donationBtn"
             android:layout_weight="1"
-            android:layout_margin="0dp"
             android:text="캠페인"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
@@ -59,7 +57,6 @@
             android:id="@+id/rankBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:layout_weight="1"
             android:text="랭크"
             android:background="#00ff0000"
@@ -70,7 +67,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/infoBtn"
             android:layout_weight="1"
-            android:layout_margin="8dp"
             android:text="정보"
             android:background="#00ff0000"
             android:layout_gravity="center_vertical"/>
