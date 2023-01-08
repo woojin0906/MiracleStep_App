@@ -71,9 +71,6 @@
             android:name=".RankActivity"
             android:exported="true" />
         <activity
-            android:name=".RunningActivity"
-            android:exported="true" />
-        <activity
             android:name=".MypageActivity"
             android:exported="true" />
         <activity

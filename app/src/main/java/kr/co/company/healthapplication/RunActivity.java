@@ -82,6 +82,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private boolean running;
     private int m; // 시간(분)
 
+
+
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
@@ -160,6 +162,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         if (stepCountSensor == null) {
             Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
         }
+
 
         // T Map
         tMapView = new TMapView(this);
