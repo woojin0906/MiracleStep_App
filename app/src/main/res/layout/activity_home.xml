@@ -17,15 +17,6 @@
         android:textColor="#84A7E4"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/ivRun"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"/>
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +39,23 @@
             android:textStyle="bold"
             android:text="34166"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivRun"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"/>
+
+
+        <Button
+            android:id="@+id/btnRun"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="러닝하기"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,20 +97,5 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <!-- 광고 -->
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            ads:adSize="FULL_BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
-        <!-- TestID : ca-app-pub-3940256099942544/6300978111 -->
     </LinearLayout>
 </LinearLayout>
