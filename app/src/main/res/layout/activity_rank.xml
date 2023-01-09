@@ -69,7 +69,7 @@
             android:textSize="18dp"
             android:textColor="@color/white"
             android:layout_marginLeft="7dp"
-            android:text="걸음"/>
+            android:text="코인"/>
     </LinearLayout>
 
     <!-- 내 등수 -->
@@ -108,13 +108,6 @@
         android:layout_height="wrap_content"
         android:background="#2e5694"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnTotalRank"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="@drawable/radius_button_rank"
-            android:text="전체"/>
         <Button
             android:id="@+id/btnDonaRank"
             android:layout_width="wrap_content"
