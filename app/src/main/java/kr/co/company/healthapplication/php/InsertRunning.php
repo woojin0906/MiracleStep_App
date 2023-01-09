@@ -1,12 +1,4 @@
 <?php
-    /*
-      // 파일 공유를 위해 올립니다. (2023-01-03 이수.)
-
-      Register.php : 회원가입을 처리하는 php
-      $ : 변수를 선언해주는 기호
-      con : mysql 연결을 시도하는 변수.
-    */
-
 /* (1) 서버 DB에 연결.*/
     $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
@@ -34,6 +26,5 @@
     $response = array();
     $response["success"] = true;
 
-    echo json_encode($runDate);
     echo json_encode($response);
 ?>

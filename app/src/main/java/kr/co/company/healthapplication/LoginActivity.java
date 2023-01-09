@@ -75,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         tvFindPwd = findViewById(R.id.tvFindPwd);
         cbIdSave = findViewById(R.id.cbIdSave);
 
-
         try {
             // 아이디 저장 불러오기
             sql = "SELECT * FROM " + helper.UserIDSave;
@@ -91,56 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userId = etId.getText().toString();
                 String userPassword = etPwd.getText().toString();
-
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                            boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
-                            //String jsonString = jsonObject.toString();
-                            //Log.d("전송여부", jsonString);
-
-                            // 로그인에 성공한 경우.
-                            if(success) {
-                                String userID = jsonObject.getString("userID");
-                                //String userPassword = jsonObject.getString("userPassword");
-
-                                try {
-                                    // 아이디 저장버튼을 누른 경우.
-                                    if (cbIdSave.isChecked()) {
-                                        helper.DeleteUserID(db);
-                                        helper.insertUserID(db, userId);
-                                    } else {
-                                        helper.DeleteUserID(db);
-                                    }
-                                } catch (Exception e){
-                                    e.printStackTrace();
-                                }
-
-                                editor.putString("UserID", userId);
-                                editor.apply();
-
-                                Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userID", userID);
-                                startActivity(intent);
-                                finish();
-                            }
-                            // 로그인에 실패한 경우.
-                            else {
-                                Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                LoginRequest loginRequest = new LoginRequest(userId, userPassword, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                login(userId, userPassword);
             }
         });
 
@@ -161,5 +111,57 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void login(String userId, String userPassword) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    //String jsonString = jsonObject.toString();
+                    //Log.d("전송여부", jsonString);
+
+                    // 로그인에 성공한 경우.
+                    if(success) {
+                        String userID = jsonObject.getString("userID");
+                        //String userPassword = jsonObject.getString("userPassword");
+
+                        try {
+                            // 아이디 저장버튼을 누른 경우.
+                            if (cbIdSave.isChecked()) {
+                                helper.DeleteUserID(db);
+                                helper.insertUserID(db, userId);
+                            } else {
+                                helper.DeleteUserID(db);
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        editor.putString("UserID", userId);
+                        editor.apply();
+
+                        Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("userID", userID);
+                        startActivity(intent);
+                        finish();
+                    }
+                    // 로그인에 실패한 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        LoginRequest loginRequest = new LoginRequest(userId, userPassword, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        queue.add(loginRequest);
     }
 }

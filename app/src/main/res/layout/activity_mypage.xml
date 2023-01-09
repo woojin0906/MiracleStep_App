@@ -5,126 +5,150 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Miracle Step"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="#84A7E4"
-            android:textSize="35dp"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Miracle Step"
+        android:layout_marginTop="20dp"
+        android:textColor="#84A7E4"
+        android:layout_gravity="center"
+        android:textSize="35dp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tvUserSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15dp"
         android:inputType="text"
         android:layout_gravity="right"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="30dp"
         android:textStyle="bold"
-        android:text="내 정보 수정 >"/>
+        android:text="내 정보 수정하기 >"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/donation_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/mypage_imageView"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/user"
+            android:background="@drawable/donation_back"/>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/donation_back"
-            android:layout_marginLeft="20dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
             android:layout_marginRight="20dp">
-
-            <ImageView
-                android:id="@+id/mypage_imageView"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_margin="15dp"
-                android:src="@drawable/ic_launcher_background" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:inputType="text"
+                    android:text="사용자 이메일 : "/>
+                <TextView
+                    android:id="@+id/tvUserID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:inputType="text"
+                    android:text="아이디"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_marginRight="20dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:inputType="text"
-                        android:text="사용자 이메일 : "/>
-                    <TextView
-                        android:id="@+id/tvUserID"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:inputType="text"
-                        android:text="아이디"/>
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="사용자 이름 : "
+                    android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/tvUserPW"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="text"
-                        android:text="사용자 이름 : "
-                        android:textSize="15dp" />
-                    <TextView
-                        android:id="@+id/tvUserPW"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:inputType="text"
-                        android:text="이름"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:inputType="text"
+                    android:text="이름"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:inputType="text"
-                        android:text="현재 사용 가능한 걸음 수 : "/>
-                    <TextView
-                        android:id="@+id/tvUserDStep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:inputType="text"
-                        android:text="걸음 수"/>
-                </LinearLayout>
+                    android:textSize="15dp"
+                    android:inputType="text"
+                    android:text="현재 사용 가능한 걸음 수 : "/>
+                <TextView
+                    android:id="@+id/tvUserDStep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:inputType="text"
+                    android:text="걸음 수"/>
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvUserInfoSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:inputType="text"
+        android:layout_gravity="right"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="30dp"
+        android:textStyle="bold"
+        android:text="나의 신체정보 수정하기 >"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/donation_back"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_margin="20dp"
-            android:background="@drawable/donation_back"
-            android:padding="10dp"
-            android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:layout_gravity="center">
 
@@ -140,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="현재 키"
+                    android:text="180cm"
                     android:textColor="#0558FF"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -149,7 +173,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="20dp"
                 android:layout_gravity="center">
 
                 <TextView
@@ -164,7 +187,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="현재 몸무게"
+                    android:text="65kg"
+                    android:textColor="#0558FF"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="나이 : "
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/mypage_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="만 25세"
                     android:textColor="#0558FF"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -173,33 +230,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="20dp"
                 android:layout_gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:text="BMI : "
+                    android:text="BMI: "
                     android:textSize="17dp" />
 
                 <TextView
-                    android:id="@+id/mypage_money"
+                    android:id="@+id/ㅇㅇㅇ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="bmi 치수"
+                    android:text="과체중"
                     android:textColor="#0558FF"
                     android:textSize="17dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+       android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/donation_back"
         android:padding="5dp"
         android:gravity="center">
@@ -245,24 +304,21 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="20dp">
+            android:layout_margin="23dp">
 
             <TextView
-                android:id="@+id/mypage_Tv_customerCenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="19dp"
                 android:textStyle="bold"
-                android:text="앱 이름 고객센터" />
+                android:gravity="center"
+                android:text="고객센터" />
 
             <TextView
-                android:id="@+id/mypage_Tv_ex1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -270,17 +326,22 @@
                 android:text="앱 이용 관련 상담만 가능합니다." />
 
             <TextView
-                android:id="@+id/mypage_Tv_ex2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:textSize="17dp"
-                android:text="전화상담은 10:00부터 18:00까지 가능합니다.(주말 및 공휴일 휴무)" />
+                android:text="전화상담은 10:00부터 18:00까지 가능합니다.
+                                (주말 및 공휴일 휴무)" />
         </LinearLayout>
+
     <Button
         android:id="@+id/btnLogOut"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="로그아웃"
+        android:layout_gravity="center"
         android:backgroundTint="#84A7E4"/>
+
 </LinearLayout>
