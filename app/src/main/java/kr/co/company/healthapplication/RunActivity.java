@@ -58,6 +58,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import kr.co.company.healthapplication.request.InsertRequest;
+import kr.co.company.healthapplication.request.RunSelectRequest;
+import kr.co.company.healthapplication.request.UpdateRequest;
+
 // 러닝 액티비티 (2023-01-07 인범 수정)
 public class RunActivity extends AppCompatActivity implements SensorEventListener, TMapGpsManager.onLocationChangedCallback {
 
@@ -103,9 +107,9 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private String runKcal;
 
     // Preferences Shared
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-    private String userId;
+    private SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+    private SharedPreferences.Editor  editor = pref.edit();
+    private String userId = pref.getString("UserID", "_");   // 유저 아이디 값 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
 
     // 거리계산 식
     private int count = 0;
@@ -113,6 +117,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     private double[] lat = new double[1000];
     private double total = 0.0;
 
+    boolean stateRunningTable;
 
     @Override
     public void onBackPressed() { // 뒤로가기 버튼 클릭 시
@@ -123,45 +128,12 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         running = false;
 
         // 2. 러닝 기록 가져오기
-        runTime = String.valueOf(m);
-        runDistance = tvDistance.getText().toString();
-        runStepCount = tvStepCount.getText().toString();
-        runKcal = tvKcal.getText().toString();
+        runTime += String.valueOf(m);
+        runDistance += tvDistance.getText().toString();
+        runStepCount += tvStepCount.getText().toString();
+        runKcal += tvKcal.getText().toString();
 
-        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        editor = pref.edit();
-        userId = pref.getString("UserID", "_");   // String 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
-
-        //3. 기록 DB에 저장
-        // JSON 오브젝트를 활용하여 회원가입 요청을 하는 메서드
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
-                    String jsonString = jsonObject.toString();
-                    Log.d("전송여부", jsonString);
-
-                    // 운동기록 저장 성공인 경우.
-                    if (success) {
-                        Toast.makeText(getApplicationContext(), "운동기록 저장 완료.", Toast.LENGTH_SHORT).show();
-                    }
-                    // 운동기록 저장 실패인 경우.
-                    else {
-                        Toast.makeText(getApplicationContext(), "운동기록 저장 실패.", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        // 서버로 Volley를 이용해서 요청을 함.
-        RunRequest runRequest = new RunRequest(userId, runTime, runDistance, runStepCount, runKcal, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
-        queue.add(runRequest);
+        insertRunning();
 
         finish();
     }
@@ -172,8 +144,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
-        
-        // 유저의 러닝테이블 정보 가져오기. (2023-01-09 이수)
+
+        selectRunning();    // 유저의 러닝테이블 정보 가져오는 함수 (2023-01-09 이수)
 
         // id값 가져오기
         tvStepCount = findViewById(R.id.tvStepCount);
@@ -249,7 +221,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
         }
 
-
         // T Map
         tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey(API_Key);
@@ -278,7 +249,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         tMapView.setSightVisible(true);
 
         tMapGPS.OpenGps();
-
 
         // 스톱워치(시간)
         chrono = findViewById(R.id.chrono);
@@ -327,6 +297,100 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
 
     }
 
+    private void selectRunning() {
+        // 유저의 러닝테이블 정보 가져오기. (2023-01-09 이수)
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    runTime = String.valueOf(jsonObject.getInt("runTime"));
+                    runDistance = String.valueOf(jsonObject.getDouble("runDistance"));
+                    runStepCount = String.valueOf(jsonObject.getDouble("runStep"));
+                    runKcal = String.valueOf(jsonObject.getDouble("runKcal"));
+                    stateRunningTable = success;
+
+                    String jsonString = jsonObject.toString();
+                    Log.d("전송여부", jsonString);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 서버로 Volley를 이용해서 요청을 함.
+        RunSelectRequest runSelectRequest = new RunSelectRequest(userId, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
+        queue.add(runSelectRequest);
+    }
+
+    private void updateRunning() {
+        //3. 기록 DB에 저장
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String jsonString = jsonObject.toString();
+                    Log.d("전송여부", jsonString);
+
+                    // 운동기록 저장 성공인 경우.
+                    if (success) {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 완료.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 운동기록 저장 실패인 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 실패.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 서버로 Volley를 이용해서 요청을 함.
+        UpdateRequest runRequest = new UpdateRequest(userId, runTime, runDistance, runStepCount, runKcal, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
+        queue.add(runRequest);
+    }
+
+    private void insertRunning() {
+        //3. 기록 DB에 저장
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String jsonString = jsonObject.toString();
+                    Log.d("전송여부", jsonString);
+
+                    // 운동기록 저장 성공인 경우.
+                    if (success) {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 완료.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 운동기록 저장 실패인 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(), "운동기록 저장 실패.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 서버로 Volley를 이용해서 요청을 함.
+        InsertRequest runRequest = new InsertRequest(userId, runTime, runDistance, runStepCount, runKcal, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
+        queue.add(runRequest);
+    }
+
     //걸음수
     public void onStart() {
         super.onStart();
@@ -355,11 +419,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                     tvKcal.setText((String.format("%.2f", countKcal) + "kcal"));
                 }
             }
-
         }
-
     }
-
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
