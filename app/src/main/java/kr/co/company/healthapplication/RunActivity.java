@@ -172,6 +172,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+        
+        // 유저의 러닝테이블 정보 가져오기. (2023-01-09 이수)
 
         // id값 가져오기
         tvStepCount = findViewById(R.id.tvStepCount);
