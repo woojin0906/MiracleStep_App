@@ -25,7 +25,7 @@ public class DonationPopupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donation_popup);
 
         seekBar = findViewById(R.id.seekBar);
-        textview = findViewById(R.id.textView);
+        textview = findViewById(R.id.stepCount);
         maxBtn = findViewById(R.id.maxBtn);
         minBtn = findViewById(R.id.minBtn);
         donationBtn = findViewById(R.id.donationBtn);

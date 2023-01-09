@@ -7,16 +7,39 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 public class DonationPostActivity extends AppCompatActivity {
 
     private Button donationBtn;
     private ImageButton backBtn;
+    private TextView tvTitleName, tvName, tvNowStep;
+    private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_post);
+
+        tvTitleName = (TextView) findViewById(R.id.titleName);
+        tvName = (TextView) findViewById(R.id.name);
+        tvNowStep = (TextView) findViewById(R.id.nowStep);
+        img = findViewById(R.id.ivDonationProfile);
+
+        Intent receiveIntent = getIntent();
+        final String titleName = receiveIntent.getStringExtra("titleName");
+        final String name = receiveIntent.getStringExtra("name");
+        final String nowStep = receiveIntent.getStringExtra("nowStep");
+        final String ivDonationProfile = receiveIntent.getStringExtra("ivDonationProfile");
+
+        tvTitleName.setText(titleName);
+        tvName.setText(name);
+        tvNowStep.setText(nowStep);
+        Glide.with(img).load(ivDonationProfile).into(img);
+
 
         donationBtn = findViewById(R.id.donationBtn);
         backBtn = findViewById(R.id.backBtn);
@@ -36,9 +59,6 @@ public class DonationPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-
-                Intent intent = new Intent(DonationPostActivity.this, DonationActivity.class);
-                startActivity(intent);
 
             }
         });

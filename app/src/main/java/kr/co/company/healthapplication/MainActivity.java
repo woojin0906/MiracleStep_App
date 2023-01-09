@@ -1,25 +1,33 @@
 package kr.co.company.healthapplication;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+// 바텀네비게이션 + 프래그먼트 액티비티 (2023-01-09 우진 수정)
 public class MainActivity extends AppCompatActivity {
 
-    private RankActivity rankActivity;
-    private MypageActivity mypageActivity;
-    private HomeActivity homeActivity;
-    private DonationActivity donationActivity;
+    // 바텀 네비게이션
+    BottomNavigationView bottomNavigationView;
 
-    private Button buttonRank, buttonRunning, buttonInfo, buttonDonation;
-    private ImageButton buttonHome;
+    // 프래그먼트 변수
+    Fragment fragment_home;
+    Fragment fragment_donation;
+    Fragment fragment_rank;
+    Fragment fragment_info;
+
     private long backBtnTime = 0;
 
     @Override
@@ -27,64 +35,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rankActivity = new RankActivity();
-        mypageActivity = new MypageActivity();
-        homeActivity = new HomeActivity();
-        donationActivity = new DonationActivity();
+        // 프래그먼트 생성
+        fragment_home = new HomeActivity();
+        fragment_donation = new DonationActivity();
+        fragment_rank = new RankActivity();
+        fragment_info = new MypageActivity();
 
-        // 프래그먼트 매니저 획득
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        // 바텀 네비게이션
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        //프래그먼트 Transaction 획득
-        //프래그먼트를 올리거나 교체하는 작업을 Transaction이라고 합니다.
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //프래그먼트를 FrameLayout의 자식으로 등록해줍니다.
-        fragmentTransaction.add(R.id.fragmentFrame, homeActivity);
-        //commit을 하면 자식으로 등록된 프래그먼트가 화면에 보여집니다.
-        fragmentTransaction.commit();
+        // 초기 프래그먼트 설정
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_home).commitAllowingStateLoss();
 
-        buttonRank = findViewById(R.id.rankBtn);
-        buttonRunning = findViewById(R.id.runningBtn);
-        buttonInfo = findViewById(R.id.infoBtn);
-        buttonHome = findViewById(R.id.homeBtn);
-        buttonDonation = findViewById(R.id.donationBtn);
-
-        buttonRank.setOnClickListener(v -> {
-            FragmentManager fm1 = getSupportFragmentManager();
-            FragmentTransaction ft1 = fragmentManager.beginTransaction();
-            ft1.replace(R.id.fragmentFrame, rankActivity);
-            ft1.commit();
-        });
-
-        buttonRunning.setOnClickListener(new View.OnClickListener() {
+        // 리스너 등록
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(MainActivity.this, RunActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_home).commitAllowingStateLoss();
+                        return true;
+                    case R.id.donation:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_donation).commitAllowingStateLoss();
+                        return true;
+                    case R.id.rank:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_rank).commitAllowingStateLoss();
+                        return true;
+                    case R.id.info:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_info).commitAllowingStateLoss();
+                        return true;
+                }
+                return true;
             }
         });
-
-        buttonInfo.setOnClickListener(v -> {
-            FragmentManager fm3 = getSupportFragmentManager();
-            FragmentTransaction ft3 = fragmentManager.beginTransaction();
-            ft3.replace(R.id.fragmentFrame, mypageActivity);
-            ft3.commit();
-        });
-
-        buttonHome.setOnClickListener(v -> {
-            FragmentManager fm4 = getSupportFragmentManager();
-            FragmentTransaction ft4 = fragmentManager.beginTransaction();
-            ft4.replace(R.id.fragmentFrame, homeActivity);
-            ft4.commit();
-        });
-
-        buttonDonation.setOnClickListener(v -> {
-            FragmentManager fm5 = getSupportFragmentManager();
-            FragmentTransaction ft5 = fragmentManager.beginTransaction();
-            ft5.replace(R.id.fragmentFrame, donationActivity);
-            ft5.commit();
-        });
-
     }
     @Override
     public void onBackPressed() {

@@ -1,24 +1,28 @@
 package kr.co.company.healthapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
+// 기부캠페인 어댑터 (2023-01-09 우진 수정)
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.CustomViewHolder> {
 
-    private ArrayList<DonationInfo> arrayList;
-    private Context context;
+    private ArrayList<DonationData> arrayList;
 
-    public DonationAdapter(ArrayList<DonationInfo> arrayList, Context context) {
+    public DonationAdapter(ArrayList<DonationData> arrayList) {
         this.arrayList = arrayList;
-        this.context = context;
     }
 
     // list_item에 대한 최초의 뷰 생성
@@ -37,7 +41,26 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Custom
         holder.titleName.setText(arrayList.get(position).getTitleName());
         holder.name.setText(arrayList.get(position).getName());
         holder.nowStep.setText(arrayList.get(position).getNowStep());
+        Glide.with(holder.itemView)
+                .load(arrayList.get(position).getIvDonationProfile())
+                .into(holder.ivDonationProfile);
 
+        // 리사이클러뷰 클릭이벤트(선택된 리사이클러뷰 화면으로 이동)
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mPosition = holder.getAdapterPosition();
+                Context context = view.getContext();
+
+                Intent intent = new Intent(context, DonationPostActivity.class);
+                intent.putExtra("titleName", arrayList.get(mPosition).getTitleName());
+                intent.putExtra("name", arrayList.get(mPosition).getName());
+                intent.putExtra("nowStep", arrayList.get(mPosition).getNowStep());
+                intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
+
+                (context).startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,12 +72,14 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Custom
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleName, name, nowStep;
+        ImageView ivDonationProfile;
 
         public CustomViewHolder(@NonNull View view) {
             super(view);
             this.titleName=view.findViewById(R.id.titleName);
             this.name=view.findViewById(R.id.name);
             this.nowStep=view.findViewById(R.id.nowStep);
+            this.ivDonationProfile=(ImageView) view.findViewById(R.id.ivDonationProfile);
 
         }
     }
