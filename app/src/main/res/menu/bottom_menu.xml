@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/donation"
+        android:title="캠페인"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="홈"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/rank"
+        android:title="랭킹"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/info"
+        android:title="정보"
+        android:enabled="true"/>
+</menu>
