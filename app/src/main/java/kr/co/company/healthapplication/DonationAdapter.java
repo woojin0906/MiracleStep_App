@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-// 기부캠페인 어댑터 (2023-01-09 우진 수정)
+// 기부캠페인 어댑터 (2023-01-10 우진 수정)
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.CustomViewHolder> {
 
     private ArrayList<DonationData> arrayList;
@@ -56,7 +56,11 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Custom
                 intent.putExtra("titleName", arrayList.get(mPosition).getTitleName());
                 intent.putExtra("name", arrayList.get(mPosition).getName());
                 intent.putExtra("nowStep", arrayList.get(mPosition).getNowStep());
-                intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
+                //intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
+                intent.putExtra("date", arrayList.get(mPosition).getDate());
+                intent.putExtra("maxStep", arrayList.get(mPosition).getMaxStep());
+                intent.putExtra("content", arrayList.get(mPosition).getContent());
+                intent.putExtra("category", arrayList.get(mPosition).getCategory());
 
                 (context).startActivity(intent);
             }
