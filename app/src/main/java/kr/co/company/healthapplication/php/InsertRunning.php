@@ -25,6 +25,7 @@
 /* (4) 성공 여부 전송. */
     $response = array();
     $response["success"] = true;
-
+    echo json_encode($runTime);
+    echo json_encode($runDistance);
     echo json_encode($response);
 ?>
