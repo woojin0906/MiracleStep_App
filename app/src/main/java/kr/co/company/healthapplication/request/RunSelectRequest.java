@@ -1,5 +1,7 @@
 package kr.co.company.healthapplication.request;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,6 +28,9 @@ public class RunSelectRequest extends StringRequest {
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("runDate", nowDate);
+        
+        Log.d("검색 아이디", userID);
+        Log.d("검색 날짜", nowDate);
     }
 
     @Override

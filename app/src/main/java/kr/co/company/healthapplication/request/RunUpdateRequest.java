@@ -11,11 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InsertRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/InsertRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
+public class RunUpdateRequest extends StringRequest {
+    final static private String URL = "http://miraclestep.ivyro.net/UpdateRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
-    public InsertRequest(String userId, String runTime, String runDistance, String runStep, String runKcal, Response.Listener<String> listener){
+    public RunUpdateRequest(String userId, String runTime, String runDistance, String runStep, String runKcal, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
@@ -32,6 +32,7 @@ public class InsertRequest extends StringRequest {
         map.put("runStep", runStep);
         map.put("runKcal", runKcal);
 
+        Log.d("어디", "업데이트");
         Log.d("아이디", userId);
         Log.d("일정", nowDate);
         Log.d("타임", runTime);

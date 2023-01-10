@@ -8,8 +8,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Miracle Step"
-        android:layout_marginTop="20dp"
+        android:text="내 정보 설정"
+        android:layout_marginTop="25dp"
         android:textColor="#84A7E4"
         android:layout_gravity="center"
         android:textSize="35dp"
