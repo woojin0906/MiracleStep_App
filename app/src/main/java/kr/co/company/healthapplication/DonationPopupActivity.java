@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// 기부캠페인 팝업 액티비티 (2023-01-10 우진 수정)
 public class DonationPopupActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView textview;
