@@ -3,6 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +17,7 @@
         android:text="서비스 이용 약관"
         android:textAlignment="center"
         android:textColor="#84A7E4"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
@@ -23,58 +25,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:text="서비스 이용을 위해 약관에 동의해주세요."
-        android:textSize="20dp" />
+        android:textSize="15dp" />
 
     <CheckBox
         android:id="@+id/allAgree"
-        android:layout_width="340dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:onClick="onClick"
         android:text="약관 전체 동의"
-        android:textSize="18dp" />
+        android:textSize="13dp" />
 
     <CheckBox
         android:id="@+id/agreeone"
-        android:layout_width="340dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:onClick="onClick"
         android:text="(필수) 개인정보 수집 및 이용 안내"
-        android:textSize="18dp" />
+        android:textSize="13dp" />
 
     <CheckBox
         android:id="@+id/agreetwo"
-        android:layout_width="340dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:onClick="onClick"
         android:text="(필수) 서비스 이용약관 동의"
-        android:textSize="18dp" />
+        android:textSize="13dp" />
 
     <CheckBox
         android:id="@+id/agreethree"
-        android:layout_width="340dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:text="(선택) 다양한 혜택 및 정보 알림 동의"
-        android:textSize="18dp" />
+        android:textSize="13dp" />
 
     <Button
         android:id="@+id/AgreeButton"
-        android:layout_width="300dp"
-        android:layout_height="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
         android:backgroundTint="#84A7E4"
         android:onClick="onClick"
-        android:text="확인"
-        android:textSize="25dp" />
+        android:text="확인" />
 
 </LinearLayout>
