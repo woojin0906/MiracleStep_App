@@ -5,24 +5,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <!--android:textColor="#84A7E4"-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내 정보 설정"
-        android:layout_marginTop="25dp"
-        android:textColor="#84A7E4"
         android:layout_gravity="center"
-        android:textSize="35dp"
+        android:layout_marginTop="25dp"
+        android:text="내 정보"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvUserSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="35px"
         android:inputType="text"
         android:layout_gravity="right"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:textStyle="bold"
         android:text="내 정보 수정하기 >"/>
@@ -33,10 +34,12 @@
         android:orientation="horizontal"
         android:background="@drawable/donation_back"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:elevation="15dp">
 
         <ImageView
-            android:id="@+id/mypage_imageView"
+            android:id="@+id/ivUser"
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:layout_margin="15dp"
@@ -56,14 +59,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="35px"
                     android:inputType="text"
-                    android:text="사용자 이메일 : "/>
+                    android:text="이메일 : "/>
                 <TextView
                     android:id="@+id/tvUserID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="35px"
                     android:textStyle="bold"
                     android:inputType="text"
                     android:text="아이디"/>
@@ -79,13 +82,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:text="사용자 이름 : "
-                    android:textSize="15dp" />
+                    android:text="이름 : "
+                    android:textSize="35px" />
                 <TextView
-                    android:id="@+id/tvUserPW"
+                    android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="35px"
                     android:textStyle="bold"
                     android:inputType="text"
                     android:text="이름"/>
@@ -98,14 +101,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="35px"
                     android:inputType="text"
                     android:text="현재 사용 가능한 걸음 수 : "/>
                 <TextView
                     android:id="@+id/tvUserDStep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="35px"
                     android:textStyle="bold"
                     android:inputType="text"
                     android:text="걸음 수"/>
@@ -113,22 +116,24 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tvUserInfoSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="35px"
         android:inputType="text"
         android:layout_gravity="right"
         android:layout_marginTop="25dp"
         android:layout_marginRight="30dp"
         android:textStyle="bold"
-        android:text="나의 신체정보 수정하기 >"/>
+        android:text="나의 신체정보 수정하기 >"/> -->
 
     <LinearLayout
+        android:elevation="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/donation_back"
@@ -157,18 +162,19 @@
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:text="키 : "
-                    android:textSize="17dp" />
+                    android:textSize="40px" />
 
                 <TextView
-                    android:id="@+id/mypage_Tv_money"
+                    android:id="@+id/tvUserHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:text="180cm"
                     android:textColor="#0558FF"
-                    android:textSize="17dp"
+                    android:textSize="40px"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,16 +186,16 @@
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:text="몸무게 : "
-                    android:textSize="17dp" />
+                    android:textSize="40px" />
 
                 <TextView
-                    android:id="@+id/mypage_Tv_"
+                    android:id="@+id/tvUserWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:text="65kg"
                     android:textColor="#0558FF"
-                    android:textSize="17dp"
+                    android:textSize="40px"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -214,18 +220,19 @@
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:text="나이 : "
-                    android:textSize="17dp" />
+                    android:textSize="40px" />
 
                 <TextView
-                    android:id="@+id/mypage_money"
+                    android:id="@+id/tvUserAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:text="만 25세"
                     android:textColor="#0558FF"
-                    android:textSize="17dp"
+                    android:textSize="40px"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -236,32 +243,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:text="BMI: "
-                    android:textSize="17dp" />
+                    android:text="BMI : "
+                    android:textSize="40px" />
 
                 <TextView
-                    android:id="@+id/ㅇㅇㅇ"
+                    android:id="@+id/tvUserBMI"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="과체중"
+                    android:text="표준"
                     android:textColor="#0558FF"
-                    android:textSize="17dp"
+                    android:textSize="40px"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:elevation="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/donation_back"
         android:padding="5dp"
         android:gravity="center">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -276,22 +285,21 @@
                 android:layout_weight="1"
                 android:layout_gravity="center">
                 <TextView
-                    android:id="@+id/mypage_Tv_donation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="17dp"
+                    android:textSize="40px"
                     android:inputType="text"
                     android:text="기부금 : "/>
 
                 <TextView
-                    android:id="@+id/mypagey"
+                    android:id="@+id/tvUserDonation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:text="누적 기부금"
                     android:textStyle="bold"
                     android:textColor="#0558FF"
-                    android:textSize="17dp" />
+                    android:textSize="40px" />
             </LinearLayout>
 
             <Button
@@ -308,12 +316,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="23dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="23dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="19dp"
+                android:textSize="40px"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="고객센터" />
@@ -322,22 +332,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="17dp"
+                android:textSize="40px"
                 android:text="앱 이용 관련 상담만 가능합니다." />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textSize="17dp"
-                android:text="전화상담은 10:00부터 18:00까지 가능합니다.
-                                (주말 및 공휴일 휴무)" />
+                android:textSize="40px"
+                android:text="전화상담은 10:00부터 18:00까지 가능합니다."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="40px"
+                android:text="(주말 및 공휴일 휴무)" />
         </LinearLayout>
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="로그아웃"
