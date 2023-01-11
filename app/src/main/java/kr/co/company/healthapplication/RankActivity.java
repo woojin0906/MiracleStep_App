@@ -1,5 +1,7 @@
 package kr.co.company.healthapplication;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 랭크 액티비티 (2023-01-10 인범 수정)
+// 랭크 액티비티 (2023-01-11 인범 수정)
 public class RankActivity extends Fragment {
 
     // 구글 광고
@@ -48,6 +50,16 @@ public class RankActivity extends Fragment {
 
 
     private String category = "TotalUserDonation";
+
+    // SharedPreference
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String rememberID;
+
+    // 내랭킹
+    private TextView tvMyPoint;
+    private TextView tvMyRank;
+
 
 
     @Nullable
@@ -77,7 +89,7 @@ public class RankActivity extends Fragment {
         recyclerView.setAdapter(mainAdapter);
 
         // 랭크 메서드 호출
-        rank(category);
+        rank(category, rootView);
 
 
         // 랭킹 버튼 클릭 이벤트
@@ -89,11 +101,11 @@ public class RankActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 // 기부버튼 클릭 시
-                tvRankTitle.setText("기부 랭킹");
+                tvRankTitle.setText("전체 기부 랭킹");
                 tvRankStep.setText("코인");
 
                 category = "TotalUserDonation";
-                rank(category);
+                rank(category, rootView);
             }
         });
 
@@ -102,18 +114,33 @@ public class RankActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 // 걸음버튼 클릭 시
-                tvRankTitle.setText("걷기 랭킹");
+                tvRankTitle.setText("전체 걷기 랭킹");
                 tvRankStep.setText("걸음");
 
                 category = "TotalUserStep";
-                rank(category);
+                rank(category, rootView);
             }
         });
 
         return rootView;
     }
 
-    private void rank(String category) {
+    private void rank(String category, ViewGroup rootView) {
+
+        // 내 랭킹을 나타낼 TextView정의
+        tvMyPoint = rootView.findViewById(R.id.tvMyPoint);
+        tvMyRank = rootView.findViewById(R.id.tvMyRank);
+
+        // 현재 로그인된 아이디
+        pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        rememberID = pref.getString("UserID", "_");
+
+        // 어댑터 초기화
+        arrayList = new ArrayList<>();
+        mainAdapter = new RankListAdapter(arrayList);
+        recyclerView.setAdapter(mainAdapter);
+
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -126,12 +153,16 @@ public class RankActivity extends Fragment {
                         String id = jsonObject.getString("UserId");
                         int point = jsonObject.getInt("point");
 
+                        if(rememberID.equals(id)){
+                            tvMyPoint.setText(point+"");
+                            tvMyRank.setText((i+1)+"");
+                        }
+
                         RankListData mainData = new RankListData((i+1)+"", R.drawable.user, id, point+"");
                         arrayList.add(mainData);
                     }
 
                     // 불러오기 전에 데이터(아이템) 초기화 해줘야 중첩 안됨.
-
                     mainAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {

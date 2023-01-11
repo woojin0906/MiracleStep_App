@@ -18,10 +18,10 @@ public class RankRequest extends StringRequest {
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
-        map = new HashMap<>();
-        map.put("category", category);
+          map = new HashMap<>();
+          map.put("category", category);
 
-        Log.d("정보", category);
+          Log.d("정보", category);
     }
 
     @Override
