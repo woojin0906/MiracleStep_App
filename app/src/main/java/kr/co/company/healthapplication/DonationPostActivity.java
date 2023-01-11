@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,6 +43,7 @@ public class DonationPostActivity extends AppCompatActivity {
         final String maxStep = receiveIntent.getStringExtra("maxStep");
         final String content = receiveIntent.getStringExtra("content");
         final String category = receiveIntent.getStringExtra("category");
+        final String dNum = receiveIntent.getStringExtra("dNum");
 
         tvTitleName.setText(titleName);
         tvName.setText(name);
@@ -59,6 +61,9 @@ public class DonationPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DonationPostActivity.this, DonationPopupActivity.class);
+                intent.putExtra("dNum", dNum);
+                intent.putExtra("nowStep", nowStep);
+
                 startActivity(intent);
 
             }
