@@ -11,6 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvListNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
         
         <ImageView
             android:id="@+id/ivProfile"

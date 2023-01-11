@@ -1,13 +1,14 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.dbAll;
 
-// 체크리스트 데이터 액티비티 (2023-01-04 인범 생성)
-public class CheckListData {
+import android.widget.ImageView;
+
+public class CheckList {
 
     private String tvListNum;
-    private int ivProfile;
+    private ImageView ivProfile;
     private String tvContent;
 
-    public CheckListData(String tvListNum, int ivProfile, String tvContent) {
+    public CheckList(String tvListNum, ImageView ivProfile, String tvContent) {
         this.tvListNum = tvListNum;
         this.ivProfile = ivProfile;
         this.tvContent = tvContent;
@@ -21,11 +22,11 @@ public class CheckListData {
         this.tvListNum = tvListNum;
     }
 
-    public int getIvProfile() {
+    public ImageView getIvProfile() {
         return ivProfile;
     }
 
-    public void setIvProfile(int ivProfile) {
+    public void setIvProfile(ImageView ivProfile) {
         this.ivProfile = ivProfile;
     }
 

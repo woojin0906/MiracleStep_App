@@ -1,8 +1,11 @@
 package kr.co.company.healthapplication;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +18,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-// 홈 액티비티 (2023-01-04 인범)
+import kr.co.company.healthapplication.request.HomeRequest;
+
+// 홈 액티비티 (2023-01-11 인범 수정.)
 public class HomeActivity extends Fragment {
 
     private ImageView ivRun;
@@ -32,6 +44,11 @@ public class HomeActivity extends Fragment {
 
     // 러닝
     private Button btnRun;
+
+    // SharedPreference
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String rememberID;
 
 
     @SuppressLint("ResourceType")
@@ -67,16 +84,66 @@ public class HomeActivity extends Fragment {
         mainAdapter = new CheckListAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
-        // list값 세팅
-        for(int i=1;i<=7;i++){
-            CheckListData mainData = new CheckListData(R.drawable.uncheckbox,  "오늘의 체크리스트 "+i);
-            arrayList.add(mainData);
-        }
+        // checkList메서드 호출
+        checkList(rootView);
 
-        mainAdapter.notifyDataSetChanged();
+        //mainAdapter.notifyDataSetChanged();
 
         return rootView;
     }
 
 
+    private void checkList(ViewGroup rootView) {
+
+        // 현재 로그인된 아이디
+        pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        rememberID = pref.getString("UserID", "_");
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);   // 결과 값을 리턴받음.
+                    JSONObject jsonObject;
+
+                    for(int i=0;i<jsonArray.length();i++){
+                        jsonObject = (JSONObject) jsonArray.opt(i);
+                        int ListNum = jsonObject.getInt("ListNum");
+                        int Checked = jsonObject.getInt("Checked");
+                        String CheckContent = jsonObject.getString("CheckContent");
+
+                        Log.d("ListNum", ListNum+"");
+                        Log.d("Checked", Checked+"");
+                        Log.d("CheckContent", CheckContent);
+
+
+                        // checked = 0 (체크안됨)
+                        // checked = 1 (체크됨)
+                        CheckListData mainData;
+                        if(Checked==0){
+                            mainData = new CheckListData(ListNum+"", R.drawable.uncheckbox, CheckContent);
+                        }else{
+                            mainData = new CheckListData(ListNum+"", R.drawable.checkbox, CheckContent);
+                        }
+                        arrayList.add(mainData);
+                    }
+
+                    // 불러오기 전에 데이터(아이템) 초기화 해줘야 중첩 안됨.
+                    mainAdapter.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        HomeRequest homeRequest = new HomeRequest(rememberID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(homeRequest);
+    }
+
+
+    public SharedPreferences getPref() {
+        return pref;
+    }
 }

@@ -60,8 +60,6 @@ public class RankActivity extends Fragment {
     private TextView tvMyPoint;
     private TextView tvMyRank;
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
