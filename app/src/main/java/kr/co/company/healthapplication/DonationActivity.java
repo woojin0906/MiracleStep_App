@@ -157,8 +157,9 @@ public class DonationActivity extends Fragment {
                         String content = jsonObject.getString("content");
                         String date = jsonObject.getString("date");
                         String maxStep = jsonObject.getString("maxStep");
+                        String dNum = jsonObject.getString("dNum");
 
-                        DonationData mainData = new DonationData(titleName, name, nowStep + i, R.drawable.bear2, content, date, maxStep);
+                        DonationData mainData = new DonationData(dNum, titleName, name, nowStep, R.drawable.bear2, content, date, maxStep);
                         arrayList.add(mainData);
                     }
 

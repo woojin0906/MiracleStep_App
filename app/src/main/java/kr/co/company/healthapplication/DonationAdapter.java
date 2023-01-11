@@ -3,6 +3,7 @@ package kr.co.company.healthapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,10 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Custom
                 intent.putExtra("maxStep", arrayList.get(mPosition).getMaxStep());
                 intent.putExtra("content", arrayList.get(mPosition).getContent());
                 intent.putExtra("category", arrayList.get(mPosition).getCategory());
+                intent.putExtra("dNum", arrayList.get(mPosition).getdNum());
 
                 (context).startActivity(intent);
+
             }
         });
     }

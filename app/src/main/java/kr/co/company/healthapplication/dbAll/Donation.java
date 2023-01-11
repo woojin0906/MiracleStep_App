@@ -12,6 +12,15 @@ public class Donation {
     private Date DDate;
     private int MaxStep;
     private int NowStep;
+    private int dNum;
+
+    public int getdNum() {
+        return dNum;
+    }
+
+    public void setdNum(int dNum) {
+        this.dNum = dNum;
+    }
 
     public String getDCategory() {
         return DCategory;

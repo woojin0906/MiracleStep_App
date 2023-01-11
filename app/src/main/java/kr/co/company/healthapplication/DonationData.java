@@ -12,6 +12,15 @@ public class DonationData {
     private String content;
     private String date;
     private String maxStep;
+    private String dNum;
+
+    public String getdNum() {
+        return dNum;
+    }
+
+    public void setdNum(String dNum) {
+        this.dNum = dNum;
+    }
 
     public DonationData() {}  // 생성자 메서드
 
@@ -79,7 +88,8 @@ public class DonationData {
         this.nowStep = nowStep;
     }
 
-    public DonationData(String titleName, String name, String nowStep, int ivDonationProfile, String content, String date, String maxStep) {
+    public DonationData(String dNum, String titleName, String name, String nowStep, int ivDonationProfile, String content, String date, String maxStep) {
+        this.dNum = dNum;
         this.titleName = titleName;
         this.name = name;
         this.nowStep = nowStep;
