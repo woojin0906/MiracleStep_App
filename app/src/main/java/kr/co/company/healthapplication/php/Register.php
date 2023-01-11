@@ -22,9 +22,9 @@
 
     // date타입을 php는 String으로 받아들이기 때문에 형변환이 필요해요... (2023-01-03 이수)
     $UserInfoDate = isset($_POST["UserInfoDate"]) ? $_POST["UserInfoDate"] : "";
-    $UserInfoDate=str_replace(".","-",$UserInfoDate);
-    $UserInfoDate=str_replace("/","-",$UserInfoDate);
-    $UserInfoDate = date('Ymd', strtotime($UserInfoDate));
+    //$UserInfoDate=str_replace(".","-",$UserInfoDate);
+    //$UserInfoDate=str_replace("/","-",$UserInfoDate);
+    //$UserInfoDate = date('Ymd', strtotime($UserInfoDate));
 
     $userHeight = isset($_POST["userHeight"]) ? $_POST["userHeight"] : "";
     $userWeight = isset($_POST["userWeight"]) ? $_POST["userWeight"] : "";
@@ -42,7 +42,7 @@
     mysqli_stmt_execute($statement1);
 
     $statement2 = mysqli_prepare($con, "INSERT INTO UserInfo VALUES (?,?,?,?,?)");
-    mysqli_stmt_bind_param($statement2, "sbddb", $userID, $UserInfoDate, $userHeight, $userWeight, $userBirth);
+    mysqli_stmt_bind_param($statement2, "sbdds", $userID, $UserInfoDate, $userHeight, $userWeight, $userBirth);
     mysqli_stmt_execute($statement2);
 
 /* (4) 성공 여부 전송. */
