@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.co.company.healthapplication.request.CheckListCheckedRequest;
 import kr.co.company.healthapplication.request.HomeRequest;
 
 // 홈 액티비티 (2023-01-11 인범 수정.)
@@ -46,9 +47,9 @@ public class HomeActivity extends Fragment {
     private Button btnRun;
 
     // SharedPreference
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-    private String rememberID;
+    public SharedPreferences pref;
+    public SharedPreferences.Editor editor;
+    public static String UserID;
 
 
     @SuppressLint("ResourceType")
@@ -57,6 +58,10 @@ public class HomeActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_home, container, false);
 
+        // 현재 로그인된 사용자 아이디 가져오기
+        pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        UserID = pref.getString("UserID", "_");
 
         // 러닝 버튼
         btnRun = rootView.findViewById(R.id.btnRun);
@@ -85,20 +90,50 @@ public class HomeActivity extends Fragment {
         recyclerView.setAdapter(mainAdapter);
 
         // checkList메서드 호출
-        checkList(rootView);
+        checkList();
 
         //mainAdapter.notifyDataSetChanged();
 
         return rootView;
     }
 
+    // CheckList클릭 이벤트 처리하는 메서드
+    public void checkListChecked(String ListNum, String Checked) { // 버튼 클릭시 리스트번호와 체크상태 가져옴
+        // 아이디와 현재날짜(Request)의 리스트번호를 보내서 체크상태를 보고 Checked 업데이트
+        // 현재 로그인된 사용자 아이디 가져오기
 
-    private void checkList(ViewGroup rootView) {
+        Log.d("클릭 이벤트 사용자 아이디", UserID);
 
-        // 현재 로그인된 아이디
-        pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        editor = pref.edit();
-        rememberID = pref.getString("UserID", "_");
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+
+                    // 데이터를 정상적으로 처리한 경우
+                    if (success) {
+                        Log.d("체크리스트", "업데이트 성공");
+                    }
+                    // 데이터를 정상적으로 처리한 경우
+                    else {
+                        Log.d("체크리스트", "업데이트 실패");
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        CheckListCheckedRequest checkRequest = new CheckListCheckedRequest("lib1234", ListNum, Checked, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(checkRequest);
+
+    }
+
+    // 체크리스트 가져와 뿌려주는 메서드
+    private void checkList() {
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -116,7 +151,6 @@ public class HomeActivity extends Fragment {
                         Log.d("ListNum", ListNum+"");
                         Log.d("Checked", Checked+"");
                         Log.d("CheckContent", CheckContent);
-
 
                         // checked = 0 (체크안됨)
                         // checked = 1 (체크됨)
@@ -137,13 +171,10 @@ public class HomeActivity extends Fragment {
                 }
             }
         };
-        HomeRequest homeRequest = new HomeRequest(rememberID, responseListener);
+        HomeRequest homeRequest = new HomeRequest(UserID, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(homeRequest);
     }
 
 
-    public SharedPreferences getPref() {
-        return pref;
-    }
 }
