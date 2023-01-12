@@ -191,8 +191,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             String weather = weatherResult.substring(0, (beginIndex - 1));    // 날씨
             tvTemperatures.setText(temperatures);
             tvWeather.setText(weather);
-            Log.d("r1의 정보", weather121313);
-            Log.d("weather의 정보", weather);
             if(!weather121313.equals(weather)) {
                 // 날씨에 따라 이미지 변경
                 if (weather.equals("현재 날씨는 맑은 상태입니다.")) {
@@ -313,8 +311,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             @Override
             public void onResponse(String response) {
                 try {
-                        //JSONObject jsonArray = new JSONObject(response);   // 결과 값을 리턴받음.
-                        Log.d("뭐지", response);
                         JSONObject jsonObject = new JSONObject(response);
                         stateRunningTable =jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
 

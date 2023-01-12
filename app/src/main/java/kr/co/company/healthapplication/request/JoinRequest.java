@@ -18,7 +18,7 @@ public class JoinRequest extends StringRequest {
     private Map<String, String> map;
 
     public JoinRequest(String userID, String userPassword, String userName, String UserPhoneNumber,
-                       double userHeight, double userWeight, Date userBirth, Response.Listener<String> listener){
+                       double userHeight, double userWeight, String userBirth, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
@@ -35,7 +35,7 @@ public class JoinRequest extends StringRequest {
         map.put("UserInfoDate", formatedNow);
         map.put("userHeight", userHeight+"");
         map.put("userWeight", userWeight+"");
-        map.put("userBirth", userBirth+"");
+        map.put("userBirth", userBirth+"" );
     }
 
     @Override

@@ -30,19 +30,19 @@
     $userWeight = isset($_POST["userWeight"]) ? $_POST["userWeight"] : "";
 
     $userBirth = isset($_POST["userBirth"]) ? $_POST["userBirth"] : "";
-    $userBirth=str_replace(".","-",$userBirth);
-    $userBirth=str_replace("/","-",$userBirth);
-    $userBirth = date('Ymd', strtotime($userBirth));
+    //$userBirth=str_replace(".","-",$userBirth);
+    //$userBirth=str_replace("/","-",$userBirth);
+    //$userBirth = date('Ymd', strtotime($userBirth));
     
     $userImg = "img";
 
 /* (3) DB안에 insert하는 문장. (User, UserInfo) */
-    $statement1 = mysqli_prepare($con, "INSERT INTO User VALUES (?,?,?,?,?,?)");
-    mysqli_stmt_bind_param($statement1, "ssssis", $userID, $userPassword, $userName, $UserPhoneNumber, $userDstep, $userImg);
+    $statement1 = mysqli_prepare($con, "INSERT INTO User VALUES (?,?,?,?,?,?,?)");
+    mysqli_stmt_bind_param($statement1, "ssssiss", $userID, $userPassword, $userName, $UserPhoneNumber, $userDstep, $userImg, $userBirth);
     mysqli_stmt_execute($statement1);
 
-    $statement2 = mysqli_prepare($con, "INSERT INTO UserInfo VALUES (?,?,?,?,?)");
-    mysqli_stmt_bind_param($statement2, "sbdds", $userID, $UserInfoDate, $userHeight, $userWeight, $userBirth);
+    $statement2 = mysqli_prepare($con, "INSERT INTO UserInfo VALUES (?,?,?,?)");
+    mysqli_stmt_bind_param($statement2, "ssdd", $userID, $UserInfoDate, $userHeight, $userWeight);
     mysqli_stmt_execute($statement2);
 
 /* (4) 성공 여부 전송. */
