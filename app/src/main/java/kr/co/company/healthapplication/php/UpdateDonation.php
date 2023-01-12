@@ -1,4 +1,9 @@
 <?php
+ /*
+      UpdateDonation.php : 해당 캠페인의 현재 기부된 걸음 수를 처리하는 php (POST 형식으로 MySQL로부터 데이터를 받아옴.)
+      con : mysql 연결을 시도하는 변수.
+      "$변수" 로 변수 선언
+    */
 
 /* (1) 서버 DB에 연결.*/
     $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
@@ -9,7 +14,7 @@
 
     $updateStep = isset($_POST["updateStep"]) ? $_POST["updateStep"] : "";
 
-/* (3) DB안에 insert하는 문장. (User, UserInfo) */
+/* (3) DB안에 insert하는 문장. (Donation) */
     $statement = mysqli_prepare($con, "UPDATE Donation SET NowStep = ? Where DNum = ?");
     mysqli_stmt_bind_param($statement, "ii", $updateStep, $dNum);
     mysqli_stmt_execute($statement);

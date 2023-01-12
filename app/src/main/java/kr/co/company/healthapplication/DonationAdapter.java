@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-// 기부캠페인 어댑터 (2023-01-10 우진 수정)
+// 기부캠페인 어댑터 (2023-01-11 우진 수정)
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.CustomViewHolder> {
 
     private ArrayList<DonationData> arrayList;
