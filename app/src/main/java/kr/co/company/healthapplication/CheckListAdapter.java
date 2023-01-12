@@ -1,7 +1,9 @@
 package kr.co.company.healthapplication;
 
 import android.content.SharedPreferences;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,11 +57,14 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
                 String ListNum = holder.tvListNum.getText().toString();
                 home = new HomeActivity();
 
-                int a = holder.ivProfile.getImageAlpha();
-                Log.d("aaa", a+"");
+                Drawable temp = holder.ivProfile.getDrawable();
+                Drawable temp1 = home.getContext().getDrawable(R.drawable.checkbox);
+
+                Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
+                Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
 
                 // 0 - 체크 안된 상태 (체크하고 DB반영)
-                if(a==255){
+                if(tmpBitmap.equals(tmpBitmap1)){
                     String Content = holder.tvContent.getText().toString();
                     Toast.makeText(view.getContext(), Content+" 완료!", Toast.LENGTH_SHORT).show();
 
