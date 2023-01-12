@@ -94,13 +94,7 @@ public class JoinActivity extends AppCompatActivity {
                 // 전송 시 필요한 형변환 실행.
                 Double dUserHeight = Double.parseDouble(userHeight);
                 Double dUserWeight = Double.parseDouble(userWeight);
-                Date userBirth = null;
-                try {
-                    userBirth = formatter.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                Log.d("생년월일", String.valueOf(userBirth));
+                Log.d("생년월일", String.valueOf(date));
 
                 // JSON 오브젝트를 활용하여 회원가입 요청을 하는 메서드
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -129,7 +123,7 @@ public class JoinActivity extends AppCompatActivity {
                 };
 
                 // 서버로 Volley를 이용해서 요청을 함.
-                JoinRequest joinRequest = new JoinRequest(userId, userPassword, userName, userPhoneNumber, dUserHeight, dUserWeight, userBirth, responseListener);
+                JoinRequest joinRequest = new JoinRequest(userId, userPassword, userName, userPhoneNumber, dUserHeight, dUserWeight, date, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
                 queue.add(joinRequest);
             }

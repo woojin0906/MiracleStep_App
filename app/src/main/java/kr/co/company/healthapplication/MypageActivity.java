@@ -70,20 +70,6 @@ public class MypageActivity extends Fragment {
 
         selectUserInfo();   // DB에서 정보를 가져오는 메소드.
 
-        tvUserID.setText(returnID);
-        tvUserName.setText(returnUserName);
-        tvUserDStep.setText(Integer.toString(returnUserDStep));
-        // 1. 이미지... (2023-01-10 이수)
-
-        tvUserHeight.setText(Double.toString(height));
-        tvUserWeight.setText(Double.toString(weight));
-        
-        // 2. 나이 변환해야 함. (2023-01-10 이수)
-        tvUserAge.setText(birth);
-        
-        // 3. BMI 계산해야 함. (2023-01-10 이수)
-        //tvUserBMI.setText();
-
         tvUserDonation.setText(Integer.toString(totalUserDonation));
 
         tvUserSetting.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +77,7 @@ public class MypageActivity extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UserInfoSettingActivity.class);
                 startActivity(intent);
+                //getActivity().finish();
             }
         });
 
@@ -138,33 +125,27 @@ public class MypageActivity extends Fragment {
 
                         totalUserDonation = jsonObject.optInt("totalUserDonation", 0);
 
+                        tvUserID.setText(returnID);
+                        tvUserName.setText(returnUserName);
+                        tvUserDStep.setText(Integer.toString(returnUserDStep));
+                        // 1. 이미지... (2023-01-10 이수)
+
+                        tvUserHeight.setText(Double.toString(height));
+                        tvUserWeight.setText(Double.toString(weight));
+
+                        // 2. 나이 변환해야 함. (2023-01-10 이수)
+                        tvUserAge.setText(birth);
+
+                        // 3. BMI 계산해야 함. (2023-01-10 이수)
+                        //tvUserBMI.setText();
+
                     } else {
                         Toast.makeText(getActivity(), "이용자 정보를 확인하지 못했습니다.", Toast.LENGTH_SHORT).show();
-                        returnID = "에러 아이디";
-                        returnUserName = "에러 이름";
-                        returnUserDStep = 0;
-                        returnUserImg = "img";
-
-                        height = 0.0;
-                        weight = 0.0;
-                        birth = "2000-01-01";
-
-                        totalUserDonation = 0;
                     }
 
                 } catch(Exception e){
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "에러가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                    returnID = "에러 아이디";
-                    returnUserName = "에러 이름";
-                    returnUserDStep = 0;
-                    returnUserImg = "img";
-
-                    height = 0.0;
-                    weight = 0.0;
-                    birth = "2000-01-01";
-
-                    totalUserDonation = 0;
                 }
             }
         };

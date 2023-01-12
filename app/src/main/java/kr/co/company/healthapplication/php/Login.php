@@ -27,11 +27,6 @@
 
     while(mysqli_stmt_fetch($statement)) {
         $response["success"] = true;
-        $response["userID"] = $userID;
-        $response["userPassword"] = $userPassword;
-        $response["userName"] = $userName;
-        $response["userPhoneNumber"] = $userPhoneNumber;
-        $response["userDstep"] = $userDstep;
     }
 
 /* (5) 로그인 실행 결과 전송. */

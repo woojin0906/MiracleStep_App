@@ -6,7 +6,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "tndnqja11!!", "miraclestep");
+    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
 /* (2) DB에 저장할 객체 선언. */

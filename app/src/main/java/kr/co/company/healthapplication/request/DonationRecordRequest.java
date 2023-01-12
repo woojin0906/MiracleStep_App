@@ -6,22 +6,19 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserInfoSelectRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/SelectUserInfo.php"; // 서버 URL 설정 (PHP 파일 연동.)
+public class DonationRecordRequest extends StringRequest {
+    final static private String URL = "http://miraclestep.ivyro.net/SelectUserDonation.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
-    public UserInfoSelectRequest(String userID, Response.Listener<String> listener){
+    public DonationRecordRequest(String userID, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("userID", userID);
-
         Log.d("검색 아이디", userID);
     }
 

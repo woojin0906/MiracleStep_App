@@ -7,19 +7,19 @@
     $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
     $userInfoDate = isset($_POST["userInfoDate"]) ? $_POST["userInfoDate"] : "";
 
-    $statement1 = mysqli_prepare($con, "SELECT UserID, UserName, UserDStep, UserImg FROM User WHERE UserID = ? ");
+    $statement1 = mysqli_prepare($con, "SELECT UserID, UserName, UserDStep, UserImg, UserBirth FROM User WHERE UserID = ? ");
     mysqli_stmt_bind_param($statement1, "s", $userID);
     mysqli_stmt_execute($statement1);
 
     mysqli_stmt_store_result($statement1);
-    mysqli_stmt_bind_result($statement1, $UserID, $UserName, $UserDStep, $UserImg);
+    mysqli_stmt_bind_result($statement1, $UserID, $UserName, $UserDStep, $UserImg, $Birth);
 
-    $statement2 = mysqli_prepare($con, "SELECT UserHeight, UserWeight, UserBirth FROM UserInfo WHERE UserID = ? ORDER BY UserInfoDate DESC");
+    $statement2 = mysqli_prepare($con, "SELECT UserHeight, UserWeight FROM UserInfo WHERE UserID = ? ORDER BY UserInfoDate ASC");
     mysqli_stmt_bind_param($statement2, "s", $userID);
     mysqli_stmt_execute($statement2);
 
     mysqli_stmt_store_result($statement2);
-    mysqli_stmt_bind_result($statement2, $Height, $Weight, $Birth);
+    mysqli_stmt_bind_result($statement2, $Height, $Weight);
 
     $statement3 = mysqli_prepare($con, "SELECT TotalUserDonation FROM Rank WHERE UserID = ?");
     mysqli_stmt_bind_param($statement3, "s", $userID);
