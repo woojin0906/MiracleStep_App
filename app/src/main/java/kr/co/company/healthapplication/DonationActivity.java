@@ -30,7 +30,7 @@ import java.util.Optional;
 import kr.co.company.healthapplication.request.DonationRequest;
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 기부캠페인 액티비티 (2023-01-10 우진 수정)
+// 기부캠페인 액티비티 (2023-01-11 우진 수정)
 public class DonationActivity extends Fragment {
 
     private RecyclerView recyclerView;                                  // 리사이클러뷰
@@ -40,13 +40,8 @@ public class DonationActivity extends Fragment {
 
     private Button peopleBtn, environmentBtn, animalBtn;
 
-    private String titleName = "helpGoogle";
-    private String name = "googlePlay";
-    private String nowStep = "555";
     private String category = "people";
-    private String content = "help";
-    private String date = "2023-01-10";
-    private String maxStep = "100000";
+
 
     @Nullable
     @Override

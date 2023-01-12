@@ -33,8 +33,9 @@ import kr.co.company.healthapplication.request.RunSelectRequest;
 import kr.co.company.healthapplication.request.RunUpdateRequest;
 import kr.co.company.healthapplication.request.UserInfoSelectRequest;
 import kr.co.company.healthapplication.request.UserStepSelectRequest;
+import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 
-// 기부캠페인 팝업 액티비티 (2023-01-10 우진 수정)
+// 기부캠페인 팝업 액티비티 (2023-01-12 우진 수정)
 public class DonationPopupActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView stepCount, DuserStep;
@@ -44,8 +45,8 @@ public class DonationPopupActivity extends AppCompatActivity {
     // Preferences Shared
     private SharedPreferences pref;
     private SharedPreferences.Editor  editor;
-    private String userId, dNum, nowStep, userStep, returnID;   // 유저 아이디 값 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
-    private int updateStep, DBUserStep;
+    private String userId, dNum, nowStep, userStep, returnID;
+    private int updateStep, DBUserStep, updateUserStep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,10 @@ public class DonationPopupActivity extends AppCompatActivity {
         dNum = receiveIntent.getStringExtra("dNum");
         nowStep = receiveIntent.getStringExtra("nowStep");
 
+        // userID 값 받아오기
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
-        userId = pref.getString("UserID", "_");
+        userId = pref.getString("UserID", "_");   // 유저 아이디 값 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
 
         selectUserStep();
 
@@ -71,7 +73,7 @@ public class DonationPopupActivity extends AppCompatActivity {
         donationBtn = findViewById(R.id.donationBtn);
         closeBtn = findViewById(R.id.closeBtn);
 
-        userStep = stepCount.getText().toString();
+
         DuserStep.setText(Integer.toString(DBUserStep));
 
         // seekBar의 기본 값 지정
@@ -99,7 +101,10 @@ public class DonationPopupActivity extends AppCompatActivity {
         donationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userStep = stepCount.getText().toString();
                 if(Integer.parseInt(DuserStep.getText().toString())>=Integer.parseInt(userStep)) {
+                    Log.d("유저의 기부가능걸음수", Integer.parseInt(DuserStep.getText().toString())+"");
+                    Log.d("기부하려는 걸음 수", Integer.parseInt(userStep)+"");
                     //3. 기록 DB에 저장
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
@@ -111,12 +116,18 @@ public class DonationPopupActivity extends AppCompatActivity {
                                 Log.d("전송여부", jsonString);
 
                                 if(success) {
-                                    // if문으로 기부 가능 금액 초과시 알림 뜨도록 추가해야함
                                     // 메시지가 안뜸
                                     updateStep = Integer.parseInt(userStep) + Integer.parseInt(nowStep);
                                     Toast.makeText(DonationPopupActivity.this, "기부되셨습니다.", Toast.LENGTH_SHORT).show();
+
+                                    // 현재 기부된 걸음 수 업데이트하기
                                     updateNowStep();
 
+                                    // 사용자의 기부 가능 걸음 수 - 기부할 걸음 수
+                                    updateUserStep = (Integer.parseInt(DuserStep.getText().toString())-Integer.parseInt(userStep));
+
+                                    // 사용자의 기부 가능 걸음 수 업데이트하기
+                                    updateUserStep();
                                     finish();
                                 }
                                 else {
@@ -134,7 +145,7 @@ public class DonationPopupActivity extends AppCompatActivity {
                     RequestQueue queue = Volley.newRequestQueue(DonationPopupActivity.this);
                     queue.add(donationInsertRequest);
                 } else {
-                    Toast.makeText(DonationPopupActivity.this, "기부 되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonationPopupActivity.this, "기부 가능 걸음 수가 초과되었습니다.", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -165,9 +176,43 @@ public class DonationPopupActivity extends AppCompatActivity {
         });
     }
 
-    private void selectUserStep() {
-        // 유저의 정보 가져오기. (2023-01-10 이수)
+    // 사용자의 기부 가능 걸음 수 업데이트
+    private void updateUserStep() {
+        //3. 기록 DB에 저장
         Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
+                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String jsonString = jsonObject.toString();
+                    Log.d("전송여부", jsonString);
+
+                    // 저장 성공인 경우.
+                    if (success) {
+                        Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 저장 실패인 경우.
+                    else {
+                        Toast.makeText(getApplicationContext(), "업데이트 실패.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 서버로 Volley를 이용해서 요청을 함.
+        UserStepUpdateRequest userStepUpdateRequest = new UserStepUpdateRequest(userId, updateUserStep, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(DonationPopupActivity.this);
+        queue.add(userStepUpdateRequest);
+
+    }
+
+    // 사용자의 기부 가능 걸음 수 가져오기
+    private void selectUserStep() {
+       Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -196,6 +241,7 @@ public class DonationPopupActivity extends AppCompatActivity {
         queue.add(userStepSelectRequest);
     }
 
+    // 해당 캠페인의 현재 기부된 걸음 수 업데이트
     private void updateNowStep() {
         //3. 기록 DB에 저장
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -209,11 +255,11 @@ public class DonationPopupActivity extends AppCompatActivity {
 
                     // 저장 성공인 경우.
                     if (success) {
-                        Toast.makeText(getApplicationContext(), "저장 완료.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                     }
                     // 저장 실패인 경우.
                     else {
-                        Toast.makeText(getApplicationContext(), "저장 실패.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "업데이트 실패.", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {

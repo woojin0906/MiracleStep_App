@@ -2,7 +2,7 @@ package kr.co.company.healthapplication;
 
 import java.util.Date;
 
-// 기부캠페인리스트 데이터 액티비티 (2023-01-10 우진 수정)
+// 기부캠페인리스트 데이터 액티비티 (2023-01-11 우진 수정)
 public class DonationData {
     private String titleName;
     private String name;
