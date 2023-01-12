@@ -1,19 +1,14 @@
 package kr.co.company.healthapplication;
 
-import android.content.Intent;
-import android.icu.text.IDNA;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 // 바텀네비게이션 + 프래그먼트 액티비티 (2023-01-09 우진 수정)
@@ -29,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_info;
 
     private long backBtnTime = 0;
+
+    // SharedPreference
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String rememberID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,4 +81,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

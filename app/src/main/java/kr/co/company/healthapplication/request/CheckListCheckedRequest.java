@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-// Checked값 서버로 전송 (2023-01-10 인범 수정)
+// Checked값 서버로 전송 (2023-01-12 인범 수정)
 public class CheckListCheckedRequest extends StringRequest {
     final static private String URL = "http://miraclestep.ivyro.net/CheckListChecked.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
@@ -24,6 +24,8 @@ public class CheckListCheckedRequest extends StringRequest {
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String NowDate = now.format(formatter);
+
+        Log.d("request 사용자 아아디", UserID);
 
         map = new HashMap<>();
         map.put("UserID", UserID);      // 사용자 id

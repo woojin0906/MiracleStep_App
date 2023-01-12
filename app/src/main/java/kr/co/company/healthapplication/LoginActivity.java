@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("여기가 들어가면 안되는데", "완료");
             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("UserID", rememberID);
+            //intent.putExtra("UserID", rememberID);
             startActivity(intent);
             finish();
         }
