@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import kr.co.company.healthapplication.request.CheckListCheckedRequest;
 import kr.co.company.healthapplication.request.HomeRequest;
+import kr.co.company.healthapplication.request.UserInfoSelectRequest;
 
 // 홈 액티비티 (2023-01-11 인범 수정.)
 public class HomeActivity extends Fragment {
@@ -86,7 +87,7 @@ public class HomeActivity extends Fragment {
 
         arrayList = new ArrayList<>();
 
-        mainAdapter = new CheckListAdapter(arrayList);
+        mainAdapter = new CheckListAdapter(arrayList, getActivity());
         recyclerView.setAdapter(mainAdapter);
 
         // checkList메서드 호출
@@ -95,41 +96,6 @@ public class HomeActivity extends Fragment {
         //mainAdapter.notifyDataSetChanged();
 
         return rootView;
-    }
-
-    // CheckList클릭 이벤트 처리하는 메서드
-    public void checkListChecked(String ListNum, String Checked) { // 버튼 클릭시 리스트번호와 체크상태 가져옴
-        // 아이디와 현재날짜(Request)의 리스트번호를 보내서 체크상태를 보고 Checked 업데이트
-        // 현재 로그인된 사용자 아이디 가져오기
-
-        Log.d("클릭 이벤트 사용자 아이디", UserID);
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
-
-                    // 데이터를 정상적으로 처리한 경우
-                    if (success) {
-                        Log.d("체크리스트", "업데이트 성공");
-                    }
-                    // 데이터를 정상적으로 처리한 경우
-                    else {
-                        Log.d("체크리스트", "업데이트 실패");
-                        return;
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        CheckListCheckedRequest checkRequest = new CheckListCheckedRequest("lib1234", ListNum, Checked, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(checkRequest);
-
     }
 
     // 체크리스트 가져와 뿌려주는 메서드
@@ -156,9 +122,9 @@ public class HomeActivity extends Fragment {
                         // checked = 1 (체크됨)
                         CheckListData mainData;
                         if(Checked==0){
-                            mainData = new CheckListData(ListNum+"", R.drawable.uncheckbox, CheckContent);
+                            mainData = new CheckListData(Checked, UserID, ListNum+"", R.drawable.uncheckbox, CheckContent);
                         }else{
-                            mainData = new CheckListData(ListNum+"", R.drawable.checkbox, CheckContent);
+                            mainData = new CheckListData(Checked, UserID, ListNum+"", R.drawable.checkbox, CheckContent);
                         }
                         arrayList.add(mainData);
                     }
