@@ -3,7 +3,9 @@ package kr.co.company.healthapplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
+
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,7 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
             @Override
             public void onClick(View view) {
                 String ListNum = holder.tvListNum.getText().toString();
+
 
                 Log.d("정보", Integer.toString(checked));
                 // 0 - 체크 안된 상태 (체크하고 DB반영)
