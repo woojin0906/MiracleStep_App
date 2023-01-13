@@ -35,7 +35,7 @@ public class CheckListCheckedRequest extends StringRequest {
 
         Log.d("UserID", UserID);
         Log.d("ListNum", ListNum);
-        Log.d("Checked", Checked);
+        Log.d("ddddddChecked", Checked);
         Log.d("NowDate", NowDate);
     }
 
