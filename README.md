@@ -1,4 +1,4 @@
-# Miracle-Step
+# MiracleStep_App
 
 운동을 통한 기부 캠페인 및 일정관리 시스템 
 
