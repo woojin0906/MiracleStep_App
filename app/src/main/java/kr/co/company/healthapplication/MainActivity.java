@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // 프래그먼트 생성
         fragment_home = new HomeActivity();
         fragment_donation = new DonationActivity();
-        fragment_volunteer = new DonationActivity();    // 수정필요 (2023-03-05 이수)
+        fragment_volunteer = new VolunteerActivity();
         fragment_toDoList = new CalendarActivity();     // 수정필요 (2023-03-05 이수)
         fragment_rank = new RankActivity();
         fragment_info = new MypageActivity();

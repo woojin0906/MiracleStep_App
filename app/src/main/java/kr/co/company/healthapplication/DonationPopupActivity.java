@@ -1,10 +1,6 @@
 package kr.co.company.healthapplication;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -23,15 +21,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import kr.co.company.healthapplication.request.DonationInsertRequest;
 import kr.co.company.healthapplication.request.DonationUpdateRequest;
-import kr.co.company.healthapplication.request.JoinRequest;
-import kr.co.company.healthapplication.request.RunSelectRequest;
-import kr.co.company.healthapplication.request.RunUpdateRequest;
-import kr.co.company.healthapplication.request.UserInfoSelectRequest;
 import kr.co.company.healthapplication.request.UserStepSelectRequest;
 import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 
