@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_home = new HomeActivity();
         fragment_donation = new DonationActivity();
         fragment_volunteer = new DonationActivity();    // 수정필요 (2023-03-05 이수)
-        fragment_toDoList = new DonationActivity();     // 수정필요 (2023-03-05 이수)
+        fragment_toDoList = new CalendarActivity();     // 수정필요 (2023-03-05 이수)
         fragment_rank = new RankActivity();
         fragment_info = new MypageActivity();
 

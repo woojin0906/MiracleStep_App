@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HealthApplication</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
+    <string name="pre"><![CDATA[<]]></string>
+    <string name="next"><![CDATA[>]]></string>
 </resources>
