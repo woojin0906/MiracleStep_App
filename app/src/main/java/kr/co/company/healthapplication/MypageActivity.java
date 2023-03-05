@@ -28,8 +28,9 @@ import kr.co.company.healthapplication.request.UserInfoSelectRequest;
 public class MypageActivity extends Fragment {
     private TextView tvUserSetting, tvUserID, tvUserName, tvUserDStep;
     private TextView tvUserInfoSetting, tvUserHeight, tvUserWeight, tvUserAge, tvUserBMI;
+    private TextView tvUserRank;
     private TextView tvUserDonation;
-    private Button btnDonationReceipts ,btnLogOut;
+    private Button btnDonationReceipts ,btnRank ,btnLogOut;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor  editor;
@@ -61,6 +62,7 @@ public class MypageActivity extends Fragment {
         tvUserBMI = view.findViewById(R.id.tvUserBMI);
         tvUserDonation = view.findViewById(R.id.tvUserDonation);
         btnDonationReceipts = view.findViewById(R.id.btnDonationReceipts);
+        btnRank = view.findViewById(R.id.btnRank);
         btnLogOut = view.findViewById(R.id.btnLogOut);
 
         // 이용자 정보 가져오기.
@@ -85,6 +87,14 @@ public class MypageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DonationReceiptsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), RankActivity2.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,5 @@
 package kr.co.company.healthapplication;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_home;
     Fragment fragment_donation;
     Fragment fragment_rank;
+    Fragment fragment_volunteer;
+    Fragment fragment_toDoList;
     Fragment fragment_info;
 
     private long backBtnTime = 0;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         // 프래그먼트 생성
         fragment_home = new HomeActivity();
         fragment_donation = new DonationActivity();
+        fragment_volunteer = new DonationActivity();    // 수정필요 (2023-03-05 이수)
+        fragment_toDoList = new DonationActivity();     // 수정필요 (2023-03-05 이수)
         fragment_rank = new RankActivity();
         fragment_info = new MypageActivity();
 
@@ -58,8 +61,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.donation:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_donation).commitAllowingStateLoss();
                         return true;
-                    case R.id.rank:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_rank).commitAllowingStateLoss();
+                    case R.id.volunteer:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_volunteer).commitAllowingStateLoss();
+                        return true;
+                    case R.id.toDoList:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_toDoList).commitAllowingStateLoss();
                         return true;
                     case R.id.info:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_info).commitAllowingStateLoss();

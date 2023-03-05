@@ -1,19 +1,18 @@
 package kr.co.company.healthapplication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,8 +31,7 @@ import java.util.ArrayList;
 
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 랭크 액티비티 (2023-01-11 인범 수정)
-public class RankActivity extends Fragment {
+public class RankActivity2 extends AppCompatActivity {
 
     // 구글 광고
     private AdView mAdView;
@@ -59,25 +57,26 @@ public class RankActivity extends Fragment {
     private TextView tvMyPoint;
     private TextView tvMyRank;
 
-    @Nullable
+    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_rank, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_rank2);
 
         // 구글 광고API
-        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
             }
         });
-        mAdView = rootView.findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
 
         // List 설정
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvRankList);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView = findViewById(R.id.rvRankList);
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
@@ -86,14 +85,14 @@ public class RankActivity extends Fragment {
         recyclerView.setAdapter(mainAdapter);
 
         // 랭크 메서드 호출
-        rank(category, rootView);
+        rank(category);
 
 
         // 랭킹 버튼 클릭 이벤트
-        tvRankTitle = rootView.findViewById(R.id.tvRankTitle);
-        tvRankStep = rootView.findViewById(R.id.tvRankStep);
+        tvRankTitle = findViewById(R.id.tvRankTitle);
+        tvRankStep = findViewById(R.id.tvRankStep);
 
-        btnDonaRank = rootView.findViewById(R.id.btnDonaRank);
+        btnDonaRank = findViewById(R.id.btnDonaRank);
         btnDonaRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,11 +101,11 @@ public class RankActivity extends Fragment {
                 tvRankStep.setText("코인");
 
                 category = "TotalUserDonation";
-                rank(category, rootView);
+                rank(category);
             }
         });
 
-        btnStepRank = rootView.findViewById(R.id.btnStepRank);
+        btnStepRank = findViewById(R.id.btnStepRank);
         btnStepRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,21 +114,19 @@ public class RankActivity extends Fragment {
                 tvRankStep.setText("걸음");
 
                 category = "TotalUserStep";
-                rank(category, rootView);
+                rank(category);
             }
         });
-
-        return rootView;
     }
 
-    private void rank(String category, ViewGroup rootView) {
+    private void rank(String category) {
 
         // 내 랭킹을 나타낼 TextView정의
-        tvMyPoint = rootView.findViewById(R.id.tvMyPoint);
-        tvMyRank = rootView.findViewById(R.id.tvMyRank);
+        tvMyPoint = findViewById(R.id.tvMyPoint);
+        tvMyRank = findViewById(R.id.tvMyRank);
 
         // 현재 로그인된 아이디
-        pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
         rememberID = pref.getString("UserID", "_");
 
@@ -168,8 +165,7 @@ public class RankActivity extends Fragment {
             }
         };
         RankRequest rankRequest = new RankRequest(category, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(rankRequest);
     }
-
 }
