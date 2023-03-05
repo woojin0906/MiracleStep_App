@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 봉사활동 리스트 아이템 레이아웃 (2023-03-05 우진) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/radius_boder_layout"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="5dp"
+        android:layout_margin="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/titleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="경로식당 배식 봉사자 및 봉사단체 모집 공고(제목)"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:padding="5dp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="사회복지관(단체명)"
+                        android:textSize="15dp"
+                        android:singleLine="true"
+                        android:padding="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="모집중"
+                            android:textSize="15dp"
+                            android:padding="1dp" />
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2022.12.12~2023.03.30"
+                            android:gravity="right"
+                            android:textSize="15dp"
+                            android:textColor="#84A7E4"
+                            android:textStyle="bold"
+                            android:singleLine="true"
+                            android:padding="1dp" />
+                    </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 스피너 (2023-03-05 우진) -->
+<resources>
+    <string-array name="spinner_array">
+        <item>봉사분야</item>
+        <item>생활편의지원</item>
+        <item>교육</item>
+        <item>환경보호</item>
+    </string-array>
+
+</resources>
