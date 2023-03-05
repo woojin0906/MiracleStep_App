@@ -14,9 +14,15 @@
         android:enabled="true"/>
 
     <item
-        android:id="@+id/rank"
-        android:icon="@drawable/ranking"
-        android:title="랭킹"
+        android:id="@+id/volunteer"
+        android:icon="@drawable/volunteer"
+        android:title="봉사활동"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/toDoList"
+        android:icon="@drawable/list"
+        android:title="체크리스트"
         android:enabled="true"/>
 
     <item
