@@ -17,44 +17,44 @@
         android:textColor="#84A7E4"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:background="@drawable/donation_back">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 기부 걸음 : "
-            android:textSize="20dp"/>
+    <!-- 말풍성 이미지 들어가야됨! -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:padding="15dp"-->
+<!--        android:background="@drawable/donation_back">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="내 기부 걸음 : "-->
+<!--            android:textSize="20dp"/>-->
 
-        <TextView
-            android:id="@+id/tvMyDonationStep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="34166"/>
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tvMyDonationStep"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:text="34166"/>-->
+<!--    </LinearLayout>-->
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="55dp"
+        android:src="@drawable/run2"/>
 
     <ImageView
         android:id="@+id/ivRun"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"/>
-
-
-        <Button
-            android:id="@+id/btnRun"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="러닝하기"/>
 
 
     <LinearLayout
@@ -98,4 +98,68 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- 체크리스트 하단 걸음 정보 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2300"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="654"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="47566"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="사용가능 걸음"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="오늘의 걸음"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="총 기부 걸음"
+            android:gravity="center_horizontal"
+            android:textSize="8pt"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

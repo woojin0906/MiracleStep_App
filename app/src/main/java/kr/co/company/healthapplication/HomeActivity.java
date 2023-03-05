@@ -29,9 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.company.healthapplication.request.CheckListCheckedRequest;
 import kr.co.company.healthapplication.request.HomeRequest;
-import kr.co.company.healthapplication.request.UserInfoSelectRequest;
 
 // 홈 액티비티 (2023-01-11 인범 수정.)
 public class HomeActivity extends Fragment {
@@ -64,20 +62,26 @@ public class HomeActivity extends Fragment {
         editor = pref.edit();
         UserID = pref.getString("UserID", "_");
 
-        // 러닝 버튼
-        btnRun = rootView.findViewById(R.id.btnRun);
-        btnRun.setOnClickListener(new View.OnClickListener() {
+        // 러닝 버튼 - *** 이미지 클릭시 (setOnclickListener)로 이전 시켜야함 "펭귄"
+//        btnRun = rootView.findViewById(R.id.btnRun);
+//        btnRun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), RunActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        // 러닝 GIF
+        ivRun = rootView.findViewById(R.id.ivRun);
+        Glide.with(this).load(R.raw.run2).into(ivRun);
+        ivRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), RunActivity.class);
                 startActivity(intent);
             }
         });
-
-
-        // 러닝 GIF
-        ivRun = rootView.findViewById(R.id.ivRun);
-        Glide.with(this).load(R.raw.run2).into(ivRun);
 
 
         // List 설정
