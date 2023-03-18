@@ -1,61 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 체크리스트 화면 (2023-03-05 이수) -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#84A7E4"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:clickable="true"
+        android:src="@drawable/add">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <!-- 일정 추가 레이아웃 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- 달력 레이아웃-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Daily Note"
+            android:textSize="8pt"
+            android:textStyle="italic|bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_gravity="top"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/radius_calendar"
+            android:elevation="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_previousMonthAction"
-                    android:backgroundTint="@color/blue"
+                    android:id="@+id/btnPreviousMonthAction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
                     android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
                     android:text="@string/pre"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textColor="#84A7E4"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_monthYear"
+                    android:id="@+id/tvMonthYear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="2022년 12월"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/btn_nextMonthAction"
+                    android:id="@+id/btnNextMonthAction"
                     android:layout_width="0dp"
-                    android:backgroundTint="@color/blue"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
                     android:text="@string/next"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textColor="#84A7E4"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- 요일 레이아웃 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +97,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:text="일"
                     android:textAlignment="center"
@@ -125,113 +159,144 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <!--달력 뷰-->
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_calendar"
+                android:id="@+id/rvCalendar"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="180dp"
+                android:layout_marginBottom="10dp" />
         </LinearLayout>
 
+        <!-- 체크리스트 -->
         <LinearLayout
             android:id="@+id/layoutChecklist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/radius_calendar"
+            android:elevation="10dp"
+            android:orientation="vertical"
+            >
 
-            <TextView
-                android:layout_marginTop="30dp"
+            <!-- 리사이클 뷰 등록 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCheckList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Daily Checklist"
-                android:gravity="center"
-                android:textSize="9pt"
-                android:textStyle="italic"
-                />
-
-            <!--체크리스트 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:background="@drawable/donation_back">
-                <!-- 리사이클 뷰 등록 -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCheckList"
-                    android:padding="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbarFadeDuration="0"
-                    android:scrollbarSize="5dp"
-                    android:scrollbarThumbVertical="@android:color/darker_gray"
-                    android:scrollbars="vertical"
-                    android:layout_weight="1">
-                </androidx.recyclerview.widget.RecyclerView>
-
-
-            </LinearLayout>
+                android:layout_height="250dp"
+                android:padding="20dp"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarSize="5dp"
+                android:scrollbarThumbVertical="@android:color/darker_gray"
+                android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutAdd"
+        android:id="@+id/layoutAddSchedule"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/gray"
-        android:visibility="invisible"
-        android:orientation="vertical">
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/radius_calendar"
+        android:elevation="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
 
-        <DatePicker
-            android:id="@+id/addDatePicker"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="내용입력"
-            android:layout_margin="10dp"/>
+            android:layout_marginTop="10dp"
+            android:text="Add Schedule"
+            android:gravity="center"
+            android:textStyle="italic|bold"
+            android:layout_marginBottom="5dp"
+            android:textSize="7pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/addBtn"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일정 : "
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvSelectDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginRight="2dp"
-                android:text="추가"/>
+                android:textSize="13sp"
+                android:text="2000년 00월 00일"
+                android:padding="5dp"
+                ></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목 : "
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etScheduleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:hint="일정 제목을 입력해주세요."
+                android:padding="5dp"
+                android:background="@drawable/calendar_text_border"
+                ></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
 
             <Button
-                android:id="@+id/cancelBtn"
+                android:id="@+id/btnAddScheduleInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginRight="5dp"
+                android:text="일정 추가"/>
+
+            <Button
+                android:id="@+id/btnCancelScheduleInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginLeft="5dp"
                 android:text="취소"/>
         </LinearLayout>
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="80dp"
-        android:backgroundTint="@color/blue"
-        android:clickable="true"
-        android:foregroundGravity="center"
-        android:src="@drawable/add">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
 </FrameLayout>
