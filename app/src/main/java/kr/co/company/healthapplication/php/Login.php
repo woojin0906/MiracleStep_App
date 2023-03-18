@@ -6,15 +6,15 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
 /* (2) 앱에서 작성한 아이디와 비밀번호를 가져옴. */
-    $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
-    $userPassword = isset($_POST["userPassword"]) ? $_POST["userPassword"] : "";
+    $userID = isset($_POST["id"]) ? $_POST["id"] : "";
+    $userPassword = isset($_POST["pw"]) ? $_POST["pw"] : "";
 
 /* (3) 현재 DB에 저장된 아이디와 비밀번호를 검색함. */  // ss는 String이 두 개라서 ss가 들어감.
-    $statement = mysqli_prepare($con, "SELECT UserID FROM User WHERE UserID = ? AND UserPassword = ?");
+    $statement = mysqli_prepare($con, "SELECT id FROM User WHERE id = ? AND pw = ?");
     mysqli_stmt_bind_param($statement, "ss", $userID, $userPassword);
     mysqli_stmt_execute($statement);
 
@@ -27,6 +27,7 @@
 
     while(mysqli_stmt_fetch($statement)) {
         $response["success"] = true;
+        $response["id"] = $userID;
     }
 
 /* (5) 로그인 실행 결과 전송. */

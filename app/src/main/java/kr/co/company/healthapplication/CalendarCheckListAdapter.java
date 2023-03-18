@@ -3,9 +3,7 @@ package kr.co.company.healthapplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
-
 import android.util.Log;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +25,10 @@ import java.util.ArrayList;
 
 import kr.co.company.healthapplication.request.CheckListCheckedRequest;
 
-// 체크리스트 어댑터 액티비티 (2023-01-12 인범 수정)
-public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.CustomViewHolder> {
+// 달력 체크리스트 어댑터 액티비티 (2023-03-06 이수 제작)
+public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheckListAdapter.CustomViewHolder> {
 
-    private ArrayList<CheckListData> arrayList;
+    private ArrayList<CalendarCheckListData> arrayList;
     private Activity homeActivity;
 
     // SharedPreference
@@ -39,14 +37,14 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
     private String userID;
     private int checked;
 
-    public CheckListAdapter(ArrayList<CheckListData> arrayList, Activity homeActivity) {
+    public CalendarCheckListAdapter(ArrayList<CalendarCheckListData> arrayList, Activity homeActivity) {
         this.arrayList = arrayList;
         this.homeActivity = homeActivity;
     }
 
     @NonNull
     @Override
-    public CheckListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CalendarCheckListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 리스트가 생성될 때 호출 (생명주기)
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.checklist_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -55,13 +53,13 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CheckListAdapter.CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // 리스트가 실제 실행될 때 호출 (arrayList로 부터 가져옴.)
-        holder.tvListNum.setText(arrayList.get(position).getTvListNum());
-        holder.ivProfile.setImageResource(arrayList.get(position).getIvProfile());
-        holder.tvContent.setText(arrayList.get(position).getTvContent());
+        holder.tvListNum.setText(arrayList.get(position).getListIndex());
+        holder.ivProfile.setImageResource(arrayList.get(position).getProfile());
+        holder.tvContent.setText(arrayList.get(position).getContent());
         userID = arrayList.get(position).getUserID();
-        checked = arrayList.get(position).getCheck();
+        checked = arrayList.get(position).getChecked();
 
         // 이벤트가 발생했을 때 위치 값을 가져온다. (2023-01-13 이수)
         holder.itemView.setTag(position);
@@ -80,7 +78,7 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
                     Toast.makeText(view.getContext(), Content+" 완료!", Toast.LENGTH_SHORT).show();
 
                     checkListChecked(ListNum, "1");    // Update 코드 보고 처음부터 다시 작성
-                    arrayList.get(position).setCheck(1);
+                    arrayList.get(position).setChecked(1);
                     checked = 1;
 
                     holder.ivProfile.setImageResource(R.drawable.checkbox);
@@ -92,26 +90,13 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
                     Toast.makeText(view.getContext(), Content+" 실패,,", Toast.LENGTH_SHORT).show();
 
                     checkListChecked(ListNum, "0");
-                    arrayList.get(position).setCheck(0);
+                    arrayList.get(position).setChecked(0);
                     checked = 0;
                     holder.ivProfile.setImageResource(R.drawable.uncheckbox);
                 }
                 else{}
             }
         });
-
-//        // item을 길게 눌렀을때 체크 해제
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                String curName = holder.tvContent.getText().toString();
-//                Toast.makeText(view.getContext(), curName+" 실패!", Toast.LENGTH_SHORT).show();
-//
-//                holder.ivProfile.setImageResource(R.drawable.uncheckbox);
-//                holder.tvContent.setText(curName);
-//               return true;
-//            }
-//        });
 
     }
 
@@ -144,7 +129,6 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    Log.d("로그", response);
 
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
 

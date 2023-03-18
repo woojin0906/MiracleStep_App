@@ -35,25 +35,26 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import kr.co.company.healthapplication.request.HomeRequest;
+import kr.co.company.healthapplication.request.CalendarRequest;
 
 // 체크리스트 액티비티 (2023-03-05 이수)
 public class CalendarActivity extends Fragment implements CalendarAdapter.OnItemListener {
     // 달력
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private Button btn_previousMonthAction, btn_nextMonthAction, addBtn, cancelBtn;
-    private FloatingActionButton btnAdd;
+    private Button btnPreviousMonthAction, btnNextMonthAction, btnAddScheduleInfo, btnCancelScheduleInfo;
+    private FloatingActionButton btnAddSchedule;
 
     // 리사이클러뷰
-    private ArrayList<CheckListData> arrayList;
-    private CheckListAdapter mainAdapter;
-    private RecyclerView recyclerView;
+    private ArrayList<CalendarCheckListData> arrayList;
+    private CalendarCheckListAdapter mainAdapter;
+    private RecyclerView rvCheckList;
     private LinearLayoutManager linearLayoutManager;
     private View layoutChecklist;
 
     // 일정 추가
-    private LinearLayout layoutAdd;
+    private LinearLayout layoutAddSchedule;
+    private TextView tvSelectDate;
 
     // SharedPreference
     public SharedPreferences pref;
@@ -72,8 +73,8 @@ public class CalendarActivity extends Fragment implements CalendarAdapter.OnItem
         UserID = pref.getString("UserID", "_");
 
         // 이전 달 달력
-        btn_previousMonthAction = rootView.findViewById(R.id.btn_previousMonthAction);
-        btn_previousMonthAction.setOnClickListener(new View.OnClickListener() {
+        btnPreviousMonthAction = rootView.findViewById(R.id.btnPreviousMonthAction);
+        btnPreviousMonthAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
@@ -82,8 +83,8 @@ public class CalendarActivity extends Fragment implements CalendarAdapter.OnItem
         });
 
         // 다음 달 달력
-        btn_nextMonthAction = rootView.findViewById(R.id.btn_nextMonthAction);
-        btn_nextMonthAction.setOnClickListener(new View.OnClickListener() {
+        btnNextMonthAction = rootView.findViewById(R.id.btnNextMonthAction);
+        btnNextMonthAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
@@ -95,56 +96,59 @@ public class CalendarActivity extends Fragment implements CalendarAdapter.OnItem
         setMonthView();
 
         // 일정 추가 버튼
-        layoutAdd = rootView.findViewById(R.id.layoutAdd);
+        layoutAddSchedule = rootView.findViewById(R.id.layoutAddSchedule);
         layoutChecklist = rootView.findViewById(R.id.layoutChecklist);
-        btnAdd = rootView.findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        tvSelectDate = rootView.findViewById(R.id.tvSelectDate);
+        btnAddSchedule = rootView.findViewById(R.id.btnAddSchedule);
+        btnAddSchedule.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               layoutAdd.setVisibility(v.VISIBLE);
-               layoutChecklist.setVisibility(v.INVISIBLE);
-               btnAdd.setVisibility(v.INVISIBLE);
+               layoutAddSchedule.setVisibility(v.VISIBLE);
+               btnAddSchedule.setClickable(false);
+               String date = String.valueOf(CalendarUtils.selectedDate);
+               tvSelectDate.setText(date.substring(0, 4)+"년 "+date.substring(5, 7)+"월 "+date.substring(8, 10)+"일");
            }
        });
 
-        addBtn = rootView.findViewById(R.id.addBtn);
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        btnAddScheduleInfo = rootView.findViewById(R.id.btnAddScheduleInfo);
+        btnAddScheduleInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutAdd.setVisibility(v.INVISIBLE);
+                layoutAddSchedule.setVisibility(v.INVISIBLE);
                 layoutChecklist.setVisibility(v.VISIBLE);
-                btnAdd.setVisibility(v.VISIBLE);
+                btnAddSchedule.setClickable(true);
             }
         });
 
-        cancelBtn = rootView.findViewById(R.id.cancelBtn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
+        btnCancelScheduleInfo = rootView.findViewById(R.id.btnCancelScheduleInfo);
+        btnCancelScheduleInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutAdd.setVisibility(v.INVISIBLE);
+                layoutAddSchedule.setVisibility(v.INVISIBLE);
                 layoutChecklist.setVisibility(v.VISIBLE);
-                btnAdd.setVisibility(v.VISIBLE);
+                btnAddSchedule.setClickable(true);
             }
         });
 
         // List 설정
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvCheckList);
+        rvCheckList = (RecyclerView) rootView.findViewById(R.id.rvCheckList);
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        rvCheckList.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
 
-        mainAdapter = new CheckListAdapter(arrayList, getActivity());
-        recyclerView.setAdapter(mainAdapter);
+        mainAdapter = new CalendarCheckListAdapter(arrayList, getActivity());
+        rvCheckList.setAdapter(mainAdapter);
 
-        // checkList메서드 호출
-        checkList();
+        // checkList 호출 메서드
+        selectCheckList();
 
         return rootView;
     }
 
-    // 체크리스트 가져와 뿌려주는 메서드
-    private void checkList() {
+    // 체크리스트 가져오는 메서드
+    private void selectCheckList() {
+        Log.d("여기 지나가요. 1111","hello");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -154,21 +158,21 @@ public class CalendarActivity extends Fragment implements CalendarAdapter.OnItem
 
                     for(int i=0;i<jsonArray.length();i++){
                         jsonObject = (JSONObject) jsonArray.opt(i);
-                        int ListNum = jsonObject.getInt("ListNum");
-                        int Checked = jsonObject.getInt("Checked");
-                        String CheckContent = jsonObject.getString("CheckContent");
+                        int listIndex = jsonObject.getInt("listIndex");
+                        int checked = jsonObject.getInt("checked");
+                        String content = jsonObject.getString("content");
 
-                        Log.d("ListNum", ListNum+"");
-                        Log.d("Checked", Checked+"");
-                        Log.d("CheckContent", CheckContent);
+                        Log.d("에러 ListNum", listIndex+"");
+                        Log.d("에러 Checked", checked+"");
+                        Log.d("에러 CheckContent", content);
 
                         // checked = 0 (체크안됨)
                         // checked = 1 (체크됨)
-                        CheckListData mainData;
-                        if(Checked==0){
-                            mainData = new CheckListData(Checked, UserID, ListNum+"", R.drawable.uncheckbox, CheckContent);
+                        CalendarCheckListData mainData;
+                        if(checked==0){
+                            mainData = new CalendarCheckListData(checked, UserID, listIndex+"", R.drawable.uncheckbox, content, String.valueOf(CalendarUtils.selectedDate));
                         }else{
-                            mainData = new CheckListData(Checked, UserID, ListNum+"", R.drawable.checkbox, CheckContent);
+                            mainData = new CalendarCheckListData(checked, UserID, listIndex+"", R.drawable.checkbox, content, String.valueOf(CalendarUtils.selectedDate));
                         }
                         arrayList.add(mainData);
                     }
@@ -177,18 +181,22 @@ public class CalendarActivity extends Fragment implements CalendarAdapter.OnItem
                     mainAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
+                    Log.d("여기 지나가요. 7777","hello");
                     e.printStackTrace();
                 }
             }
         };
-        HomeRequest homeRequest = new HomeRequest(UserID, responseListener);
+        CalendarRequest calendarRequest = new CalendarRequest(UserID, String.valueOf(CalendarUtils.selectedDate) , responseListener);
+        Log.d("여기 지나가요. 3333", String.valueOf(calendarRequest));
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(homeRequest);
+        Log.d("여기 지나가요. 4444","hello");
+        queue.add(calendarRequest);
+        Log.d("여기 지나가요. 5555", String.valueOf(queue));
     }
 
     private void initWidgets(ViewGroup rootView) {
-        calendarRecyclerView = rootView.findViewById(R.id.rv_calendar);
-        monthYearText = rootView.findViewById(R.id.tv_monthYear);
+        calendarRecyclerView = rootView.findViewById(R.id.rvCalendar);
+        monthYearText = rootView.findViewById(R.id.tvMonthYear);
     }
 
     private void setMonthView() {

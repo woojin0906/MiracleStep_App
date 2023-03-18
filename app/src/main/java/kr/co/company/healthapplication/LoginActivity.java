@@ -58,9 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         editor = pref.edit();
         rememberID = pref.getString("UserID", "_");   // String 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
 
-        Log.d("로그인 화면", "완료");
         if(!rememberID.equals("_")) {
-            Log.d("여기가 들어가면 안되는데", "완료");
             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             //intent.putExtra("UserID", rememberID);
@@ -90,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userId = etId.getText().toString();
                 String userPassword = etPwd.getText().toString();
+                Log.d("1111", "ㅇㅇ");
                 login(userId, userPassword);
             }
         });
@@ -114,18 +113,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String userId, String userPassword) {
+        Log.d("2222", "ㅇㅇ");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("4444", "ㅇㅇ");
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
+                    String userID = jsonObject.getString("id");
+                    Log.d("확인된 아이디", userID);
                     //String jsonString = jsonObject.toString();
                     //Log.d("전송여부", jsonString);
 
                     // 로그인에 성공한 경우.
                     if(success) {
-                        String userID = jsonObject.getString("userID");
                         //String userPassword = jsonObject.getString("userPassword");
 
                         try {
@@ -156,10 +158,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),"서버를 확인해주세요.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
         };
+        Log.d("3333", "ㅇㅇ");
         LoginRequest loginRequest = new LoginRequest(userId, userPassword, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);
