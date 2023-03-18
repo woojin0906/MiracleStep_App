@@ -9,9 +9,9 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-// User값 서버로 전송 (2023-01-12 우진 생성)
+// User값 서버로 전송 (2023-03-18 우진 수정)
 public class UserStepUpdateRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/UpdateUserStep.php"; // 서버 URL 설정 (PHP 파일 연동.)
+    final static private String URL = "http://miraclestep01.dothome.co.kr/UpdateUserStep.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
     public UserStepUpdateRequest(String userID, int updateUserStep, Response.Listener<String> listener){

@@ -4,15 +4,15 @@ import java.util.Date;
 
 // 기부캠페인리스트 데이터 액티비티 (2023-01-11 우진 수정)
 public class DonationData {
-    private String titleName;
-    private String name;
-    private String nowStep;
-    private int ivDonationProfile;
-    private String category;
-    private String content;
-    private String date;
-    private String maxStep;
-    private String dNum;
+    private String titleName; // 제목
+    private String name; // 기업명
+    private String nowStep; // 현재 기부된 걸음 수
+    private int ivDonationProfile; // 사진
+    private String category; // 카테고리
+    private String content; // 내용
+    private String date; // 작성일
+    private String maxStep; // 최대 걸음 수
+    private String dNum; // 자동 증가 번호
 
     public String getdNum() {
         return dNum;

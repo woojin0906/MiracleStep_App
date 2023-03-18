@@ -6,7 +6,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
 /* (2) DB에 저장할 객체 선언. */
@@ -15,7 +15,7 @@
     $updateUserStep = isset($_POST["updateUserStep"]) ? $_POST["updateUserStep"] : "";
 
 /* (3) DB안에 insert하는 문장. (User) */
-    $statement = mysqli_prepare($con, "UPDATE User SET UserDStep = ? Where UserID = ?");
+    $statement = mysqli_prepare($con, "UPDATE User SET availableStep = ? Where id = ?");
     mysqli_stmt_bind_param($statement, "is", $updateUserStep, $userID);
     mysqli_stmt_execute($statement);
 

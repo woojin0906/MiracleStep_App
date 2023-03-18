@@ -6,7 +6,7 @@
     */
 
     /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
     /* (2) 앱에서 선택한 카테고리 비교 */
@@ -17,8 +17,9 @@
             } else {
                 $cate = "animal";
             }
+
     /* (3) 현재 DB에 저장된 값을 검색함. */
-        $statement = mysqli_prepare($con, "SELECT DNum, DName, DGroup, NowStep, DContent, DDate, MaxStep FROM Donation WHERE DCategory=?");
+        $statement = mysqli_prepare($con, "SELECT campaignIndex, title, hostingGroup, nowDonation, content, lastDate, maxDonation FROM CampaignList WHERE category=?");
             mysqli_stmt_bind_param($statement, "s", $cate);
         mysqli_stmt_execute($statement);
 

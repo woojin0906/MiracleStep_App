@@ -2,7 +2,9 @@ package kr.co.company.healthapplication;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +26,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -30,7 +42,7 @@ import java.util.Optional;
 import kr.co.company.healthapplication.request.DonationRequest;
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 기부캠페인 액티비티 (2023-01-11 우진 수정)
+// 기부캠페인 액티비티 (2023-03-06 우진 수정)
 public class DonationActivity extends Fragment {
 
     private RecyclerView recyclerView;                                  // 리사이클러뷰
@@ -140,12 +152,14 @@ public class DonationActivity extends Fragment {
             public void onResponse(String response) {
                 // 불러오기 전에 데이터(아이템) 초기화 해줘야 중첩 안됨.
                 adapter.notifyDataSetChanged();
+
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     JSONObject jsonObject;
 
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonObject = (JSONObject) jsonArray.opt(i);
+
+                        jsonObject = (JSONObject) jsonArray.getJSONObject(i);
                         String titleName = jsonObject.getString("titleName");
                         String name = jsonObject.getString("name");
                         String nowStep = jsonObject.getString("nowStep");

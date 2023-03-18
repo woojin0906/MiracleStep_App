@@ -26,7 +26,7 @@ import kr.co.company.healthapplication.request.DonationUpdateRequest;
 import kr.co.company.healthapplication.request.UserStepSelectRequest;
 import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 
-// 기부캠페인 팝업 액티비티 (2023-01-12 우진 수정)
+// 기부캠페인 팝업 액티비티 (2023-03-18 우진 수정)
 public class DonationPopupActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView stepCount, DuserStep;
@@ -206,11 +206,12 @@ public class DonationPopupActivity extends AppCompatActivity {
        Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject jsonObject = new JSONObject(response);   // 결과 값 리턴 받음
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
 
-                    String jsonString = jsonObject.toString();
+                    String jsonString = jsonObject.getString("DBUserStep");
                     Log.d("전송여부", jsonString);
 
                     if (success) {

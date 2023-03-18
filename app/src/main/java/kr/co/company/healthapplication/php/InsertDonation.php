@@ -6,7 +6,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep");
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
 /* (2) DB에 저장할 객체 선언. */
@@ -22,7 +22,7 @@
     $userStep = isset($_POST["userStep"]) ? $_POST["userStep"] : "";
 
 /* (3) DB안에 insert하는 문장. (UserDonation) */
-    $statement = mysqli_prepare($con, "INSERT INTO UserDonation (DNum, UserID, UDDate, UserDStep) VALUES (?,?,?,?)");
+    $statement = mysqli_prepare($con, "INSERT INTO DonationHistory (donationIndex, userId, donationDate, donationStep) VALUES (?,?,?,?)");
     mysqli_stmt_bind_param($statement, "issi", $dNum, $userID, $ddate, $userStep);
     mysqli_stmt_execute($statement);
 

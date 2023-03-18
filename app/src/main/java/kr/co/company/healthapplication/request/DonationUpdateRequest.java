@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-// Donation값 서버로 전송 (2023-01-11 우진 생성)
+// Donation값 서버로 전송 (2023-03-18 우진 수정)
 public class DonationUpdateRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/UpdateDonation.php"; // 서버 URL 설정 (PHP 파일 연동.)
+    final static private String URL = "http://miraclestep01.dothome.co.kr/UpdateDonation.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
     public DonationUpdateRequest(int dNum, int updateStep, Response.Listener<String> listener){
