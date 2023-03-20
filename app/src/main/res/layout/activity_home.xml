@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 홈 화면 (2023-01-04 인범 수정함.)-->
+<!-- 홈 화면 (2023-03-05 인범 수정함.)-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,30 +16,6 @@
         android:textSize="40dp"
         android:textColor="#84A7E4"
         android:textStyle="bold" />
-
-    <!-- 말풍성 이미지 들어가야됨! -->
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:padding="15dp"-->
-<!--        android:background="@drawable/donation_back">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="내 기부 걸음 : "-->
-<!--            android:textSize="20dp"/>-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvMyDonationStep"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="20dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:text="34166"/>-->
-<!--    </LinearLayout>-->
 
     <ImageView
         android:layout_marginTop="30dp"
