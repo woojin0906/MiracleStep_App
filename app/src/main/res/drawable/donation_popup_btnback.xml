@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 캠페인 기부 팝업창 버튼 설정 (2023-03-21 우진 생성) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#84A7E4"/>
+    <corners android:bottomLeftRadius="20dp"
+        android:bottomRightRadius="20dp"
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"/>
+</shape>

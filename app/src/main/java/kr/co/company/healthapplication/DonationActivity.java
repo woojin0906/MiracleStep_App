@@ -42,7 +42,7 @@ import java.util.Optional;
 import kr.co.company.healthapplication.request.DonationRequest;
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 기부캠페인 액티비티 (2023-03-06 우진 수정)
+// 기부캠페인 액티비티 (2023-03-21 우진 수정)
 public class DonationActivity extends Fragment {
 
     private RecyclerView recyclerView;                                  // 리사이클러뷰
@@ -78,6 +78,13 @@ public class DonationActivity extends Fragment {
         environmentBtn = rootView.findViewById(R.id.environmentBtn);
         animalBtn = rootView.findViewById(R.id.animalBtn);
 
+        peopleBtn.setBackgroundResource(R.drawable.btnclickback);
+        environmentBtn.setBackgroundResource(R.drawable.btnback);
+        animalBtn.setBackgroundResource(R.drawable.btnback);
+        peopleBtn.setTextColor(Color.rgb(132, 167, 228));
+        environmentBtn.setTextColor(Color.rgb(184, 184, 184));
+        animalBtn.setTextColor(Color.rgb(184, 184, 184));
+
         peopleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,9 +92,9 @@ public class DonationActivity extends Fragment {
                 environmentBtn.setBackgroundResource(R.drawable.btnback);
                 animalBtn.setBackgroundResource(R.drawable.btnback);
 
-                peopleBtn.setTextColor(Color.WHITE);
-                environmentBtn.setTextColor(Color.BLACK);
-                animalBtn.setTextColor(Color.BLACK);
+                peopleBtn.setTextColor(Color.rgb(132, 167, 228));
+                environmentBtn.setTextColor(Color.rgb(184, 184, 184));
+                animalBtn.setTextColor(Color.rgb(184, 184, 184));
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
@@ -106,9 +113,9 @@ public class DonationActivity extends Fragment {
                 environmentBtn.setBackgroundResource(R.drawable.btnclickback);
                 animalBtn.setBackgroundResource(R.drawable.btnback);
 
-                peopleBtn.setTextColor(Color.BLACK);
-                environmentBtn.setTextColor(Color.WHITE);
-                animalBtn.setTextColor(Color.BLACK);
+                peopleBtn.setTextColor(Color.rgb(184, 184, 184));
+                environmentBtn.setTextColor(Color.rgb(132, 167, 228));
+                animalBtn.setTextColor(Color.rgb(184, 184, 184));
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
@@ -128,9 +135,9 @@ public class DonationActivity extends Fragment {
                 environmentBtn.setBackgroundResource(R.drawable.btnback);
                 animalBtn.setBackgroundResource(R.drawable.btnclickback);
 
-                peopleBtn.setTextColor(Color.BLACK);
-                environmentBtn.setTextColor(Color.BLACK);
-                animalBtn.setTextColor(Color.WHITE);
+                peopleBtn.setTextColor(Color.rgb(184, 184, 184));
+                environmentBtn.setTextColor(Color.rgb(184, 184, 184));
+                animalBtn.setTextColor(Color.rgb(132, 167, 228));
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
@@ -165,10 +172,11 @@ public class DonationActivity extends Fragment {
                         String nowStep = jsonObject.getString("nowStep");
                         String content = jsonObject.getString("content");
                         String date = jsonObject.getString("date");
+                        String startDate = jsonObject.getString("startDate");
                         String maxStep = jsonObject.getString("maxStep");
                         String dNum = jsonObject.getString("dNum");
 
-                        DonationData mainData = new DonationData(dNum, titleName, name, nowStep, R.drawable.bear2, content, date, maxStep);
+                        DonationData mainData = new DonationData(dNum, titleName, name, nowStep, R.drawable.bear2, content, date, startDate, maxStep);
                         arrayList.add(mainData);
                     }
 

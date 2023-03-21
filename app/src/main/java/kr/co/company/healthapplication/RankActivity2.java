@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,7 +47,7 @@ public class RankActivity2 extends AppCompatActivity {
     private Button btnDonaRank, btnStepRank;
     private TextView tvRankTitle, tvRankStep;
 
-    private String category = "TotalUserDonation";
+    private String category = "totalDonation";
 
     // SharedPreference
     private SharedPreferences pref;
@@ -100,7 +101,7 @@ public class RankActivity2 extends AppCompatActivity {
                 tvRankTitle.setText("전체 기부 랭킹");
                 tvRankStep.setText("코인");
 
-                category = "TotalUserDonation";
+                category = "totalDonation";
                 rank(category);
             }
         });
@@ -113,7 +114,7 @@ public class RankActivity2 extends AppCompatActivity {
                 tvRankTitle.setText("전체 걷기 랭킹");
                 tvRankStep.setText("걸음");
 
-                category = "TotalUserStep";
+                category = "totalStep";
                 rank(category);
             }
         });
@@ -143,16 +144,16 @@ public class RankActivity2 extends AppCompatActivity {
                     JSONObject jsonObject;
 
                     for(int i=0;i<jsonArray.length();i++){
-                        jsonObject = (JSONObject) jsonArray.opt(i);
+                        jsonObject = (JSONObject) jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("UserId");
-                        int point = jsonObject.getInt("point");
+                        String point = jsonObject.getString("point");
 
                         if(rememberID.equals(id)){
                             tvMyPoint.setText(point+"");
                             tvMyRank.setText((i+1)+"");
                         }
-
-                        RankListData mainData = new RankListData((i+1)+"", R.drawable.user, id, point+"");
+Log.d(">>>>>>>>>>>", rememberID + " " + id);
+                        RankListData mainData = new RankListData((i+1)+"", R.drawable.user, id, point);
                         arrayList.add(mainData);
                     }
 

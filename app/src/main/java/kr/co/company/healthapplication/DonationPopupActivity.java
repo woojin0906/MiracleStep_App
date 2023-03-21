@@ -21,12 +21,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import kr.co.company.healthapplication.request.DonationInsertRequest;
 import kr.co.company.healthapplication.request.DonationUpdateRequest;
 import kr.co.company.healthapplication.request.UserStepSelectRequest;
 import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 
-// 기부캠페인 팝업 액티비티 (2023-03-18 우진 수정)
+// 기부캠페인 팝업 액티비티 (2023-03-21 우진 수정)
 public class DonationPopupActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView stepCount, DuserStep;
@@ -216,7 +218,10 @@ public class DonationPopupActivity extends AppCompatActivity {
 
                     if (success) {
                         DBUserStep = jsonObject.optInt("DBUserStep", 0);
-                        DuserStep.setText(Integer.toString(DBUserStep));
+
+                        DecimalFormat myFormatter = new DecimalFormat("###,###");
+                        String doStep = myFormatter.format(DBUserStep);
+                        DuserStep.setText(doStep);
                     } else {
                         Toast.makeText(DonationPopupActivity.this, "걸음 수 가져오기 실패", Toast.LENGTH_SHORT).show();
 

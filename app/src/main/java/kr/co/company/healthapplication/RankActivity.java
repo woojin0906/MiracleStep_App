@@ -101,7 +101,7 @@ public class RankActivity extends Fragment {
                 tvRankTitle.setText("전체 기부 랭킹");
                 tvRankStep.setText("코인");
 
-                category = "TotalUserDonation";
+                category = "totalDonation";
                 rank(category, rootView);
             }
         });
@@ -114,7 +114,7 @@ public class RankActivity extends Fragment {
                 tvRankTitle.setText("전체 걷기 랭킹");
                 tvRankStep.setText("걸음");
 
-                category = "TotalUserStep";
+                category = "totalStep";
                 rank(category, rootView);
             }
         });

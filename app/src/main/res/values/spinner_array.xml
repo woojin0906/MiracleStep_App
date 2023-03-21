@@ -4,6 +4,10 @@
     <string-array name="spinner_array">
         <item>봉사분야</item>
         <item>생활편의지원</item>
+        <item>주거환경</item>
+        <item>보건의료</item>
+        <item>문화행사</item>
+        <item>농어촌 봉사</item>
         <item>교육</item>
         <item>환경보호</item>
     </string-array>

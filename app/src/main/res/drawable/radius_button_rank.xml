@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 랭킹화면 버튼 Background (2023-01-04 인범 생성함.)-->
+<!-- 랭킹화면 버튼 Background (2023-03-21 우진 생성)-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="10dp"
     android:shape="rectangle" >
-    <solid android:color="@color/black" />
+    <solid android:color="#84A7E4" />
     <corners
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"

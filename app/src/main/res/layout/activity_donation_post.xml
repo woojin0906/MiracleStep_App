@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 기부 캠페인 글 화면 (2023-01-09 우진 수정) -->
+<!-- 기부 캠페인 글 화면 (2023-03-21 우진 수정) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,8 +14,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -23,108 +24,135 @@
                 <ImageView
                     android:id="@+id/ivDonationProfile"
                     android:layout_width="match_parent"
-                    android:layout_height="223dp"
+                    android:layout_height="220dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/bear2"/>
+                    android:background="@drawable/bear2" />
 
                 <ImageButton
                     android:id="@+id/backBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/backicon"
-                    android:background="#00ff0000" />
+                    android:layout_marginTop="12dp"
+                    android:background="#00ff0000"
+                    android:src="@drawable/backicon" />
             </FrameLayout>
 
-                <TextView
-                    android:id="@+id/titleName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="'따뜻한 플레이' 캠페인(제목)"/>
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="'따뜻한 플레이' 캠페인(제목)"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="17dp"
-                    android:text="Google Play(단체명)"/>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="20dp"
+                android:text="Google Play(단체명)"
+                android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:textSize="17dp"
-                    android:text="캠페인 기간"/>
+                    android:text="캠페인 기간"
+                    android:textSize="17dp" />
 
-                <TextView
-                    android:id="@+id/date"
-                    android:padding="5dp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:text="2023/01/02~2023/03/02" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/startdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="2023-01-05"
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="2023-03-02"
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:textSize="17dp"
-                    android:text="목표 걸음"/>
+                    android:text="목표 걸음"
+                    android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/maxStep"
-                    android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
+                    android:padding="5dp"
+                    android:text="100,000,000"
                     android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:text="100,000,000" />
+                    android:textSize="17dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:textSize="17dp"
-                    android:text="기부된 걸음"/>
+                    android:text="기부된 걸음"
+                    android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/nowStep"
@@ -135,25 +163,27 @@
                     android:text="75,084,212"
                     android:textColor="#125EE4"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/contentTitleName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:padding="5dp"
-                android:textSize="17dp"
-                android:text="북극곰을 지켜주세요."
+                android:text="세부사항"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:fillViewport="true">
 
@@ -161,20 +191,21 @@
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
                     android:padding="5dp"
-                    android:textSize="17dp"
                     android:text="최근 20년 사이 북극의 빙하 면적은 50% 감소하였습니다. 북극은 북극곰의 주 서식지이자 사냥터지만 이 순간에도 녹아내리는 빙하로 인해 북극곰은 갈 곳을 잃었습니다. 빙하가 녹으면 인류 재앙으로 돌아옵니다. 지구온난화로 북극의 온도는 빠르게 상승하고 빙하는 더욱 빠르게 녹아가고 있습니다. 빙하가 무너져 내리는 경고를 결코 무시해서는 안 됩니다."
-                    />
+                    android:textSize="17dp" />
             </ScrollView>
+
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:orientation="vertical"/>
+                android:orientation="vertical"
+                android:padding="8dp" />
 
         </LinearLayout>
     </ScrollView>

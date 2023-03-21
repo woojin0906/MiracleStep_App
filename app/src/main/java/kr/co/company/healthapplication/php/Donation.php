@@ -19,13 +19,13 @@
             }
 
     /* (3) 현재 DB에 저장된 값을 검색함. */
-        $statement = mysqli_prepare($con, "SELECT campaignIndex, title, hostingGroup, nowDonation, content, lastDate, maxDonation FROM CampaignList WHERE category=?");
+        $statement = mysqli_prepare($con, "SELECT campaignIndex, title, hostingGroup, nowDonation, content, lastDate, startDate, maxDonation FROM CampaignList WHERE category=?");
             mysqli_stmt_bind_param($statement, "s", $cate);
         mysqli_stmt_execute($statement);
 
     // /* (4) DB안에 해당 카테고리가 일치하는 Donation정보 가져오기 */
         mysqli_stmt_store_result($statement);
-             mysqli_stmt_bind_result($statement, $DNum, $DTitleName, $DName, $DNowStep, $DContent, $DDate, $MaxStep);
+             mysqli_stmt_bind_result($statement, $DNum, $DTitleName, $DName, $DNowStep, $DContent, $DDate, $DsDate, $MaxStep);
 
            $revs = array();
 
@@ -40,6 +40,7 @@
             $revs["nowStep"] = $DNowStep;
             $revs["content"] = $DContent;
             $revs["date"] = $DDate;
+            $revs["startDate"] = $DsDate;
             $revs["maxStep"] = $MaxStep;
             $revs["dNum"] = $DNum;
 

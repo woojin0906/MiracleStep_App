@@ -1,8 +1,5 @@
 package kr.co.company.healthapplication;
-
-import java.util.Date;
-
-// 기부캠페인리스트 데이터 액티비티 (2023-01-11 우진 수정)
+// 기부캠페인리스트 데이터 액티비티 (2023-03-21 우진 수정)
 public class DonationData {
     private String titleName; // 제목
     private String name; // 기업명
@@ -10,17 +7,10 @@ public class DonationData {
     private int ivDonationProfile; // 사진
     private String category; // 카테고리
     private String content; // 내용
-    private String date; // 작성일
+    private String date; // 끝나는 기간
+    private String startDate; // 시작 기간
     private String maxStep; // 최대 걸음 수
     private String dNum; // 자동 증가 번호
-
-    public String getdNum() {
-        return dNum;
-    }
-
-    public void setdNum(String dNum) {
-        this.dNum = dNum;
-    }
 
     public DonationData() {}  // 생성자 메서드
 
@@ -88,7 +78,23 @@ public class DonationData {
         this.nowStep = nowStep;
     }
 
-    public DonationData(String dNum, String titleName, String name, String nowStep, int ivDonationProfile, String content, String date, String maxStep) {
+    public String getdNum() {
+        return dNum;
+    }
+
+    public void setdNum(String dNum) {
+        this.dNum = dNum;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public DonationData(String dNum, String titleName, String name, String nowStep, int ivDonationProfile, String content, String date, String startDate, String maxStep) {
         this.dNum = dNum;
         this.titleName = titleName;
         this.name = name;
@@ -96,6 +102,7 @@ public class DonationData {
         this.ivDonationProfile = ivDonationProfile;
         this.content = content;
         this.date = date;
+        this.startDate = startDate;
         this.maxStep = maxStep;
     }
 }

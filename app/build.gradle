@@ -53,5 +53,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
+    // 공공데이터 api
+    implementation group: 'org.json', name: 'json', version: '20220924'
 
 }

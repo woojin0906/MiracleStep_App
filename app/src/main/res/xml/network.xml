@@ -2,8 +2,7 @@
 <!-- Android9 부터 HTTP 통신이 금지되어 별도의 설정이 필요함. -->
 <!-- HTTP 통신을 허용할 도메인 혹은 IP 주소를 명시해주어야 함. -->
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true"/>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">YOUR IP</domain>
+        <domain includeSubdomains="true">openapi.1365.go.kr</domain>
     </domain-config>
 </network-security-config>
