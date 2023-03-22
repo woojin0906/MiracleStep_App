@@ -1,6 +1,4 @@
-package kr.co.company.healthapplication.request;
-
-import android.util.Log;
+package kr.co.company.healthapplication.request.run;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,11 +10,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RunSelectRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/SelectRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
+public class SelectRunRequest extends StringRequest {
+    final static private String URL = "http://miraclestep01.dothome.co.kr/SelectRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
-    public RunSelectRequest(String userID, Response.Listener<String> listener){
+    public SelectRunRequest(String userID, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Request.Method.POST, URL, listener, null);
 
@@ -28,9 +26,6 @@ public class RunSelectRequest extends StringRequest {
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("runDate", nowDate);
-        
-        Log.d("검색 아이디", userID);
-        Log.d("검색 날짜", nowDate);
     }
 
     @Override

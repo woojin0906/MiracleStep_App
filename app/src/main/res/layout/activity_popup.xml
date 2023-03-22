@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="170dp"
+    android:orientation="vertical"
+    android:backgroundTint="#17CCCCCC">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/radius_calendar"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="일정을 수정하시겠습니까?"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#666666"
+            android:layout_marginBottom="5dp"
+            android:textSize="6pt" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일정 : "
+                android:textColor="#666666"
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvSelectDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:text="2000년 00월 00일"
+                android:padding="5dp"
+                android:textColor="#666666"
+                ></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내용 : "
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etScheduleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:hint="일정 내용을 수정해주세요."
+                android:padding="5dp"
+                android:background="@drawable/calendar_text_border"
+                android:textColor="#666666"
+                ></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+
+            <Button
+                android:id="@+id/btnModifySchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginRight="5dp"
+                android:text="수정"/>
+
+            <Button
+                android:id="@+id/btnDeleteSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginLeft="5dp"
+                android:text="삭제"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

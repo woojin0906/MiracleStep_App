@@ -1,13 +1,13 @@
 <?php
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
-    mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
+    $con = mysqli_connect("localhost", "miraclestep01", "", "miraclestep01");
+    mysqli_query($con, 'SET NAMES utf8');
 
     $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
     $runDate = isset($_POST["runDate"]) ? $_POST["runDate"] : "";
 
-    $statement = mysqli_prepare($con, "SELECT * FROM Running WHERE UserID = ? AND RunDate = ?");
+    $statement = mysqli_prepare($con, "SELECT * FROM RunRecord WHERE userId = ? AND runDate = ?");
     mysqli_stmt_bind_param($statement, "ss", $userID, $runDate);
     mysqli_stmt_execute($statement);
 

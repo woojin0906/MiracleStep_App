@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.calendar;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

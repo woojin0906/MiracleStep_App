@@ -16,8 +16,9 @@
             android:id="@+id/tvListNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="0"/>
-        
+
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_marginRight="10dp"
@@ -30,10 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10pt"
-                android:text="오늘의 체크리스트!!!!!"/>
-
-        
+                android:textSize="8pt"
+                android:text="체크리스트"/>
     </LinearLayout>
-
 </LinearLayout>

@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import kr.co.company.healthapplication.activity.calendar.CalendarActivity;
+import kr.co.company.healthapplication.activity.home.HomeActivity;
+
 // 바텀네비게이션 + 프래그먼트 액티비티 (2023-01-09 우진 수정)
 public class MainActivity extends AppCompatActivity {
 
@@ -87,5 +91,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
