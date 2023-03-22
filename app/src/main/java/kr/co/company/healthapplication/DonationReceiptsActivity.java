@@ -1,5 +1,5 @@
 package kr.co.company.healthapplication;
-
+// 기부내역 액티비티 (2023-03-22 우진 수정)
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +28,7 @@ public class DonationReceiptsActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<DonationReceiptsData> arrayList;
     private SharedPreferences pref;
-    private SharedPreferences.Editor  editor;
+    private SharedPreferences.Editor editor;
     private String userId;
 
     @Override

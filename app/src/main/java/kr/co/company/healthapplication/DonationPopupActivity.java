@@ -49,7 +49,7 @@ public class DonationPopupActivity extends AppCompatActivity {
         // 글 번호 받아오기
         Intent receiveIntent = getIntent();
         dNum = receiveIntent.getStringExtra("dNum");
-        nowStep = receiveIntent.getStringExtra("nowStep");
+        nowStep = receiveIntent.getStringExtra("nowStep").replace(",", "");
 
         // userID 값 받아오기
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
@@ -94,9 +94,10 @@ public class DonationPopupActivity extends AppCompatActivity {
         donationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userStep = stepCount.getText().toString();
-                if(Integer.parseInt(DuserStep.getText().toString())>=Integer.parseInt(userStep)) {
-                    Log.d("유저의 기부가능걸음수", Integer.parseInt(DuserStep.getText().toString())+"");
+                userStep = stepCount.getText().toString().replace(",", "");
+
+                if(Integer.parseInt(DuserStep.getText().toString().replace(",", ""))>=Integer.parseInt(userStep)) {
+                    Log.d("유저의 기부가능걸음수", Integer.parseInt(DuserStep.getText().toString().replace(",", ""))+"");
                     Log.d("기부하려는 걸음 수", Integer.parseInt(userStep)+"");
                     //3. 기록 DB에 저장
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -117,7 +118,7 @@ public class DonationPopupActivity extends AppCompatActivity {
                                     updateNowStep();
 
                                     // 사용자의 기부 가능 걸음 수 - 기부할 걸음 수
-                                    updateUserStep = (Integer.parseInt(DuserStep.getText().toString())-Integer.parseInt(userStep));
+                                    updateUserStep = (Integer.parseInt(DuserStep.getText().toString().replace(",", ""))-Integer.parseInt(userStep));
 
                                     // 사용자의 기부 가능 걸음 수 업데이트하기
                                     updateUserStep();

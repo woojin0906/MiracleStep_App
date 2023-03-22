@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-// 기부캠페인 어댑터 (2023-01-09 우진 수정)
+// 기부내역 어댑터 (2023-03-22 우진 수정)
 public class DonationReceiptsAdapter extends RecyclerView.Adapter<DonationReceiptsAdapter.CustomViewHolder1> {
 
     private ArrayList<DonationReceiptsData> arrayList;
@@ -35,32 +36,17 @@ public class DonationReceiptsAdapter extends RecyclerView.Adapter<DonationReceip
     // 실제 아이템 매칭 역할
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder1 holder, int position) {
+        DecimalFormat myFormatter = new DecimalFormat("###,###");
+        String nowStep = myFormatter.format(Integer.parseInt(arrayList.get(position).getDonationStep()));
+
         holder.titleName.setText(arrayList.get(position).getTitleName());
         holder.groupName.setText(arrayList.get(position).getGroupName());
         holder.donationDate.setText(arrayList.get(position).getDonationDate());
-        holder.donationStep.setText(arrayList.get(position).getDonationStep());
+        holder.donationStep.setText(nowStep);
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getIvDonationProfile())
                 .into(holder.ivDonationProfile);
     }
-
-        /*// 리사이클러뷰 클릭이벤트(선택된 리사이클러뷰 화면으로 이동)
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int mPosition = holder.getAdapterPosition();
-                Context context = view.getContext();
-
-                Intent intent = new Intent(context, DonationPostActivity.class);
-                intent.putExtra("titleName", arrayList.get(mPosition).getTitleName());
-                intent.putExtra("name", arrayList.get(mPosition).getName());
-                intent.putExtra("nowStep", arrayList.get(mPosition).getNowStep());
-                intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
-
-                (context).startActivity(intent);
-            }
-        });
-    }*/
 
     @Override
     public int getItemCount() {

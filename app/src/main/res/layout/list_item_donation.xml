@@ -12,6 +12,8 @@
         android:background="@drawable/donation_listback"
         android:padding="5dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
         android:elevation="5dp"
         android:layout_margin="1dp">
 
