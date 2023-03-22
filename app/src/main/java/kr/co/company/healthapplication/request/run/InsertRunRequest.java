@@ -1,6 +1,4 @@
-package kr.co.company.healthapplication.request;
-
-import android.util.Log;
+package kr.co.company.healthapplication.request.run;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
@@ -11,11 +9,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RunUpdateRequest extends StringRequest {
-    final static private String URL = "http://miraclestep.ivyro.net/UpdateRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
+public class InsertRunRequest extends StringRequest {
+    final static private String URL = "http://miraclestep01.dothome.co.kr/InsertRunning.php"; // 서버 URL 설정 (PHP 파일 연동.)
     private Map<String, String> map;
 
-    public RunUpdateRequest(String userId, String runTime, String runDistance, String runStep, String runKcal, Response.Listener<String> listener){
+    public InsertRunRequest(String userId, String runTime, String runDistance, String runStep, String runKcal, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
@@ -31,14 +29,6 @@ public class RunUpdateRequest extends StringRequest {
         map.put("runDistance", runDistance);
         map.put("runStep", runStep);
         map.put("runKcal", runKcal);
-
-        Log.d("어디", "업데이트");
-        Log.d("아이디", userId);
-        Log.d("일정", nowDate);
-        Log.d("타임", runTime);
-        Log.d("거리", runDistance);
-        Log.d("걸음", runStep);
-        Log.d("칼로리", runKcal);
     }
 
     @Override

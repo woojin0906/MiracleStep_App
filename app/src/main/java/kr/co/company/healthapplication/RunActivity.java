@@ -58,13 +58,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import kr.co.company.healthapplication.request.RunInsertRequest;
-import kr.co.company.healthapplication.request.RunSelectRequest;
-import kr.co.company.healthapplication.request.RunUpdateRequest;
+import kr.co.company.healthapplication.request.run.InsertRunRequest;
+import kr.co.company.healthapplication.request.run.SelectRunRequest;
+import kr.co.company.healthapplication.request.run.UpdateRunRequest;
 
-// 러닝 액티비티 (2023-01-07 인범 수정)
 public class RunActivity extends AppCompatActivity implements SensorEventListener, TMapGpsManager.onLocationChangedCallback {
-
     // 날씨
     public static String weather121313 = "현재 날씨는 맑은 상태입니다.";
     private double longitude = 37.4481;    // 인하공전 경도
@@ -110,8 +108,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
 
     // Preferences Shared
     private SharedPreferences pref;
-    private SharedPreferences.Editor  editor;
-    private String userId;   // 유저 아이디 값 불러오기 (저장해둔 값 없으면 초기값인 _으로 불러옴)
+    private SharedPreferences.Editor editor;
+    private String userId;
 
 
     // 거리계산 식
@@ -122,26 +120,34 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     boolean stateRunningTable;
 
     @Override
-    public void onBackPressed() { // 뒤로가기 버튼 클릭 시
-        // 1. 러닝 정지
-        result = 0;
-        chrono.stop();
-        pauseOffset = SystemClock.elapsedRealtime() - chrono.getBase();
-        running = false;
+    public void onBackPressed() {
+        stopRunning();
+        getWalkingInfo();
+        savingWalkingInfo();
 
-        // 2. 러닝 기록 가져오기
-        runTime += runTime + m;
-        runDistance += Double.parseDouble(tvDistance.getText().toString().replaceAll("km", ""));
-        runStepCount += Integer.parseInt(tvStepCount.getText().toString());
-        runKcal += Double.parseDouble(tvKcal.getText().toString().replaceAll("kcal", ""));
+        finish();
+    }
 
-        // 러닝 기록 테이블에 저장하기
+    private void savingWalkingInfo() {
         if(returnRunDate != null)
             updateRunning();
         else
             insertRunning();
 
-        finish();
+    }
+
+    private void getWalkingInfo() {
+        runTime += runTime + m;
+        runDistance += Double.parseDouble(tvDistance.getText().toString().replaceAll("km", ""));
+        runStepCount += Integer.parseInt(tvStepCount.getText().toString());
+        runKcal += Double.parseDouble(tvKcal.getText().toString().replaceAll("kcal", ""));
+    }
+
+    private void stopRunning() {
+        result = 0;
+        chrono.stop();
+        pauseOffset = SystemClock.elapsedRealtime() - chrono.getBase();
+        running = false;
     }
 
     @SuppressLint("WrongViewCast")
@@ -150,114 +156,15 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+        initWidgets();
+        selectRunning();
+        weatherSetting();
+        exerciseSetting();
+        tmapSetting();
+        stopwatchSetting();
+    }
 
-        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        editor = pref.edit();
-        userId = pref.getString("UserID", "_");
-
-        selectRunning();    // 유저의 러닝테이블 정보 가져오는 함수 (2023-01-09 이수)
-
-        // id값 가져오기
-        tvStepCount = findViewById(R.id.tvStepCount);
-        tvDistance = findViewById(R.id.tvDistance);
-        tvKcal = findViewById(R.id.tvKcal);
-
-        // 날씨 이미지 뷰
-        ivWeather = findViewById(R.id.ivWeather);
-        tvTemperatures = findViewById(R.id.tvTemperatures);
-        tvWeather = findViewById(R.id.tvWeather);
-
-        Glide.with(this).load(R.mipmap.sun).into(ivWeather);
-
-        new Thread(() -> {
-            try {
-                weatherResult = lookUpWeather(longitude, latitude);
-                Log.d("날씨정보",weatherResult);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-        // 날씨
-        int beginIndex = weatherResult.lastIndexOf(",") + 1;
-        int endIndex = weatherResult.length();
-        // 혹시 모를 에러 처리하기!!
-        if (beginIndex != 0) {
-            Log.d("정보", String.valueOf(beginIndex));
-            String temperatures = weatherResult.substring(beginIndex, endIndex);    // 기온
-            String weather = weatherResult.substring(0, (beginIndex - 1));    // 날씨
-            tvTemperatures.setText(temperatures);
-            tvWeather.setText(weather);
-            if(!weather121313.equals(weather)) {
-                // 날씨에 따라 이미지 변경
-                if (weather.equals("현재 날씨는 맑은 상태입니다.")) {
-                    Glide.with(ivWeather).load(R.mipmap.sun).into(ivWeather);
-                    weather121313 = "현재 날씨는 맑은 상태입니다.";
-                    ivWeather.setImageResource(R.mipmap.sun);
-                } else if (weather.equals("현재 날씨는 비가 오는 상태입니다.")) {
-                    Glide.with(ivWeather).load(R.mipmap.rain).into(ivWeather);
-                    ivWeather.setImageResource(R.mipmap.rain);
-                    weather121313 = "현재 날씨는 비가 오는 상태입니다.";
-                } else if (weather.equals("현재 날씨는 구름이 많은 상태입니다.")) {
-                    Glide.with(ivWeather).load(R.mipmap.cloudy).into(ivWeather);
-                    ivWeather.setImageResource(R.mipmap.cloudy);
-                    weather121313 = "현재 날씨는 구름이 많은 상태입니다.";
-                } else if (weather.equals("현재 날씨는 흐린 상태입니다.")) {
-                    Glide.with(ivWeather).load(R.mipmap.clouds).into(ivWeather);
-                    ivWeather.setImageResource(R.mipmap.clouds);
-                    weather121313 = "현재 날씨는 흐린 상태입니다.";
-                }
-            }
-        }
-
-        // 활동 퍼미션 체크
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
-
-            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
-        }
-        // 걸음 센서 연결
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
-        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-
-        // 디바이스에 걸음 센서의 존재 여부 체크
-        if (stepCountSensor == null) {
-            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
-        }
-
-        // T Map
-        tMapView = new TMapView(this);
-        tMapView.setSKTMapApiKey(API_Key);
-
-        // Initial Setting
-        tMapView.setZoomLevel(16);
-        tMapView.setIconVisibility(true);
-        tMapView.setMapType(TMapView.MAPTYPE_STANDARD);
-        tMapView.setLanguage(TMapView.LANGUAGE_KOREAN);
-
-        // T Map View Using Linear Layout
-        LinearLayout linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
-        linearLayoutTmap.addView(tMapView);
-
-        // GPS using T Map
-        tMapGPS = new TMapGpsManager(this);
-
-        // Initial Setting
-        tMapGPS.setMinTime(100);    // 일정 시간마다 리셋
-        tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋s
-        //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
-        tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
-
-        // 화면중심을 단말의 현재위치로 이동
-        tMapView.setTrackingMode(true);
-        tMapView.setSightVisible(true);
-
-        tMapGPS.OpenGps();
-
+    private void stopwatchSetting() {
         // 스톱워치(시간)
         chrono = findViewById(R.id.chrono);
         chrono.setFormat("%s");
@@ -302,7 +209,120 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                 chrono.setText(hh+":"+mm+":"+ss);
             }
         });
+    }
 
+    private void tmapSetting() {
+        // T Map
+        tMapView = new TMapView(this);
+        tMapView.setSKTMapApiKey(API_Key);
+
+        // Initial Setting
+        tMapView.setZoomLevel(16);
+        tMapView.setIconVisibility(true);
+        tMapView.setMapType(TMapView.MAPTYPE_STANDARD);
+        tMapView.setLanguage(TMapView.LANGUAGE_KOREAN);
+
+        // T Map View Using Linear Layout
+        LinearLayout linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
+        linearLayoutTmap.addView(tMapView);
+
+        // GPS using T Map
+        tMapGPS = new TMapGpsManager(this);
+
+        // Initial Setting
+        tMapGPS.setMinTime(100);    // 일정 시간마다 리셋
+        tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋s
+        //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
+        tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
+
+        // 화면중심을 단말의 현재위치로 이동
+        tMapView.setTrackingMode(true);
+        tMapView.setSightVisible(true);
+
+        tMapGPS.OpenGps();
+    }
+
+    private void exerciseSetting() {
+        // 활동 퍼미션 체크
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
+        }
+        // 걸음 센서 연결
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
+        // 디바이스에 걸음 센서의 존재 여부 체크
+        if (stepCountSensor == null) {
+            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void weatherSetting() {
+        new Thread(() -> {
+            try {
+                weatherResult = lookUpWeather(longitude, latitude);
+                Log.d("날씨정보",weatherResult);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // 날씨
+        int beginIndex = weatherResult.lastIndexOf(",") + 1;
+        int endIndex = weatherResult.length();
+        // 혹시 모를 에러 처리하기!!
+        if (beginIndex != 0) {
+            Log.d("정보", String.valueOf(beginIndex));
+            String temperatures = weatherResult.substring(beginIndex, endIndex);    // 기온
+            String weather = weatherResult.substring(0, (beginIndex - 1));    // 날씨
+            tvTemperatures.setText(temperatures);
+            tvWeather.setText(weather);
+            if(!weather121313.equals(weather)) {
+                // 날씨에 따라 이미지 변경
+                if (weather.equals("현재 날씨는 맑은 상태입니다.")) {
+                    Glide.with(ivWeather).load(R.mipmap.sun).into(ivWeather);
+                    weather121313 = "현재 날씨는 맑은 상태입니다.";
+                    ivWeather.setImageResource(R.mipmap.sun);
+                } else if (weather.equals("현재 날씨는 비가 오는 상태입니다.")) {
+                    Glide.with(ivWeather).load(R.mipmap.rain).into(ivWeather);
+                    ivWeather.setImageResource(R.mipmap.rain);
+                    weather121313 = "현재 날씨는 비가 오는 상태입니다.";
+                } else if (weather.equals("현재 날씨는 구름이 많은 상태입니다.")) {
+                    Glide.with(ivWeather).load(R.mipmap.cloudy).into(ivWeather);
+                    ivWeather.setImageResource(R.mipmap.cloudy);
+                    weather121313 = "현재 날씨는 구름이 많은 상태입니다.";
+                } else if (weather.equals("현재 날씨는 흐린 상태입니다.")) {
+                    Glide.with(ivWeather).load(R.mipmap.clouds).into(ivWeather);
+                    ivWeather.setImageResource(R.mipmap.clouds);
+                    weather121313 = "현재 날씨는 흐린 상태입니다.";
+                }
+            }
+        }
+    }
+
+    private void initWidgets() {
+        tvStepCount = findViewById(R.id.tvStepCount);
+        tvDistance = findViewById(R.id.tvDistance);
+        tvKcal = findViewById(R.id.tvKcal);
+
+        ivWeather = findViewById(R.id.ivWeather);
+        tvTemperatures = findViewById(R.id.tvTemperatures);
+        tvWeather = findViewById(R.id.tvWeather);
+
+        Glide.with(this).load(R.mipmap.sun).into(ivWeather);
+        userId = getUserID();
+    }
+
+    private String getUserID() {
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();pref.getString("UserID", "_");
+        return pref.getString("UserID", "_");
     }
 
     private void selectRunning() {
@@ -321,18 +341,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                             runDistance = jsonObject.optDouble("runDistance", 0.0);
                             runStepCount = jsonObject.optInt("runStep", 0);
                             runKcal = jsonObject.optDouble("runKcal", 0.0);
-                            //Toast.makeText(getApplicationContext(),"러닝정보를 확인하였습니다.", Toast.LENGTH_SHORT).show();
-
-                            String jsonString = jsonObject.toString();
-                            Log.d("전송여부", jsonString);
-                            Log.d("타임", String.valueOf(runTime));
-                            Log.d("거리", String.valueOf(runDistance));
-                            Log.d("스탭", String.valueOf(runStepCount));
-                            Log.d("칼로리", String.valueOf(runKcal));
-
-                       } // else {
-                            //Toast.makeText(getApplicationContext(),"러닝정보를 확인하지 못했습니다.", Toast.LENGTH_SHORT).show();
-                        //}
+                       }  else
+                            Toast.makeText(getApplicationContext(),"러닝정보를 확인하지 못했습니다.", Toast.LENGTH_SHORT).show();
 
                     } catch(Exception e){
                         e.printStackTrace();
@@ -345,7 +355,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         };
 
         // 서버로 Volley를 이용해서 요청을 함.
-        RunSelectRequest runSelectRequest = new RunSelectRequest(userId, responseListener);
+        SelectRunRequest runSelectRequest = new SelectRunRequest(userId, responseListener);
         RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
         queue.add(runSelectRequest);
     }
@@ -357,27 +367,19 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
                     String jsonString = jsonObject.toString();
                     Log.d("전송여부", jsonString);
-
-                    // 운동기록 저장 성공인 경우.
-                    if (success) {
-                        Toast.makeText(getApplicationContext(), "운동기록 저장 완료.", Toast.LENGTH_SHORT).show();
-                    }
-                    // 운동기록 저장 실패인 경우.
-                    else {
-                        Toast.makeText(getApplicationContext(), "운동기록 저장 실패.", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getApplicationContext(), "운동기록이 저장되었습니다.", Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "운동기록 저장이 실패되었습니다.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
         };
 
         // 서버로 Volley를 이용해서 요청을 함.
-        RunUpdateRequest runRequest = new RunUpdateRequest(userId, Integer.toString(runTime), Double.toString(runDistance), Integer.toString(runStepCount), Double.toString(runKcal), responseListener);
+        UpdateRunRequest runRequest = new UpdateRunRequest(userId, Integer.toString(runTime), Double.toString(runDistance), Integer.toString(runStepCount), Double.toString(runKcal), responseListener);
         RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
         queue.add(runRequest);
     }
@@ -408,7 +410,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         };
 
         // 서버로 Volley를 이용해서 요청을 함.
-        RunInsertRequest runRequest = new RunInsertRequest(userId, Integer.toString(runTime), Double.toString(runDistance), Integer.toString(runStepCount), Double.toString(runKcal), responseListener);
+        InsertRunRequest runRequest = new InsertRunRequest(userId, Integer.toString(runTime), Double.toString(runDistance), Integer.toString(runStepCount), Double.toString(runKcal), responseListener);
         RequestQueue queue = Volley.newRequestQueue(RunActivity.this);
         queue.add(runRequest);
     }

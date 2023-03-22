@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.calendar;
 
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import kr.co.company.healthapplication.R;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public final View parentView;

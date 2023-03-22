@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.calendar;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import kr.co.company.healthapplication.R;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     private final ArrayList<LocalDate> days;

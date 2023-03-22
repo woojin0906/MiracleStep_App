@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApplication"
         android:usesCleartextTraffic="true">
-
-    <activity
+        <!-- 팝업 Activity -->
+        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity
             android:name=".VolunteerPostActivity"
             android:exported="false">
             <meta-data

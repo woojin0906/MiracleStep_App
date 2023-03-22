@@ -1,8 +1,7 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.home;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.SharedPreferences;
 
 import android.util.Log;
 
@@ -25,28 +24,27 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.company.healthapplication.request.CheckListCheckedRequest;
+import kr.co.company.healthapplication.R;
+import kr.co.company.healthapplication.request.calendar.CheckListCheckedRequest;
 
 // 체크리스트 어댑터 액티비티 (2023-01-12 인범 수정)
-public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.CustomViewHolder> {
+public class HomeCheckListAdapter extends RecyclerView.Adapter<HomeCheckListAdapter.CustomViewHolder> {
 
-    private ArrayList<CheckListData> arrayList;
+    private ArrayList<HomeCheckListData> arrayList;
     private Activity homeActivity;
 
     // SharedPreference
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
     private String userID;
     private int checked;
 
-    public CheckListAdapter(ArrayList<CheckListData> arrayList, Activity homeActivity) {
+    public HomeCheckListAdapter(ArrayList<HomeCheckListData> arrayList, Activity homeActivity) {
         this.arrayList = arrayList;
         this.homeActivity = homeActivity;
     }
 
     @NonNull
     @Override
-    public CheckListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeCheckListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 리스트가 생성될 때 호출 (생명주기)
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.checklist_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -55,7 +53,7 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CheckListAdapter.CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull HomeCheckListAdapter.CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // 리스트가 실제 실행될 때 호출 (arrayList로 부터 가져옴.)
         holder.tvListNum.setText(arrayList.get(position).getTvListNum());
         holder.ivProfile.setImageResource(arrayList.get(position).getIvProfile());
@@ -71,13 +69,10 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
             @Override
             public void onClick(View view) {
                 String ListNum = holder.tvListNum.getText().toString();
-
-
-                Log.d("정보", Integer.toString(checked));
                 // 0 - 체크 안된 상태 (체크하고 DB반영)
                 if(checked == 0){
                     String Content = holder.tvContent.getText().toString();
-                    Toast.makeText(view.getContext(), Content+" 완료!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), Content+" 일정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
                     checkListChecked(ListNum, "1");    // Update 코드 보고 처음부터 다시 작성
                     arrayList.get(position).setCheck(1);
@@ -89,7 +84,7 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Cust
                 // 1 - 체크 된 상태 (체크 해제하고 DB반영)
                 else if (checked == 1){
                     String Content = holder.tvContent.getText().toString();
-                    Toast.makeText(view.getContext(), Content+" 실패,,", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), Content+" 일정이 취소되었습니다.", Toast.LENGTH_SHORT).show();
 
                     checkListChecked(ListNum, "0");
                     arrayList.get(position).setCheck(0);

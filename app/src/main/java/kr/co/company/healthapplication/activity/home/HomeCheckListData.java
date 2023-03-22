@@ -1,7 +1,7 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.home;
 
 // 체크리스트 데이터 액티비티 (2023-01-04 인범 생성)
-public class CheckListData {
+public class HomeCheckListData {
 
     private String tvListNum;
     private int ivProfile;
@@ -9,7 +9,7 @@ public class CheckListData {
     private String userID;
     private int check;
 
-    public CheckListData(int check, String userID, String tvListNum, int ivProfile, String tvContent) {
+    public HomeCheckListData(int check, String userID, String tvListNum, int ivProfile, String tvContent) {
         this.check = check;
         this.tvListNum = tvListNum;
         this.ivProfile = ivProfile;

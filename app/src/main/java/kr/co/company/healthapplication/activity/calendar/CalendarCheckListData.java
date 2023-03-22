@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.calendar;
 
 // 달력 체크리스트 데이터 액티비티 (2023-03-06 이수 제작)
 public class CalendarCheckListData {
@@ -18,7 +18,6 @@ public class CalendarCheckListData {
         this.userID = userID;
         this.listDate = listDate;
     }
-
 
     public String getListDate() {
         return listDate;

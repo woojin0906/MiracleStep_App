@@ -1,8 +1,8 @@
-package kr.co.company.healthapplication;
+package kr.co.company.healthapplication.activity.calendar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,29 +23,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.company.healthapplication.request.CheckListCheckedRequest;
+import kr.co.company.healthapplication.R;
+import kr.co.company.healthapplication.PopupActivity;
+import kr.co.company.healthapplication.request.calendar.CheckListCheckedRequest;
 
-// 달력 체크리스트 어댑터 액티비티 (2023-03-06 이수 제작)
 public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheckListAdapter.CustomViewHolder> {
 
     private ArrayList<CalendarCheckListData> arrayList;
-    private Activity homeActivity;
+    private Activity calendarActivity;
 
     // SharedPreference
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
     private String userID;
     private int checked;
+    private String date;
 
-    public CalendarCheckListAdapter(ArrayList<CalendarCheckListData> arrayList, Activity homeActivity) {
+    public CalendarCheckListAdapter(ArrayList<CalendarCheckListData> arrayList, Activity calendarActivity, String date) {
         this.arrayList = arrayList;
-        this.homeActivity = homeActivity;
+        this.calendarActivity = calendarActivity;
+        this.date = date;
     }
 
     @NonNull
     @Override
     public CalendarCheckListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // 리스트가 생성될 때 호출 (생명주기)
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.checklist_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
@@ -55,12 +55,11 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // 리스트가 실제 실행될 때 호출 (arrayList로 부터 가져옴.)
-        holder.tvListNum.setText(arrayList.get(position).getListIndex());
-        holder.ivProfile.setImageResource(arrayList.get(position).getProfile());
+        holder.ivProfile.setImageResource(arrayList.get(position).getIvProfile());
         holder.tvContent.setText(arrayList.get(position).getContent());
+        holder.tvListNum.setText(arrayList.get(position).getListIndex());
         userID = arrayList.get(position).getUserID();
         checked = arrayList.get(position).getChecked();
-
         // 이벤트가 발생했을 때 위치 값을 가져온다. (2023-01-13 이수)
         holder.itemView.setTag(position);
 
@@ -68,36 +67,49 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ListNum = holder.tvListNum.getText().toString();
-
-
-                Log.d("정보", Integer.toString(checked));
+                String listNum = holder.tvListNum.getText().toString();
                 // 0 - 체크 안된 상태 (체크하고 DB반영)
                 if(checked == 0){
                     String Content = holder.tvContent.getText().toString();
-                    Toast.makeText(view.getContext(), Content+" 완료!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), Content+" 일정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
-                    checkListChecked(ListNum, "1");    // Update 코드 보고 처음부터 다시 작성
+                    checkListChecked(listNum, "1");    // Update 코드 보고 처음부터 다시 작성
                     arrayList.get(position).setChecked(1);
                     checked = 1;
 
                     holder.ivProfile.setImageResource(R.drawable.checkbox);
-                    //holder.tvContent.setText(Content);
                 }
                 // 1 - 체크 된 상태 (체크 해제하고 DB반영)
                 else if (checked == 1){
                     String Content = holder.tvContent.getText().toString();
-                    Toast.makeText(view.getContext(), Content+" 실패,,", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), Content+" 일정이 취소되었습니다.", Toast.LENGTH_SHORT).show();
 
-                    checkListChecked(ListNum, "0");
+                    checkListChecked(listNum, "0");
                     arrayList.get(position).setChecked(0);
                     checked = 0;
                     holder.ivProfile.setImageResource(R.drawable.uncheckbox);
                 }
-                else{}
+                else
+                    holder.ivProfile.setImageResource(R.drawable.checkbox);
             }
         });
 
+        // item을 길게 눌렀을때 체크 해제
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                String listNum = holder.tvListNum.getText().toString();
+                String curName = holder.tvContent.getText().toString();
+                //데이터 담아서 팝업(액티비티) 호출
+                Intent intent = new Intent(view.getContext(), PopupActivity.class);
+                intent.putExtra("userID", userID);
+                intent.putExtra("content", curName);
+                intent.putExtra("date", date);
+                intent.putExtra("listNum", listNum);
+                calendarActivity.startActivityForResult(intent, 1);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -119,7 +131,7 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
 
     }
 
-    // CheckList클릭 이벤트 처리하는 메서드
+    // CheckList 클릭 이벤트 처리하는 메서드
     public void checkListChecked(String ListNum, String Checked) { // 버튼 클릭시 리스트번호와 체크상태 가져옴
         // 아이디와 현재날짜(Request)의 리스트번호를 보내서 체크상태를 보고 Checked 업데이트
         // 현재 로그인된 사용자 아이디 가져오기
@@ -148,7 +160,8 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
             }
         };
         CheckListCheckedRequest checkRequest = new CheckListCheckedRequest(userID, ListNum, Checked, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(homeActivity);
+        RequestQueue queue = Volley.newRequestQueue(calendarActivity);
         queue.add(checkRequest);
     }
+
 }

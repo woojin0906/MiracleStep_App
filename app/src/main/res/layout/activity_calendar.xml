@@ -44,6 +44,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/radius_calendar"
+
             android:elevation="10dp"
             android:orientation="vertical">
 
@@ -180,6 +181,7 @@
             android:background="@drawable/radius_calendar"
             android:elevation="10dp"
             android:orientation="vertical"
+            android:layout_weight="1"
             >
 
             <!-- 리사이클 뷰 등록 -->
@@ -187,7 +189,7 @@
                 android:id="@+id/rvCheckList"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scrollbarFadeDuration="0"
                 android:scrollbarSize="5dp"
                 android:scrollbarThumbVertical="@android:color/darker_gray"
@@ -215,9 +217,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Add Schedule"
+            android:text="일정을 추가하시겠습니까?"
             android:gravity="center"
-            android:textStyle="italic|bold"
+            android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:textSize="7pt" />
 
@@ -267,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="13sp"
-                android:hint="일정 제목을 입력해주세요."
+                android:hint="일정 내용을 입력해주세요."
                 android:padding="5dp"
                 android:background="@drawable/calendar_text_border"
                 ></EditText>

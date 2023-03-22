@@ -1,6 +1,6 @@
 <?php
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+    $con = mysqli_connect("localhost", "miraclestep01", "", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
 /* (2) 앱에서 선택한 카테고리를 가져옴. */
@@ -8,8 +8,8 @@
 
     // userID, nowDate
 
-    $userID = isset($_POST["userID"]) ? $_POST["userID"] : "test1234@naver.com";
-    $listDate = isset($_POST["date"]) ? $_POST["date"] : "2023-03-18";
+    $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
+    $listDate = isset($_POST["date"]) ? $_POST["date"] : "";
     //$listDate=str_replace(".","-",$listDate);
     //$listDate=str_replace("/","-",$listDate);
     //$listDate = date('Ymd', strtotime($listDate));
@@ -25,7 +25,7 @@
 
        $response = array();
 
-     $allrevs = array();
+    $allrevs = array();
     $response["success"] = false;
 
     while(mysqli_stmt_fetch($statement)) {
@@ -34,8 +34,8 @@
         $response["listIndex"] = $listIndex;
         $response["checked"] = $checked;
         $response["content"] = $content;
+        $allrevs[] = $response;
     }
-    $allrevs[] = $response;
 
 /* (5) 로그인 실행 결과 전송. */
 echo json_encode($allrevs);
