@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 기부 캠페인 글 화면 (2023-03-21 우진 수정) -->
+<!-- 기부 캠페인 글 화면 (2023-03-23 우진 수정) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -161,7 +161,7 @@
                     android:gravity="right"
                     android:padding="5dp"
                     android:text="75,084,212"
-                    android:textColor="#125EE4"
+                    android:textColor="#84A7E4"
                     android:textSize="17dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -219,7 +219,7 @@
             android:id="@+id/donationBtn"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:backgroundTint="#365BE3"
+            android:backgroundTint="#84A7E4"
             android:onClick="onClick"
             android:text="걸음기부하기"
             android:textSize="21dp" />

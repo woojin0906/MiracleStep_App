@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 기부 금액 팝업 화면 (2023-03-21 우진 수정) -->
+<!-- 기부 금액 팝업 화면 (2023-03-23 우진 수정) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="500dp"
@@ -96,7 +96,7 @@
             android:id="@+id/minBtn"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:background="@drawable/donation_popup_btnback"
+            android:background="@drawable/radius_button_click_rank"
             android:text="최소"
             android:textColor="@color/white"
             android:textSize="17dp"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="40dp"
-            android:background="@drawable/donation_popup_btnback"
+            android:background="@drawable/radius_button_click_rank"
             android:text="최대"
             android:textColor="@color/white"
             android:textSize="17dp"
@@ -120,7 +120,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:backgroundTint="#365BE3"
+        android:backgroundTint="#254378"
         android:onClick="onClick"
         android:text="걸음기부하기"
         android:textColor="@color/white"

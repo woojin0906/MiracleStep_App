@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 기부 내역 아이템 레이아웃 (2023-03-22 우진 수정) -->
+<!-- 기부 내역 아이템 레이아웃 (2023-03-23 우진 수정) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:background="@drawable/donation_listback"
         android:padding="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:elevation="5dp">
 
         <ImageView
@@ -34,7 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="-5dp"
                 android:text="'따뜻한 플레이' 캠페인(제목)"
                 android:textSize="17dp"
                 android:textColor="@color/black"
@@ -46,7 +45,6 @@
                 android:id="@+id/tvGroupName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-5dp"
                 android:layout_marginRight="10dp"
                 android:text="Google Play(단체명)"
                 android:textSize="15dp"
@@ -63,7 +61,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
                     android:text="기부한 날짜"
                     android:textSize="15dp"
                     android:padding="1dp" />
@@ -72,7 +69,6 @@
                     android:id="@+id/tvDonationDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
                     android:text="2023-01-01"
                     android:gravity="right"
                     android:textSize="15dp"

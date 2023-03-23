@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xml : 랭킹 화면 걸음수, 코인 배경 (2023-03-23 우진 생성) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:start="1dp"
+        android:end="1dp"
+        android:top="1dp"
+        android:bottom="1dp" >
+
+        <shape android:shape="rectangle">
+            <solid android:color="#80fdfeff"/>
+            <stroke android:width="2dp"
+                android:color="#10ffffff" />
+            <corners
+                android:topLeftRadius="8dp"
+                android:topRightRadius="8dp"
+                android:bottomLeftRadius="8dp"
+                android:bottomRightRadius="8dp" />
+        </shape>
+    </item>
+</layer-list>
