@@ -94,7 +94,7 @@ public class MypageActivity extends Fragment {
         btnRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RankActivity2.class);
+                Intent intent = new Intent(getActivity(), RankActivity.class);
                 startActivity(intent);
             }
         });

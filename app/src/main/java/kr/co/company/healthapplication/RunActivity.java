@@ -156,10 +156,24 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+        // 활동 퍼미션 체크
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
+        }
+        // 걸음 센서 연결
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
+        // 디바이스에 걸음 센서의 존재 여부 체크
+        if (stepCountSensor == null) {
+            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
+        }
         initWidgets();
         selectRunning();
         weatherSetting();
-        exerciseSetting();
         tmapSetting();
         stopwatchSetting();
     }
@@ -243,21 +257,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     }
 
     private void exerciseSetting() {
-        // 활동 퍼미션 체크
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
-
-            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
-        }
-        // 걸음 센서 연결
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
-        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-
-        // 디바이스에 걸음 센서의 존재 여부 체크
-        if (stepCountSensor == null) {
-            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void weatherSetting() {

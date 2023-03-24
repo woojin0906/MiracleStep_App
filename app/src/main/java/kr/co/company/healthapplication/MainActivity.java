@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         fragment_donation = new DonationActivity();
         fragment_volunteer = new VolunteerActivity();
         fragment_toDoList = new CalendarActivity();     // 수정필요 (2023-03-05 이수)
-        fragment_rank = new RankActivity();
         fragment_info = new MypageActivity();
 
         // 바텀 네비게이션
