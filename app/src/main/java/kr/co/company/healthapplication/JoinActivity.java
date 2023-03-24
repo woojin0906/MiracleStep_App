@@ -1,7 +1,5 @@
 package kr.co.company.healthapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +9,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -18,9 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import kr.co.company.healthapplication.request.JoinRequest;
 
@@ -29,7 +27,7 @@ public class JoinActivity extends AppCompatActivity {
     private EditText etId, etPwd, etCFPwd, etName, etPhoneNumber, etHeight, etWeight;
     private DatePicker dpBirth;
     private Button btnJoin;
-    private String date = "2010-01-01";
+    private String birthDate = "2010-01-01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class JoinActivity extends AppCompatActivity {
         dpBirth.init(2010, 01, 01, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                date = year + "-" + monthOfYear + "-" + dayOfMonth;
+                birthDate = year + "-" + monthOfYear + "-" + dayOfMonth;
             }
         });
 
@@ -78,7 +76,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "비밀번호 재입력을 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                
+
                 // 아이디 길이제한
                 if(userId.length() < 6) {
                     Toast.makeText(getApplicationContext(), "아이디를 6글자 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -92,9 +90,9 @@ public class JoinActivity extends AppCompatActivity {
                 }
 
                 // 전송 시 필요한 형변환 실행.
-                Double dUserHeight = Double.parseDouble(userHeight);
-                Double dUserWeight = Double.parseDouble(userWeight);
-                Log.d("생년월일", String.valueOf(date));
+                int dUserHeight = Integer.parseInt(userHeight);
+                int dUserWeight = Integer.parseInt(userWeight);
+                Log.d("생년월일", String.valueOf(birthDate));
 
                 // JSON 오브젝트를 활용하여 회원가입 요청을 하는 메서드
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -123,7 +121,7 @@ public class JoinActivity extends AppCompatActivity {
                 };
 
                 // 서버로 Volley를 이용해서 요청을 함.
-                JoinRequest joinRequest = new JoinRequest(userId, userPassword, userName, userPhoneNumber, dUserHeight, dUserWeight, date, responseListener);
+                JoinRequest joinRequest = new JoinRequest(userId, userPassword, userName, userPhoneNumber, dUserHeight, dUserWeight, birthDate, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
                 queue.add(joinRequest);
             }
