@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import kr.co.company.healthapplication.request.DeleteScheduleRequest;
 import kr.co.company.healthapplication.request.ModifyScheduleRequest;
 
-public class PopupActivity extends Activity {
+public class CalendarPopupActivity extends Activity {
 
     private TextView tvSelectDate;
     private EditText etScheduleTitle;

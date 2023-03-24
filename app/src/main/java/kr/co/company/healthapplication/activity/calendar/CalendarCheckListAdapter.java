@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import kr.co.company.healthapplication.R;
-import kr.co.company.healthapplication.PopupActivity;
+import kr.co.company.healthapplication.CalendarPopupActivity;
 import kr.co.company.healthapplication.request.calendar.CheckListCheckedRequest;
 
 public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheckListAdapter.CustomViewHolder> {
@@ -101,7 +101,7 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
                 String listNum = holder.tvListNum.getText().toString();
                 String curName = holder.tvContent.getText().toString();
                 //데이터 담아서 팝업(액티비티) 호출
-                Intent intent = new Intent(view.getContext(), PopupActivity.class);
+                Intent intent = new Intent(view.getContext(), CalendarPopupActivity.class);
                 intent.putExtra("userID", userID);
                 intent.putExtra("content", curName);
                 intent.putExtra("date", date);

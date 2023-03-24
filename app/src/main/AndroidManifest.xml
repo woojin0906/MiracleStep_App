@@ -77,33 +77,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/popupTheme" />
         <activity
-            android:name=".TestActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".DonationActivity"
             android:exported="true" />
         <activity
             android:name=".DonationPostActivity"
             android:exported="true" />
         <activity
-            android:name=".LodingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BMIActivity"
-            android:exported="false" />
-        <activity
-            android:name=".InfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".HomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".SettingActivity"
-            android:exported="true" />
         <activity
             android:name=".RankActivity"
             android:exported="true" />
