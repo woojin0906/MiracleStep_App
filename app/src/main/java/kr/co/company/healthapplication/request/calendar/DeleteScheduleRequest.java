@@ -1,4 +1,4 @@
-package kr.co.company.healthapplication.request;
+package kr.co.company.healthapplication.request.calendar;
 
 import android.util.Log;
 

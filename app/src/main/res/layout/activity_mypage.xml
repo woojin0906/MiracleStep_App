@@ -1,375 +1,393 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 마이페이지 화면 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <!--android:textColor="#84A7E4"-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!-- 신체정보 수정 -->
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="800dp"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:text="내 정보"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:backgroundTint="@color/black"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvUserSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="35px"
-        android:inputType="text"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:textStyle="bold"
-        android:text="내 정보 수정하기 >"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/donation_back"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:elevation="15dp">
-
-        <ImageView
-            android:id="@+id/ivUser"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_margin="15dp"
-            android:src="@drawable/user"
-            android:background="@drawable/donation_back"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35px"
-                    android:inputType="text"
-                    android:text="이메일 : "/>
-                <TextView
-                    android:id="@+id/tvUserID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35px"
-                    android:textStyle="bold"
-                    android:inputType="text"
-                    android:text="아이디"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="이름 : "
-                    android:textSize="35px" />
-                <TextView
-                    android:id="@+id/tvUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35px"
-                    android:textStyle="bold"
-                    android:inputType="text"
-                    android:text="이름"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35px"
-                    android:inputType="text"
-                    android:text="현재 사용 가능한 걸음 수 : "/>
-                <TextView
-                    android:id="@+id/tvUserDStep"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35px"
-                    android:textStyle="bold"
-                    android:inputType="text"
-                    android:text="걸음 수"/>
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
-    <!--<TextView
-        android:id="@+id/tvUserInfoSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="35px"
-        android:inputType="text"
-        android:layout_gravity="right"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="30dp"
-        android:textStyle="bold"
-        android:text="나의 신체정보 수정하기 >"/> -->
-
+    <!-- 내 정보 -->
     <LinearLayout
-        android:elevation="50dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/donation_back"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="키 : "
-                    android:textSize="40px" />
-
-                <TextView
-                    android:id="@+id/tvUserHeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="180cm"
-                    android:textColor="#0558FF"
-                    android:textSize="40px"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="몸무게 : "
-                    android:textSize="40px" />
-
-                <TextView
-                    android:id="@+id/tvUserWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="65kg"
-                    android:textColor="#0558FF"
-                    android:textSize="40px"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="나이 : "
-                    android:textSize="40px" />
-
-                <TextView
-                    android:id="@+id/tvUserAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="만 25세"
-                    android:textColor="#0558FF"
-                    android:textSize="40px"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="BMI : "
-                    android:textSize="40px" />
-
-                <TextView
-                    android:id="@+id/tvUserBMI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="표준"
-                    android:textColor="#0558FF"
-                    android:textSize="40px"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:elevation="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-       android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/donation_back"
-        android:padding="5dp"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="내 정보"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="40px"
-                    android:inputType="text"
-                    android:text="기부금 : "/>
-
-                <TextView
-                    android:id="@+id/tvUserDonation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="누적 기부금"
-                    android:textStyle="bold"
-                    android:textColor="#0558FF"
-                    android:textSize="40px" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnDonationReceipts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="기부내역 확인"
-                android:backgroundTint="#84A7E4"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:elevation="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/donation_back"
-        android:padding="5dp"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvUserSetting"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="40px"
-                    android:inputType="text"
-                    android:text="등수 : "/>
-
-                <TextView
-                    android:id="@+id/tvUserRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="1등"
-                    android:textStyle="bold"
-                    android:textColor="#0558FF"
-                    android:textSize="40px" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnRank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="랭킹 상세 확인"
-                android:backgroundTint="#84A7E4"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:textSize="37px"
+            android:inputType="text"
+            android:layout_gravity="right"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:textStyle="bold"
+            android:text="신체정보 수정 >"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/donation_back"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:elevation="15dp">
+
+            <ImageView
+                android:id="@+id/ivUser"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="15dp"
+                android:src="@drawable/user"
+                android:background="@drawable/donation_back"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginRight="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35px"
+                        android:inputType="text"
+                        android:text="이메일 : "/>
+                    <TextView
+                        android:id="@+id/tvUserID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35px"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="아이디"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="이름 : "
+                        android:textSize="35px" />
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35px"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="이름"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35px"
+                        android:inputType="text"
+                        android:text="현재 사용 가능한 걸음 수 : "/>
+                    <TextView
+                        android:id="@+id/tvUserDStep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35px"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:text="걸음 수"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:elevation="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/donation_back"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="키 : "
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tvUserHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="180"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="cm"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="몸무게 : "
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tvUserWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="65"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="kg"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="나이 : "
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tvUserAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="25세"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="BMI : "
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tvUserBMI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="표준"
+                        android:textColor="#0558FF"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:elevation="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/donation_back"
+            android:padding="5dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40px"
+                        android:inputType="text"
+                        android:text="기부금 : "/>
+
+                    <TextView
+                        android:id="@+id/tvUserDonation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="누적 기부금"
+                        android:textStyle="bold"
+                        android:textColor="#0558FF"
+                        android:textSize="40px" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnDonationReceipts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="기부내역 확인"
+                    android:backgroundTint="#84A7E4"
+                    android:layout_marginRight="20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:elevation="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/donation_back"
+            android:padding="5dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40px"
+                        android:inputType="text"
+                        android:text="등수 : "/>
+
+                    <TextView
+                        android:id="@+id/tvUserRank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="\?\?"
+                        android:textStyle="bold"
+                        android:textColor="#0558FF"
+                        android:textSize="40px" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="랭킹 확인"
+                    android:backgroundTint="#84A7E4"
+                    android:layout_marginRight="20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="70dp"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="23dp">
 
@@ -380,6 +398,13 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="고객센터" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="40px"
+                android:text="Tel : 010-6658-1512"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -403,15 +428,128 @@
                 android:text="(주말 및 공휴일 휴무)" />
         </LinearLayout>
 
-    <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="로그아웃"
-        android:layout_gravity="center"
-        android:backgroundTint="#84A7E4"/>
+        <Button
+            android:id="@+id/btnLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="로그아웃"
+            android:layout_gravity="center"
+            android:backgroundTint="#84A7E4"/>
+    </LinearLayout>
 
-</LinearLayout>
+    <!-- 신체정보 수정 -->
+    <LinearLayout
+        android:id="@+id/layoutBodyinfoUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/radius_calendar"
+        android:elevation="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="신체정보"
+            android:gravity="center"
+            android:textStyle="italic|bold"
+            android:layout_margin="5dp"
+            android:textSize="7pt" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="30dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="키      : "
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etHeight"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cm"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="몸무게 : "
+                android:gravity="left"
+                android:layout_marginRight="3dp"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etWeight"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kg"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            >
+
+            <Button
+                android:id="@+id/btnUpdateInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginRight="5dp"
+                android:text="변경"/>
+
+            <Button
+                android:id="@+id/btnCancelInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#84A7E4"
+                android:layout_marginLeft="5dp"
+                android:text="취소"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
