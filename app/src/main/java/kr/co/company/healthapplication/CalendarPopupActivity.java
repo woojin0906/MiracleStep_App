@@ -20,7 +20,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import kr.co.company.healthapplication.request.DeleteScheduleRequest;
+import kr.co.company.healthapplication.request.calendar.DeleteScheduleRequest;
 import kr.co.company.healthapplication.request.ModifyScheduleRequest;
 
 public class CalendarPopupActivity extends Activity {
