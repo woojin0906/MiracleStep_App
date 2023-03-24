@@ -157,7 +157,6 @@ public class MypageActivity extends Fragment {
                         rId = jsonObject.getString("id");
                         rName = jsonObject.getString("name");
                         rBirth = jsonObject.getString("birth");
-
                         rHeight = jsonObject.getInt("height");
                         rWeight = jsonObject.getInt("weight");
                         rAvailableStep = jsonObject.getInt("availableStep");
@@ -167,8 +166,8 @@ public class MypageActivity extends Fragment {
                         tvUserID.setText(rId);
                         tvUserName.setText(rName);
                         tvUserAvailableStep.setText(Integer.toString(rAvailableStep));
-                        tvUserHeight.setText(rHeight);
-                        tvUserWeight.setText(rWeight);
+                        tvUserHeight.setText(Integer.toString(rHeight));
+                        tvUserWeight.setText(Integer.toString(rWeight));
 
                         tvUserDonation.setText(String.valueOf(totalDonationStep));
 

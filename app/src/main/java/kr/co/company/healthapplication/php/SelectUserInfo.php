@@ -1,48 +1,41 @@
 <?php
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep", "비밀번호", "miraclestep"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+    $con = mysqli_connect("localhost", "miraclestep01", "tndnqja11!!", "miraclestep01");
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
     $userID = isset($_POST["userID"]) ? $_POST["userID"] : "";
-    $userInfoDate = isset($_POST["userInfoDate"]) ? $_POST["userInfoDate"] : "";
 
-    $statement1 = mysqli_prepare($con, "SELECT UserID, UserName, UserDStep, UserImg, UserBirth FROM User WHERE UserID = ? ");
+    // 사용자 정보
+    $statement1 = mysqli_prepare($con, "SELECT id, name, birth, height, weight, availableStep FROM User WHERE id = ? ");
     mysqli_stmt_bind_param($statement1, "s", $userID);
     mysqli_stmt_execute($statement1);
 
     mysqli_stmt_store_result($statement1);
-    mysqli_stmt_bind_result($statement1, $UserID, $UserName, $UserDStep, $UserImg, $Birth);
+    mysqli_stmt_bind_result($statement1, $id, $name, $birth, $height, $weight, $availableStep);
 
-    $statement2 = mysqli_prepare($con, "SELECT UserHeight, UserWeight FROM UserInfo WHERE UserID = ? ORDER BY UserInfoDate ASC");
+    // 총 기부
+    $statement2 = mysqli_prepare($con, "SELECT sum(donationStep) FROM DonationHistory WHERE userId = ? ");
     mysqli_stmt_bind_param($statement2, "s", $userID);
     mysqli_stmt_execute($statement2);
 
     mysqli_stmt_store_result($statement2);
-    mysqli_stmt_bind_result($statement2, $Height, $Weight);
+    mysqli_stmt_bind_result($statement2, $totalDonationStep);
 
-    $statement3 = mysqli_prepare($con, "SELECT TotalUserDonation FROM Rank WHERE UserID = ?");
-    mysqli_stmt_bind_param($statement3, "s", $userID);
-    mysqli_stmt_execute($statement3);
-
-    mysqli_stmt_store_result($statement3);
-    mysqli_stmt_bind_result($statement3, $TotalUserDonation);
 
     $response = array();
     $response["success"] = false;
 
-    while(mysqli_stmt_fetch($statement1) || mysqli_stmt_fetch($statement2) || mysqli_stmt_fetch($statement3)) {
+    while(mysqli_stmt_fetch($statement1) || mysqli_stmt_fetch($statement2)) {
         $response["success"] = true;
-        $response["userID"] = $UserID;
-        $response["userName"] = $UserName;
-        $response["userDStep"] = $UserDStep;
-        $response["userImg"] = $UserImg;
+        $response["id"] = $id;
+        $response["name"] = $name;
+        $response["birth"] = $birth;
+        $response["height"] = $height;
+        $response["weight"] = $weight;
+        $response["availableStep"] = $availableStep;
 
-        $response["height"] = $Height;
-        $response["weight"] = $Weight;
-        $response["birth"] = $Birth;
-
-        $response["totalUserDonation"] = $TotalUserDonation;
+        $response["totalDonationStep"] = $totalDonationStep;
     }
     echo json_encode($response);
 ?>
