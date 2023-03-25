@@ -90,7 +90,9 @@ public class MypageActivity extends Fragment {
 
                 // DB에서 업데이트 시킴
                 updateUserInfo(userId, h, w);
+
                 layoutBodyinfoUpdate.setVisibility(View.INVISIBLE);
+                selectUserInfo();
             }
         });
         // 신체정보 수정 [취소버튼]

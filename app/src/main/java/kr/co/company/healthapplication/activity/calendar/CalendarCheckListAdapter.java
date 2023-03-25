@@ -2,21 +2,25 @@ package kr.co.company.healthapplication.activity.calendar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,23 +28,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import kr.co.company.healthapplication.R;
-import kr.co.company.healthapplication.CalendarPopupActivity;
 import kr.co.company.healthapplication.request.calendar.CheckListCheckedRequest;
 
 public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheckListAdapter.CustomViewHolder> {
 
     private ArrayList<CalendarCheckListData> arrayList;
     private Activity calendarActivity;
+    private ViewGroup calendarview;
 
     // SharedPreference
     private String userID;
     private int checked;
     private String date;
 
-    public CalendarCheckListAdapter(ArrayList<CalendarCheckListData> arrayList, Activity calendarActivity, String date) {
+    public CalendarCheckListAdapter(ArrayList<CalendarCheckListData> arrayList, Activity calendarActivity, String date, ViewGroup view) {
         this.arrayList = arrayList;
         this.calendarActivity = calendarActivity;
         this.date = date;
+        this.calendarview = view;
     }
 
     @NonNull
@@ -94,19 +99,25 @@ public class CalendarCheckListAdapter extends RecyclerView.Adapter<CalendarCheck
             }
         });
 
-        // item을 길게 눌렀을때 체크 해제
+        // item을 길게 눌렀을때 값 수정
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                LinearLayout layoutScheduleModification = calendarview.findViewById(R.id.layoutScheduleModification);
+                TextView tvModificationDate = calendarview.findViewById(R.id.tvModificationDate);
+                TextView tvlistNum = calendarview.findViewById(R.id.listNum);
+                EditText etModificationTitle = calendarview.findViewById(R.id.etModificationTitle);
+                FloatingActionButton btnAddSchedule = calendarview.findViewById(R.id.btnAddSchedule);
+
                 String listNum = holder.tvListNum.getText().toString();
                 String curName = holder.tvContent.getText().toString();
-                //데이터 담아서 팝업(액티비티) 호출
-                Intent intent = new Intent(view.getContext(), CalendarPopupActivity.class);
-                intent.putExtra("userID", userID);
-                intent.putExtra("content", curName);
-                intent.putExtra("date", date);
-                intent.putExtra("listNum", listNum);
-                calendarActivity.startActivityForResult(intent, 1);
+
+                tvModificationDate.setText(date);
+                tvlistNum.setText(listNum);
+                etModificationTitle.setText(curName);
+
+                layoutScheduleModification.setVisibility(View.VISIBLE);
+                btnAddSchedule.setClickable(false);
                 return true;
             }
         });

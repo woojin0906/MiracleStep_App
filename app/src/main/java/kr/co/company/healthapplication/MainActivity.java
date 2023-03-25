@@ -1,11 +1,15 @@
 package kr.co.company.healthapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -23,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
     // 프래그먼트 변수
     Fragment fragment_home;
     Fragment fragment_donation;
-    Fragment fragment_rank;
     Fragment fragment_volunteer;
     Fragment fragment_toDoList;
     Fragment fragment_info;
 
     private long backBtnTime = 0;
+
+    public static final int REQUEST_CODE = 100;
 
     // SharedPreference
     private SharedPreferences pref;
@@ -88,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             backBtnTime = curTime;
             Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == -1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment_toDoList).commitAllowingStateLoss();
         }
     }
 }
