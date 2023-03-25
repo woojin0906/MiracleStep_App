@@ -1,8 +1,11 @@
-# MiracleStep_App
+# [MiracleStep_App]
 
-운동을 통한 기부 캠페인 및 일정관리 시스템 
+<h1>운동을 통한 기부 캠페인 및 일정관리 시스템</h1>
 
-개발일자 : 2022-12-27 ~ 중단
+<b>주요 기능 : 러닝 실시간 정보, 러닝 기록, 일정관리(checkList), 기부 캠페인, 봉사 정보<br>
+ 개발 언어(툴) : AndroidStudio(java), PHP, SpringBoot, HTML, CSS, Thymeleaf, MySQL</b>
+
+개발일자 : 2022-12-27 ~ (약 2개월간 중단) ~ 진행중
 
 참여자 :  전우진, 이인범, 이수
 
