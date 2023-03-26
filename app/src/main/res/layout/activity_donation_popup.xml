@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 기부 금액 팝업 화면 (2023-03-23 우진 수정) -->
+<!-- 기부 금액 팝업 화면 (2023-03-26 우진 수정) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="500dp"
@@ -120,7 +120,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:backgroundTint="#254378"
+        android:backgroundTint="#11256C"
         android:onClick="onClick"
         android:text="걸음기부하기"
         android:textColor="@color/white"

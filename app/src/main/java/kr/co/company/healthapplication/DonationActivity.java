@@ -42,7 +42,7 @@ import java.util.Optional;
 import kr.co.company.healthapplication.request.DonationRequest;
 import kr.co.company.healthapplication.request.RankRequest;
 
-// 기부캠페인 액티비티 (2023-03-21 우진 수정)
+// 기부캠페인 액티비티 (2023-03-26 우진 수정)
 public class DonationActivity extends Fragment {
 
     private RecyclerView recyclerView;                                  // 리사이클러뷰
@@ -81,7 +81,7 @@ public class DonationActivity extends Fragment {
         peopleBtn.setBackgroundResource(R.drawable.btnclickback);
         environmentBtn.setBackgroundResource(R.drawable.btnback);
         animalBtn.setBackgroundResource(R.drawable.btnback);
-        peopleBtn.setTextColor(Color.rgb(132, 167, 228));
+        peopleBtn.setTextColor(Color.rgb(55, 85, 190));
         environmentBtn.setTextColor(Color.rgb(184, 184, 184));
         animalBtn.setTextColor(Color.rgb(184, 184, 184));
 
@@ -92,7 +92,7 @@ public class DonationActivity extends Fragment {
                 environmentBtn.setBackgroundResource(R.drawable.btnback);
                 animalBtn.setBackgroundResource(R.drawable.btnback);
 
-                peopleBtn.setTextColor(Color.rgb(132, 167, 228));
+                peopleBtn.setTextColor(Color.rgb(55, 85, 190));
                 environmentBtn.setTextColor(Color.rgb(184, 184, 184));
                 animalBtn.setTextColor(Color.rgb(184, 184, 184));
 
@@ -114,7 +114,7 @@ public class DonationActivity extends Fragment {
                 animalBtn.setBackgroundResource(R.drawable.btnback);
 
                 peopleBtn.setTextColor(Color.rgb(184, 184, 184));
-                environmentBtn.setTextColor(Color.rgb(132, 167, 228));
+                environmentBtn.setTextColor(Color.rgb(55, 85, 190));
                 animalBtn.setTextColor(Color.rgb(184, 184, 184));
 
                 // 데이터 초기화 시켜주는 과정
@@ -136,7 +136,7 @@ public class DonationActivity extends Fragment {
                 animalBtn.setBackgroundResource(R.drawable.btnclickback);
 
                 peopleBtn.setTextColor(Color.rgb(184, 184, 184));
-                environmentBtn.setTextColor(Color.rgb(184, 184, 184));
+                environmentBtn.setTextColor(Color.rgb(55, 85, 190));
                 animalBtn.setTextColor(Color.rgb(132, 167, 228));
 
                 // 데이터 초기화 시켜주는 과정

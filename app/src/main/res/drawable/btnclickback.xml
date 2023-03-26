@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- xml : 캠페인 화면 버튼 클릭 시 설정 (2023-03-21 우진 생성) -->
+<!-- xml : 캠페인 화면 버튼 클릭 시 설정 (2023-03-26 우진 생성) -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 <item
     android:start="-10dp"
@@ -9,7 +9,7 @@
 
     <shape android:shape="rectangle">
         <solid android:color="#ffffff"/>
-        <stroke android:color="#84A7E4" android:width="3dp"/>
+        <stroke android:color="#3755BE" android:width="3dp"/>
     </shape>
 </item>
 </layer-list>

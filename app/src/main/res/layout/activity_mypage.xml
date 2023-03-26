@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="180"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                     <TextView
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="cm"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -204,7 +204,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="65"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                     <TextView
@@ -212,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="kg"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -246,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="25세"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -270,7 +270,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="표준"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -316,7 +316,7 @@
                         android:inputType="text"
                         android:text="누적 기부금"
                         android:textStyle="bold"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px" />
                 </LinearLayout>
 
@@ -325,7 +325,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="기부내역 확인"
-                    android:backgroundTint="#84A7E4"
+                    android:backgroundTint="#3755BE"
                     android:layout_marginRight="20dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -369,7 +369,7 @@
                         android:inputType="text"
                         android:text="\?\?"
                         android:textStyle="bold"
-                        android:textColor="#0558FF"
+                        android:textColor="#84A7E4"
                         android:textSize="40px" />
                 </LinearLayout>
 
@@ -378,7 +378,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="랭킹 확인"
-                    android:backgroundTint="#84A7E4"
+                    android:backgroundTint="#3755BE"
                     android:layout_marginRight="20dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -437,7 +437,7 @@
             android:layout_marginRight="20dp"
             android:text="로그아웃"
             android:layout_gravity="center"
-            android:backgroundTint="#84A7E4"/>
+            android:backgroundTint="#3755BE"/>
     </LinearLayout>
 
     <!-- 신체정보 수정 -->

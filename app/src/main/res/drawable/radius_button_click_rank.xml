@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 랭킹화면 버튼 클릭 시 Background (2023-03-22 우진 생성)-->
+<!-- 랭킹화면 버튼 클릭 시 Background (2023-03-26 우진 생성)-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="10dp"
     android:shape="rectangle" >
-    <solid android:color="#9084A7E4" />
+    <solid android:color="#3755BE" />
     <stroke android:width="2dp"
         android:color="#ffffff" />
     <corners

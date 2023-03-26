@@ -20,7 +20,7 @@
             android:text="Miracle Step"
             android:textSize="35dp"
             android:layout_margin="10dp"
-            android:textColor="#84A7E4"
+            android:textColor="#3755BE"
             android:textStyle="bold" />
         <ImageView
             android:layout_marginTop="10dp"

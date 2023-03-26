@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- xml : 시크바 설정 (2023-03-26 우진 수정) -->
 <!-- 원형 시크바 컨트롤러 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
     android:useLevel="false">
     <!-- 배경 -->
     <solid
-        android:color="#84A7E4"/>
-    <!-- 테두리 -->
-    <stroke
-        android:width="2dp"
-        android:color="#84A7E4" />
+        android:color="#803755BE"/>
     <!-- 크기 -->
     <size
         android:width="25dp"
