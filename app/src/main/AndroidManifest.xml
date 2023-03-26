@@ -22,13 +22,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".RankActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".VolunteerActivity"
             android:exported="false">
@@ -38,13 +32,6 @@
         </activity>
         <activity
             android:name=".DonationReceiptsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UserInfoSettingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
