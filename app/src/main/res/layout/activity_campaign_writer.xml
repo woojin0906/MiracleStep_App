@@ -112,29 +112,36 @@
                     android:padding="5dp"
                     android:textSize="15dp"
                     android:text="주제 :"/>
-
-                <RadioButton
-                    android:id="@+id/peopleRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14dp"
-                    android:text="사람" />
-                <RadioButton
-                    android:id="@+id/animalRadioButdton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14dp"
-                    android:text="동물" />
-                <RadioButton
-                    android:id="@+id/environmentRadioButdton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14dp"
-                    android:text="환경" />
-
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/radioGroup">
+                    <RadioButton
+                        android:id="@+id/peopleRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="14dp"
+                        android:text="사람"
+                        android:checked="true"/>
+                    <RadioButton
+                        android:id="@+id/animalRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="14dp"
+                        android:text="동물"
+                        android:checked="false"/>
+                    <RadioButton
+                        android:id="@+id/environmentRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="14dp"
+                        android:text="환경"
+                        android:checked="false"/>
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
