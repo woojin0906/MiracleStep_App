@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#84A7E4"
+    android:background="#669966"
     android:orientation="vertical">
 
     <!-- 상단 로그인 화면 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#84A7E4" >
+        android:background="#669966" >
 
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:on="false"
+                app:on="true"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -61,9 +61,9 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="50dp"
-            android:text="로그인"
+            android:text="기업 로그인"
             android:textAlignment="center"
-            android:textColor="#84A7E4"
+            android:textColor="#669966"
             android:textSize="70px"
             android:textStyle="bold" />
 
@@ -128,29 +128,21 @@
                 android:textSize="35px"
                 android:text="아이디 저장"
                 android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvFindPwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="비밀번호 재설정"
-                android:textSize="35px"
-                android:textStyle="bold"/>
         </LinearLayout>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:backgroundTint="#84A7E4"
-        android:onClick="onClick"
-        android:text="로그인"
-        android:textStyle="bold"
-        android:textSize="40px" />
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:backgroundTint="#669966"
+            android:onClick="onClick"
+            android:text="로그인"
+            android:textStyle="bold"
+            android:textSize="40px" />
 
         <Button
             android:id="@+id/btnJoin"
@@ -160,7 +152,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            android:backgroundTint="#84A7E4"
+            android:backgroundTint="#669966"
             android:onClick="onClick"
             android:text="회원가입"
             android:textSize="40px" />
