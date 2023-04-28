@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private String category = "animal";
     private Button campaign_writer_btn;
+    private ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String titleName = edtitleName.getText().toString();
 //                String name = tname.getText().toString();
-                String name = "test";
+                String name = "test1234@naver.com";
                 String startdate = edstartdate.getText().toString();
                 String date = eddate.getText().toString();
                 String maxStep = edmaxStep.getText().toString();
@@ -104,6 +106,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "등록에 성공하였습니다.", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent(CampaignWriterActivity.this, CampaignPostActivity.class);
 //                                startActivity(intent);
+                                finish();
                             }
                             // 등록 실패인 경우.
                             else {
@@ -124,5 +127,15 @@ public class CampaignWriterActivity extends AppCompatActivity {
 
             }
         });
+
+        // backBtn 클릭 시 DonationActivity 이동
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
 }

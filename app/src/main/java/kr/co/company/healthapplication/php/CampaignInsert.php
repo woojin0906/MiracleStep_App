@@ -17,11 +17,12 @@
   $date = isset($_POST["date"]) ? $_POST["date"] : "";
   $maxStep = isset($_POST["maxStep"]) ? $_POST["maxStep"] : "";
   $content = isset($_POST["content"]) ? $_POST["content"] : "";
+  $nowStep = 0;
   $userImg = "img";
 
 /* (3) DB안에 insert하는 문장. (UserDonation) */
-    $statement = mysqli_prepare($con, "INSERT INTO CampaignList(category, hostingGroup, title, content, lastDate, startDate, maxDonation, contentImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($statement, "ssssddis", $category, $titleName, $name, $startdate, $date, $maxStep, $content, $userImg);
+    $statement = mysqli_prepare($con, "INSERT INTO CampaignList(category, hostingGroup, title, content, lastDate, startDate, maxDonation, contentImage, nowDonation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($statement, "ssssssisi", $category, $name, $titleName, $startdate, $date, $maxStep, $content, $userImg, $nowStep);
     mysqli_stmt_execute($statement);
 
 /* (4) 성공 여부 전송. */

@@ -15,19 +15,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/writerback"
-            android:padding="10dp" >
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="30dp"
-                android:text="캠페인 등록"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/backBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+
+                    android:background="#ffffff"
+                    android:src="@drawable/black_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:text="캠페인 등록"/>
+            </FrameLayout>
+
 
             <ImageView
                 android:id="@+id/campaign_imageView"
@@ -123,24 +134,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="14dp"
-                        android:text="사람"
-                        android:checked="true"/>
+                        android:text="사람" />
                     <RadioButton
                         android:id="@+id/animalRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="14dp"
-                        android:text="동물"
-                        android:checked="false"/>
+                        android:text="동물" />
                     <RadioButton
                         android:id="@+id/environmentRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="14dp"
-                        android:text="환경"
-                        android:checked="false"/>
+                        android:text="환경" />
                 </RadioGroup>
             </LinearLayout>
 

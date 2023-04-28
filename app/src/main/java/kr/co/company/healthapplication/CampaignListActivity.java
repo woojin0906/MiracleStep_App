@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,17 +20,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.co.company.healthapplication.dbAll.CampaignList;
 import kr.co.company.healthapplication.request.DonationRequest;
 
 // 캠페인 리스트 액티비티 (2023-04-06 우진)
 public class CampaignListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;                                  // 리사이클러뷰
-    private DonationAdapter adapter;                               // 리사이클러뷰 어댑터
+    private CampaignAdapter adapter;                               // 리사이클러뷰 어댑터
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<DonationData> arrayList;
 
-    private Button peopleBtn, environmentBtn, animalBtn;
+    private Button peopleBtn, environmentBtn, animalBtn, campaignAddBtn;
 
     private String category = "people";
 
@@ -45,7 +47,7 @@ public class CampaignListActivity extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
 
-        adapter = new DonationAdapter(arrayList);
+        adapter = new CampaignAdapter(arrayList);
         recyclerView.setAdapter(adapter);
 
         // 캠페인 메서드 호출
@@ -55,6 +57,7 @@ public class CampaignListActivity extends AppCompatActivity {
         peopleBtn = findViewById(R.id.peopleBtn);
         environmentBtn = findViewById(R.id.environmentBtn);
         animalBtn = findViewById(R.id.animalBtn);
+        campaignAddBtn = findViewById(R.id.campaignAddBtn);
 
         peopleBtn.setBackgroundResource(R.drawable.btnclickback);
         environmentBtn.setBackgroundResource(R.drawable.btnback);
@@ -76,7 +79,7 @@ public class CampaignListActivity extends AppCompatActivity {
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
-                adapter = new DonationAdapter(arrayList);
+                adapter = new CampaignAdapter(arrayList);
                 recyclerView.setAdapter(adapter);
 
                 category = "people";
@@ -97,7 +100,7 @@ public class CampaignListActivity extends AppCompatActivity {
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
-                adapter = new DonationAdapter(arrayList);
+                adapter = new CampaignAdapter(arrayList);
                 recyclerView.setAdapter(adapter);
 
                 category = "environment";
@@ -119,7 +122,7 @@ public class CampaignListActivity extends AppCompatActivity {
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();
-                adapter = new DonationAdapter(arrayList);
+                adapter = new CampaignAdapter(arrayList);
                 recyclerView.setAdapter(adapter);
 
                 category = "animal";
@@ -127,6 +130,15 @@ public class CampaignListActivity extends AppCompatActivity {
 
             }
         });
+
+        campaignAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(CampaignListActivity.this, CampaignWriterActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void donation(String category) {

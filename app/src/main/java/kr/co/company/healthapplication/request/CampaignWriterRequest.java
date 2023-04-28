@@ -6,6 +6,10 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +17,7 @@ public class CampaignWriterRequest extends StringRequest {
 
     final static private String URL = "http://miraclestep01.dothome.co.kr/CampaignInsert.php";
     private Map<String, String> map;
+    private String strFormatstartdate, strFormatdate;
 
     public CampaignWriterRequest(String category, String titlename, String name, String startdate, String date,
                       String maxStep, String content, Response.Listener<String> listener){

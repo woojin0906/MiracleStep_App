@@ -170,10 +170,10 @@
                 android:id="@+id/contentTitleName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
                 android:padding="5dp"
                 android:text="세부사항"
                 android:textColor="@color/black"
@@ -192,9 +192,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
                     android:padding="5dp"
                     android:text="최근 20년 사이 북극의 빙하 면적은 50% 감소하였습니다. 북극은 북극곰의 주 서식지이자 사냥터지만 이 순간에도 녹아내리는 빙하로 인해 북극곰은 갈 곳을 잃었습니다. 빙하가 녹으면 인류 재앙으로 돌아옵니다. 지구온난화로 북극의 온도는 빠르게 상승하고 빙하는 더욱 빠르게 녹아가고 있습니다. 빙하가 무너져 내리는 경고를 결코 무시해서는 안 됩니다."
                     android:textSize="17dp" />
@@ -205,7 +205,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp" />
+                android:padding="8dp" >
+                <Button
+                    android:id="@+id/testButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="수정하기"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

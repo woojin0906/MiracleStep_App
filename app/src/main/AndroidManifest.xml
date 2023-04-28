@@ -19,7 +19,13 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- 팝업 Activity -->
+
         <activity
             android:name=".CampaignUpdateActivity"
             android:exported="true">
@@ -40,12 +46,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- 팝업 Activity -->
+        </activity>
         <activity
             android:name=".PopupActivity"
             android:theme="@android:style/Theme.Dialog" />
