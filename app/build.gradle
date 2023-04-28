@@ -35,6 +35,8 @@ dependencies {
     implementation files('..\\libs\\additionnal.jar')
     implementation files('..\\libs\\mail.jar')
 
+    implementation 'com.github.angads25:toggle:1.1.0'   // 토글버튼 Custom
+
     implementation 'com.android.volley:volley:1.2.1'                    // 서버 통신 관련 라이브러리 (2023-01-01 이수)
     implementation 'org.apache.commons:commons-lang3:3.12.0'            // 비밀번호 재설정에서 무작위의 인증번호를 출력하기 위한 라이브러리 (2023-01-04 이수)
 

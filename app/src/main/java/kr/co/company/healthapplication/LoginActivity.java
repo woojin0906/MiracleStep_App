@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.github.angads25.toggle.interfaces.OnToggledListener;
+import com.github.angads25.toggle.model.ToggleableView;
+import com.github.angads25.toggle.widget.LabeledSwitch;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,6 +111,17 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent= new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);    // 액티비티 이동 시 애니메이션 제거.
                 startActivity(intent);
+            }
+        });
+
+        // toggle btn
+        LabeledSwitch labeledSwitch = findViewById(R.id.toggle);
+        labeledSwitch.setOnToggledListener(new OnToggledListener() {
+            @Override
+            public void onSwitched(ToggleableView toggleableView, boolean isOn) {
+                Intent intent= new Intent(LoginActivity.this, OrganizLoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
