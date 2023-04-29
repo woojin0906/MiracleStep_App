@@ -12,7 +12,7 @@
 /* (2) DB에 저장할 객체 선언. */
   $category = isset($_POST["category"]) ? $_POST["category"] : "";
   $titleName = isset($_POST["titleName"]) ? $_POST["titleName"] : "";
-  $name = isset($_POST["name"]) ? $_POST["name"] : "a";
+  $name = isset($_POST["name"]) ? $_POST["name"] : "";
   $startdate = isset($_POST["startdate"]) ? $_POST["startdate"] : "";
   $date = isset($_POST["date"]) ? $_POST["date"] : "";
   $maxStep = isset($_POST["maxStep"]) ? $_POST["maxStep"] : "";
@@ -20,14 +20,19 @@
   $nowStep = 0;
   $userImg = "img";
 
+
+
 /* (3) DB안에 insert하는 문장. (UserDonation) */
     $statement = mysqli_prepare($con, "INSERT INTO CampaignList(category, hostingGroup, title, content, lastDate, startDate, maxDonation, contentImage, nowDonation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($statement, "ssssssisi", $category, $name, $titleName, $startdate, $date, $maxStep, $content, $userImg, $nowStep);
+    mysqli_stmt_bind_param($statement, "ssssssisi", $category, $name, $titleName, $content, $date, $startdate, $maxStep, $userImg, $nowStep);
     mysqli_stmt_execute($statement);
 
 /* (4) 성공 여부 전송. */
     $response = array();
+
     $response["success"] = true;
+    $response["category"] = $category;
+    $response["titleName"] = $titleName;
 
 /* (5) 실행 결과 전송. */
     echo json_encode($response);

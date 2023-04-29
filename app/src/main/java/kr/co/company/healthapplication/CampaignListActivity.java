@@ -40,6 +40,9 @@ public class CampaignListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_list);
 
+        Intent receiveIntent = getIntent();
+        final String userId = receiveIntent.getStringExtra("userID");
+
         // List 설정
         recyclerView = findViewById(R.id.rvDonationList);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -135,6 +138,7 @@ public class CampaignListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(CampaignListActivity.this, CampaignWriterActivity.class);
+                intent.putExtra("userID", userId);
                 startActivity(intent);
             }
         });

@@ -13,18 +13,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+// Campaign값 서버로 전송 (2023-04-29 우진)
 public class CampaignWriterRequest extends StringRequest {
 
     final static private String URL = "http://miraclestep01.dothome.co.kr/CampaignInsert.php";
     private Map<String, String> map;
-    private String strFormatstartdate, strFormatdate;
 
     public CampaignWriterRequest(String category, String titlename, String name, String startdate, String date,
                       String maxStep, String content, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
-        // Request까지는 잘 넘어옴
         Log.d("category", category);
         Log.d("titleName", titlename);
         Log.d("name", name);

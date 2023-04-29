@@ -2,7 +2,9 @@ package kr.co.company.healthapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,12 +44,17 @@ public class CampaignWriterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_writer);
 
+        Intent receiveIntent = getIntent();
+        final String userId = receiveIntent.getStringExtra("userID");
+
         edtitleName = findViewById(R.id.titleName);
         tname = findViewById(R.id.name);
         edstartdate = findViewById(R.id.startdate);
         eddate = findViewById(R.id.date);
         edmaxStep = findViewById(R.id.maxStep);
         edcontent = findViewById(R.id.content);
+
+        tname.setText(userId);
 
         radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -73,8 +80,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String titleName = edtitleName.getText().toString();
-//                String name = tname.getText().toString();
-                String name = "test1234@naver.com";
+                String name = tname.getText().toString();
                 String startdate = edstartdate.getText().toString();
                 String date = eddate.getText().toString();
                 String maxStep = edmaxStep.getText().toString();
