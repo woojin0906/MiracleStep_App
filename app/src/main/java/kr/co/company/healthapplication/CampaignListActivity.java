@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class CampaignListActivity extends AppCompatActivity {
 
     private Button peopleBtn, environmentBtn, animalBtn, campaignAddBtn;
 
+    private Button btnMyinfo;
+
     private String category = "people";
 
     @Override
@@ -52,6 +55,15 @@ public class CampaignListActivity extends AppCompatActivity {
 
         adapter = new CampaignAdapter(arrayList);
         recyclerView.setAdapter(adapter);
+
+        btnMyinfo = findViewById(R.id.btnMyinfo);
+        btnMyinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(CampaignListActivity.this, OrganizMypageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 캠페인 메서드 호출
         donation(category);
