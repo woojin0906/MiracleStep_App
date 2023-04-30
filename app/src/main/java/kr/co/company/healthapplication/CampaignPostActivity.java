@@ -3,12 +3,20 @@ package kr.co.company.healthapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.io.IOException;
+import java.net.URI;
 
 // 캠페인 게시글 액티비티 (2023-04-06 우진)
 public class CampaignPostActivity extends AppCompatActivity {
@@ -36,7 +44,7 @@ public class CampaignPostActivity extends AppCompatActivity {
         final String titleName = receiveIntent.getStringExtra("titleName");
         final String name = receiveIntent.getStringExtra("name");
         final String nowStep = receiveIntent.getStringExtra("nowStep");
-        //final String ivDonationProfile = receiveIntent.getStringExtra("ivDonationProfile");
+        final String ivDonationProfile = receiveIntent.getStringExtra("contentImage");
         final String date = receiveIntent.getStringExtra("date");
         final String maxStep = receiveIntent.getStringExtra("maxStep");
         final String content = receiveIntent.getStringExtra("content");
@@ -46,7 +54,8 @@ public class CampaignPostActivity extends AppCompatActivity {
         tvTitleName.setText(titleName);
         tvName.setText(name);
         tvNowStep.setText(nowStep);
-        //Glide.with(img).load(ivDonationProfile).into(img);
+        Glide.with(img).load(ivDonationProfile).into(img);
+
         tvDate.setText(date);
         tvStartDate.setText(startDate);
         tvMaxStep.setText(maxStep);
@@ -66,7 +75,7 @@ public class CampaignPostActivity extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(CampaignPostActivity.this, CampaignUpdateActivity.class);
+                Intent intent = new Intent(CampaignPostActivity.this, CampaignUpdateActivity.class);
                 intent.putExtra("dNum", num);
                 intent.putExtra("titleName", titleName);
                 intent.putExtra("startDate", startDate);

@@ -1,16 +1,28 @@
 package kr.co.company.healthapplication;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,6 +36,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 
 import kr.co.company.healthapplication.request.CampaignWriterRequest;
@@ -36,8 +54,10 @@ public class CampaignWriterActivity extends AppCompatActivity {
     private TextView tname;
     private RadioGroup radioGroup;
     private String category = "animal";
-    private Button campaign_writer_btn;
+    private Button campaign_writer_btn, campaign_picture_btn;
     private ImageButton backBtn;
+    private Uri uri;
+    private ImageView campaign_imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +73,19 @@ public class CampaignWriterActivity extends AppCompatActivity {
         eddate = findViewById(R.id.date);
         edmaxStep = findViewById(R.id.maxStep);
         edcontent = findViewById(R.id.content);
+        campaign_picture_btn = findViewById(R.id.campaign_picture_btn);
+        campaign_imageView = findViewById(R.id.campaign_imageView);
 
         tname.setText(userId);
+
+        campaign_picture_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.setType("image/*");
+                    startActivityResult.launch(intent);
+                }
+        });
 
         radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -127,7 +158,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
                 };
 
                 // 서버로 Volley를 이용해서 요청을 함.
-                CampaignWriterRequest campaignWriterRequest = new CampaignWriterRequest(category, titleName, name, startdate, date, maxStep, content, responseListener);
+                CampaignWriterRequest campaignWriterRequest = new CampaignWriterRequest(category, titleName, name, startdate, date, maxStep, content, uri.toString(), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(CampaignWriterActivity.this);
                 queue.add(campaignWriterRequest);
 
@@ -143,5 +174,26 @@ public class CampaignWriterActivity extends AppCompatActivity {
             }
         });
     }
+
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK && result.getData() != null) {
+
+                        uri = result.getData().getData();
+                        Log.d(">>>>>> ", String.valueOf(uri));
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            campaign_imageView.setImageBitmap(bitmap);
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
 
 }

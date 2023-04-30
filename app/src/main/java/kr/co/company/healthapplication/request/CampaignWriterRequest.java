@@ -20,7 +20,7 @@ public class CampaignWriterRequest extends StringRequest {
     private Map<String, String> map;
 
     public CampaignWriterRequest(String category, String titlename, String name, String startdate, String date,
-                      String maxStep, String content, Response.Listener<String> listener){
+                      String maxStep, String content, String img, Response.Listener<String> listener){
         // post방식으로 listener를 서버에 전송.
         super(Method.POST, URL, listener, null);
 
@@ -31,6 +31,7 @@ public class CampaignWriterRequest extends StringRequest {
         Log.d("date", date);
         Log.d("maxStep", maxStep);
         Log.d("content", content);
+        Log.d("img", img);
 
         map = new HashMap<>();
         map.put("category", category);
@@ -40,6 +41,7 @@ public class CampaignWriterRequest extends StringRequest {
         map.put("date", date);
         map.put("maxStep", maxStep);
         map.put("content", content);
+        map.put("img", img);
 
     }
 

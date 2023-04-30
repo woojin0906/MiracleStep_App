@@ -18,7 +18,7 @@
   $maxStep = isset($_POST["maxStep"]) ? $_POST["maxStep"] : "";
   $content = isset($_POST["content"]) ? $_POST["content"] : "";
   $nowStep = 0;
-  $userImg = "img";
+  $userImg = isset($_POST["img"]) ? $_POST["img"] : "";
 
 
 

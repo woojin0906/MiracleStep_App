@@ -2,7 +2,9 @@ package kr.co.company.healthapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +67,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Custom
                 intent.putExtra("titleName", arrayList.get(mPosition).getTitleName());
                 intent.putExtra("name", arrayList.get(mPosition).getName());
                 intent.putExtra("nowStep", postNowStep);
-                //intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
+                intent.putExtra("contentImage", arrayList.get(mPosition).getIvDonationProfile());
                 intent.putExtra("date", arrayList.get(mPosition).getDate());
                 intent.putExtra("startDate", arrayList.get(mPosition).getStartDate());
                 intent.putExtra("maxStep", postMaxStep);

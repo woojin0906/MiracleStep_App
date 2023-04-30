@@ -6,7 +6,7 @@
     */
 
     /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+    $con = mysqli_connect("localhost", "miraclestep01", "tndnqja11!!", "miraclestep01"); // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
     /* (2) 앱에서 선택한 카테고리 비교 */
@@ -19,13 +19,13 @@
             }
 
     /* (3) 현재 DB에 저장된 값을 검색함. */
-        $statement = mysqli_prepare($con, "SELECT campaignIndex, title, hostingGroup, nowDonation, content, lastDate, startDate, maxDonation FROM CampaignList WHERE category=?");
+        $statement = mysqli_prepare($con, "SELECT campaignIndex, title, hostingGroup, nowDonation, content, lastDate, startDate, maxDonation, contentImage FROM CampaignList WHERE category=?");
             mysqli_stmt_bind_param($statement, "s", $cate);
         mysqli_stmt_execute($statement);
 
     // /* (4) DB안에 해당 카테고리가 일치하는 Donation정보 가져오기 */
         mysqli_stmt_store_result($statement);
-             mysqli_stmt_bind_result($statement, $DNum, $DTitleName, $DName, $DNowStep, $DContent, $DDate, $DsDate, $MaxStep);
+             mysqli_stmt_bind_result($statement, $DNum, $DTitleName, $DName, $DNowStep, $DContent, $DDate, $DsDate, $MaxStep, $contentImage);
 
            $revs = array();
 
@@ -43,6 +43,7 @@
             $revs["startDate"] = $DsDate;
             $revs["maxStep"] = $MaxStep;
             $revs["dNum"] = $DNum;
+            $revs["contentImage"] = $contentImage;
 
             $allrevs[] = $revs;
         }

@@ -4,7 +4,7 @@ public class DonationData {
     private String titleName; // 제목
     private String name; // 기업명
     private String nowStep; // 현재 기부된 걸음 수
-    private int ivDonationProfile; // 사진
+    private String ivDonationProfile; // 사진
     private String category; // 카테고리
     private String content; // 내용
     private String date; // 끝나는 기간
@@ -46,11 +46,11 @@ public class DonationData {
         this.maxStep = maxStep;
     }
 
-    public int getIvDonationProfile() {
+    public String getIvDonationProfile() {
         return ivDonationProfile;
     }
 
-    public void setIvDonationProfile(int ivDonationProfile) {
+    public void setIvDonationProfile(String ivDonationProfile) {
         this.ivDonationProfile = ivDonationProfile;
     }
 
@@ -94,7 +94,7 @@ public class DonationData {
         this.startDate = startDate;
     }
 
-    public DonationData(String dNum, String titleName, String name, String nowStep, int ivDonationProfile, String content, String date, String startDate, String maxStep) {
+    public DonationData(String dNum, String titleName, String name, String nowStep, String ivDonationProfile, String content, String date, String startDate, String maxStep) {
         this.dNum = dNum;
         this.titleName = titleName;
         this.name = name;
