@@ -2,11 +2,16 @@ package kr.co.company.healthapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,11 +30,21 @@ public class CampaignPostActivity extends AppCompatActivity {
     private ImageButton backBtn;
     private TextView tvTitleName, tvName, tvNowStep, tvDate, tvMaxStep, tvContent, tvStartDate;
     private ImageView img;
+    // Preferences Shared
+    private SharedPreferences pref;
+    private SharedPreferences.Editor  editor;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_post);
+
+
+        // 이용자 정보 가져오기.
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        userId = pref.getString("organizId", "_");
 
         tvTitleName = (TextView) findViewById(R.id.titleName);
         tvName = (TextView) findViewById(R.id.name);
@@ -39,6 +54,7 @@ public class CampaignPostActivity extends AppCompatActivity {
         tvMaxStep = (TextView) findViewById(R.id.maxStep);
         tvContent = (TextView) findViewById(R.id.content);
         tvStartDate = (TextView) findViewById(R.id.startdate);
+        testButton = findViewById(R.id.testButton);
 
         Intent receiveIntent = getIntent();
         final String titleName = receiveIntent.getStringExtra("titleName");
@@ -54,6 +70,7 @@ public class CampaignPostActivity extends AppCompatActivity {
         tvTitleName.setText(titleName);
         tvName.setText(name);
         tvNowStep.setText(nowStep);
+//        img.setImageBitmap(StringToBitmap(ivDonationProfile));
         Glide.with(img).load(ivDonationProfile).into(img);
 
         tvDate.setText(date);
@@ -61,6 +78,27 @@ public class CampaignPostActivity extends AppCompatActivity {
         tvMaxStep.setText(maxStep);
         tvContent.setText(content);
 
+        Log.d(">>> userId", userId);
+        Log.d(">>> name", name);
+
+        if(userId.equals(name)) {
+            testButton.setVisibility(View.VISIBLE);
+            testButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CampaignPostActivity.this, CampaignUpdateActivity.class);
+                    intent.putExtra("dNum", num);
+                    intent.putExtra("titleName", titleName);
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("date", date);
+                    intent.putExtra("content", content);
+                    intent.putExtra("maxStep", maxStep);
+                    intent.putExtra("name", name);
+
+                    startActivity(intent);
+                }
+            });
+        }
 
         // backBtn 클릭 시 DonationActivity 이동
         backBtn = findViewById(R.id.backBtn);
@@ -71,21 +109,17 @@ public class CampaignPostActivity extends AppCompatActivity {
             }
         });
 
-        testButton = findViewById(R.id.testButton);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CampaignPostActivity.this, CampaignUpdateActivity.class);
-                intent.putExtra("dNum", num);
-                intent.putExtra("titleName", titleName);
-                intent.putExtra("startDate", startDate);
-                intent.putExtra("date", date);
-                intent.putExtra("content", content);
-                intent.putExtra("maxStep", maxStep);
-                intent.putExtra("name", name);
 
-                startActivity(intent);
-            }
-        });
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

@@ -65,7 +65,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Custom
                 intent.putExtra("titleName", arrayList.get(mPosition).getTitleName());
                 intent.putExtra("name", arrayList.get(mPosition).getName());
                 intent.putExtra("nowStep", postNowStep);
-                //intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
+                intent.putExtra("ivDonationProfile", arrayList.get(mPosition).getIvDonationProfile());
                 intent.putExtra("date", arrayList.get(mPosition).getDate());
                 intent.putExtra("startDate", arrayList.get(mPosition).getStartDate());
                 intent.putExtra("maxStep", postMaxStep);

@@ -12,10 +12,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Config;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -58,6 +62,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
     private ImageButton backBtn;
     private Uri uri;
     private ImageView campaign_imageView;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +86,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
         campaign_picture_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
                     startActivityResult.launch(intent);
                 }
@@ -180,11 +185,11 @@ public class CampaignWriterActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == RESULT_OK && result.getData() != null) {
-
                         uri = result.getData().getData();
+
                         Log.d(">>>>>> ", String.valueOf(uri));
                         try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             campaign_imageView.setImageBitmap(bitmap);
 
                         } catch (FileNotFoundException e) {
@@ -195,5 +200,8 @@ public class CampaignWriterActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
+
 
 }

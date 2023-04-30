@@ -38,7 +38,7 @@ public class DonationPostActivity extends AppCompatActivity {
         final String titleName = receiveIntent.getStringExtra("titleName");
         final String name = receiveIntent.getStringExtra("name");
         final String nowStep = receiveIntent.getStringExtra("nowStep");
-        //final String ivDonationProfile = receiveIntent.getStringExtra("ivDonationProfile");
+        final String ivDonationProfile = receiveIntent.getStringExtra("ivDonationProfile");
         final String date = receiveIntent.getStringExtra("date");
         final String maxStep = receiveIntent.getStringExtra("maxStep");
         final String content = receiveIntent.getStringExtra("content");
@@ -48,7 +48,7 @@ public class DonationPostActivity extends AppCompatActivity {
         tvTitleName.setText(titleName);
         tvName.setText(name);
         tvNowStep.setText(nowStep);
-        //Glide.with(img).load(ivDonationProfile).into(img);
+        Glide.with(img).load(ivDonationProfile).into(img);
         tvDate.setText(date);
         tvMaxStep.setText(maxStep);
         tvContent.setText(content);

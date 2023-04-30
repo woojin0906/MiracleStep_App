@@ -3,8 +3,10 @@ package kr.co.company.healthapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Custom
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getIvDonationProfile())
                 .into(holder.ivDonationProfile);
-
+//        holder.ivDonationProfile.setImageBitmap(StringToBitmap(arrayList.get(position).getIvDonationProfile()));
         // 리사이클러뷰 클릭이벤트(선택된 리사이클러뷰 화면으로 이동)
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +101,16 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Custom
             this.nowStep=view.findViewById(R.id.nowStep);
             this.ivDonationProfile=(ImageView) view.findViewById(R.id.ivDonationProfile);
 
+        }
+    }
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }
