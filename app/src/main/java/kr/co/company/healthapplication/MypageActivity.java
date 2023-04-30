@@ -29,6 +29,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import kr.co.company.healthapplication.request.UserInfoSelectRequest;
+import kr.co.company.healthapplication.request.UserRemoveRequest;
 import kr.co.company.healthapplication.request.UserSettingUpdateRequest;
 
 /* 신체정보 변경(키, 체중 등등), 회원정보 변경, 기부 신청내역 */
@@ -38,6 +39,7 @@ public class MypageActivity extends Fragment {
     private TextView tvUserInfoSetting, tvUserHeight, tvUserWeight, tvUserAge, tvUserBMI;
     private TextView tvUserDonation;
     private Button btnDonationReceipts ,btnRank ,btnLogOut;
+    private TextView tvRemove;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor  editor;
@@ -72,6 +74,7 @@ public class MypageActivity extends Fragment {
         layoutBodyinfoUpdate = view.findViewById(R.id.layoutBodyinfoUpdate);
         etHeight = view.findViewById(R.id.etHeight);
         etWeight = view.findViewById(R.id.etWeight);
+        tvRemove = view.findViewById(R.id.tvRemove);
 
         // 이용자 정보 가져오기.
         pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
@@ -103,6 +106,16 @@ public class MypageActivity extends Fragment {
             }
         });
 
+        // 회원탈퇴 클릭 이벤트
+        tvRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor = pref.edit();
+                editor.remove("UserID").apply();
+
+                userRemove(userId);
+            }
+        });
 
         tvUserSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,12 +144,13 @@ public class MypageActivity extends Fragment {
             }
         });
 
+        // 로그아웃 버튼 클릭 이벤트
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editor = pref.edit();
                 editor.remove("UserID").apply();
-                Toast.makeText(getActivity().getApplicationContext(),"로그아웃에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(),"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -145,6 +159,38 @@ public class MypageActivity extends Fragment {
 
         return view;
     }
+
+    private void userRemove(String userId) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+
+                    // 회원탈퇴 성공인 경우.
+                    if (success) {
+                        Toast.makeText(getActivity(), "회원탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    // 회원탈퇴 실패인 경우.
+                    else {
+                        Toast.makeText(getActivity(), "회원탈퇴에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        UserRemoveRequest userRemoveRequest = new UserRemoveRequest(userId, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(userRemoveRequest);
+    }
+
 
     private void selectUserInfo() {
         // 유저 정보 가져오기.

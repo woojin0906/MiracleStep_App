@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),"서버를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"아이디 또는 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
