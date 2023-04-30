@@ -1,14 +1,26 @@
-# [MiracleStep_App]
+[MiracleStep_App] - <i>UI리메이크 진행중</i>
 
 <h1>운동을 통한 기부 캠페인 및 일정관리 시스템</h1>
+<br>
 
-<b>주요 기능 : 러닝 실시간 정보, 러닝 기록, 일정관리(checkList), 기부 캠페인, 봉사 정보<br>
- 개발 언어(툴) : AndroidStudio(java), PHP, SpringBoot, HTML, CSS, Thymeleaf, MySQL</b>
+<b>MainService</b><br>
+(User) : 러닝 정보 측정 및 기록, 일정관리(checkList), 기부 캠페인, 봉사 정보<br>
+(Organization) : 기부 캠페인 개설<br>
 
-개발일자 : 2022-12-27 ~ (약 2개월간 중단) ~ 진행중
+<b>Architecture</b><br>
+(Language) : Java, XML, PHP, SQL, SQLite<br>
+(Tool) : AndroidStudio, MariaDB, FileZilla, AVD(Pixel 6 Pro)<br>
+(Other) : openAPI(data.go.kr), TmapAPI, Hosting(dothome)<br>
 
-참여자 :  전우진, 이인범, 이수
+<b>DevelopPeriod</b><br>
+2022-12-27 ~ 2023-02-13,<br>
+&nbsp;&nbsp;&nbsp;
+2023-04-05 ~ 2023-05-01 <br>
 
+참여자 :<i> 전우진, 이인범, 이수</i>
+
+
+___
 ## 깃허브 커밋 메시지
       feat : 새로운 기능에 대한 커밋  
       fix : 버그 수정에 대한 커밋  
