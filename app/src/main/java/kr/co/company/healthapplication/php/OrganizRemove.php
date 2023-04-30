@@ -3,7 +3,7 @@
       OrganizRemove.php : 기업 회원탈퇴 처리
     */
 
-    $con = mysqli_connect("localhost", "miraclestep01", "tndnqja11!!", "miraclestep01");
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01");
     mysqli_query($con, 'SET NAMES utf8');   /* 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.) */
 
     $id = isset($_POST["id"]) ? $_POST["id"] : "";

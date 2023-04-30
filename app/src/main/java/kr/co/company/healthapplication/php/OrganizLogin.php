@@ -4,7 +4,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep01", "tndnqja11!!", "miraclestep01");
+    $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01");
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
 /* (2) 앱에서 작성한 아이디와 비밀번호를 가져옴. */

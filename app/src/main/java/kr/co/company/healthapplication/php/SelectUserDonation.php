@@ -6,7 +6,7 @@
     */
 
 /* (1) 서버 DB에 연결.*/
-    $con = mysqli_connect("localhost", "miraclestep01", "tndnqja11!!", "miraclestep01");  // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
+        $con = mysqli_connect("localhost", "miraclestep01", "비밀번호", "miraclestep01");  // mysql 연결, IP, 사용자명, 비밀번호, 데이터베이스
     mysqli_query($con, 'SET NAMES utf8'); // 인코딩을 utf-8로 세팅. (한글 전송이 가능해짐.)
 
     $userID = isset($_POST["userID"]) ? $_POST["userID"] : "test1234@naver.com";
