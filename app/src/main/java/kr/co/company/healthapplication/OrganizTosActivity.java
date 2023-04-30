@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+// 기업 이용 약관  (04.29 인범)
 public class OrganizTosActivity extends AppCompatActivity {
 
     @Override

@@ -2,7 +2,9 @@ package kr.co.company.healthapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,11 +21,15 @@ import org.json.JSONObject;
 import kr.co.company.healthapplication.request.OrganizInfoSelectRequest;
 import kr.co.company.healthapplication.request.OrganizRemoveRequest;
 
+// 기업 정보 확인  (04.29 인범)
 public class OrganizMypageActivity extends AppCompatActivity {
 
-    Button btnLogout, btnRemove;
-    String id, name, proposer, joinDate;
-    TextView tvId, tvName, tvProposer, tvJoinDate;
+    private Button btnLogout, btnRemove;
+    private String id, name, proposer, joinDate;
+    private TextView tvId, tvName, tvProposer, tvJoinDate;
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor  editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class OrganizMypageActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+                editor = pref.edit();
+                editor.remove("organizId").apply();
+
                 Intent intent = new Intent(OrganizMypageActivity.this, OrganizLoginActivity.class);
                 Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
