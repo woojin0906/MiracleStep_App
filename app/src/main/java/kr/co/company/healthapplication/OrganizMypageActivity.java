@@ -24,9 +24,11 @@ import kr.co.company.healthapplication.request.OrganizRemoveRequest;
 // 기업 정보 확인  (04.29 인범)
 public class OrganizMypageActivity extends AppCompatActivity {
 
-    private Button btnLogout, btnRemove;
+    private Button btnLogout;
+    private TextView tvRemove;
     private String id, name, proposer, joinDate;
     private TextView tvId, tvName, tvProposer, tvJoinDate;
+    private String organizId;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor  editor;
@@ -41,8 +43,13 @@ public class OrganizMypageActivity extends AppCompatActivity {
         tvProposer = findViewById(R.id.tvProposer);
         tvJoinDate = findViewById(R.id.tvJoinDate);
 
-        // select해서 내정보 띄워주기
-        selectOrganizInfo(); // 아이디 받아와서 하는걸로 수정필요.
+        // 이용자 정보 가져오기.
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        organizId = pref.getString("organizId", "_");
+
+        // 내정보 select
+        selectOrganizInfo(organizId);
 
         btnLogout = findViewById(R.id.btnLogOut);
 
@@ -59,21 +66,19 @@ public class OrganizMypageActivity extends AppCompatActivity {
             }
         });
 
-        btnRemove = findViewById(R.id.btnRemove);
+        tvRemove = findViewById(R.id.tvRemove);
 
-        btnRemove.setOnClickListener(new View.OnClickListener() {
+        tvRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 회원 탈퇴 시 정보 delete해주기
-                organizRemove(); // 아이디 받아와서 하는걸로 수정 필요.
+                // 회원 탈퇴 시 정보 삭제
+                organizRemove(organizId);
             }
         });
 
     }
 
-    private void organizRemove() {
-        String organizId = "asdf";
-
+    private void organizRemove(String organizId) {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -105,7 +110,7 @@ public class OrganizMypageActivity extends AppCompatActivity {
     }
 
 
-    private void selectOrganizInfo() {
+    private void selectOrganizInfo(String organizId) {
         // 기업 정보 가져오기.
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -139,7 +144,7 @@ public class OrganizMypageActivity extends AppCompatActivity {
             }
         };
         // 서버로 Volley를 이용해서 요청을 함.
-        OrganizInfoSelectRequest organizInfoSelectRequest = new OrganizInfoSelectRequest("asdf", responseListener);
+        OrganizInfoSelectRequest organizInfoSelectRequest = new OrganizInfoSelectRequest(organizId, responseListener);
         RequestQueue queue = Volley.newRequestQueue(OrganizMypageActivity.this);
         queue.add(organizInfoSelectRequest);
     }
