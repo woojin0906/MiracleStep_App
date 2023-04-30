@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
 import kr.co.company.healthapplication.R;
 import kr.co.company.healthapplication.RunActivity;
+import kr.co.company.healthapplication.request.AstepSelectRequest;
 import kr.co.company.healthapplication.request.home.HomeSelectCheckListRequest;
 import kr.co.company.healthapplication.request.home.UserAvailableStepRequest;
 import kr.co.company.healthapplication.request.home.UserDonationStepRequest;
@@ -58,6 +59,8 @@ public class HomeActivity extends Fragment {
     public SharedPreferences.Editor editor;
     public String userID, nowDate;
 
+    private String aStep;
+
     @SuppressLint("ResourceType")
     @Nullable
     @Override
@@ -70,8 +73,9 @@ public class HomeActivity extends Fragment {
         nowDate = getNowDate();
 
         selectUserTodayRunStep(userID, nowDate);
-        selectUserAvailableStep(userID);
         selectUserDonationStep(userID);
+
+        selectAstep(userID);
 
         selectCheckList(nowDate);
 
@@ -102,6 +106,38 @@ public class HomeActivity extends Fragment {
         });
     }
 
+    // 기부가능 걸음 조희
+    private void selectAstep(String userID) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Boolean check = jsonObject.getBoolean("success");
+
+                    if (check == true) {
+                        // 값 받아서 저장
+                        aStep = jsonObject.getString("aStep");
+                        // 값 세팅
+                        tvAvilableStep.setText(aStep);
+
+                    } else {
+                        Toast.makeText(getActivity(), "이용자 정보를 확인하지 못했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "에러가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        // 서버로 Volley를 이용해서 요청을 함.
+        AstepSelectRequest astepSelectRequest = new AstepSelectRequest(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(astepSelectRequest);
+    }
+
+
     private String getNowDate() {
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -120,7 +156,6 @@ public class HomeActivity extends Fragment {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    Log.d("전송여부1", jsonObject.toString());
                     tvTodayWalk.setText(jsonObject.getString("runStep"));
                 } catch (JSONException e) {
                 Toast.makeText(getActivity(),"사용자의 정보가 없습니다. 관리자에게 문의 부탁드립니다.", Toast.LENGTH_SHORT).show();
@@ -133,33 +168,12 @@ public class HomeActivity extends Fragment {
         queue.add(userRunStepRequest);
     }
 
-    private void selectUserAvailableStep(String userId) {
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    Log.d("전송여부2", jsonObject.toString());
-                    tvAvilableStep.setText(jsonObject.getString("availableStep"));
-
-                } catch (JSONException e) {
-                    Toast.makeText(getActivity(),"사용자의 정보가 없습니다. 관리자에게 문의 부탁드립니다.", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-            }
-        };
-        UserAvailableStepRequest loginRequest = new UserAvailableStepRequest(userId, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(loginRequest);
-    }
-
     private void selectUserDonationStep(String userId) {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
-                    Log.d("전송여부3", jsonObject.toString());
                     tvTotalContributionStep.setText(jsonObject.getString("totalDonationStep"));
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(),"사용자의 정보가 없습니다. 관리자에게 문의 부탁드립니다.", Toast.LENGTH_SHORT).show();
