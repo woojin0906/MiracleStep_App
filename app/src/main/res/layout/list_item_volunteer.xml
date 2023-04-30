@@ -52,23 +52,53 @@
                         android:layout_marginRight="10dp">
 
                         <TextView
+                            android:id="@+id/state"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="모집중"
                             android:textSize="15dp"
                             android:padding="1dp" />
 
-                        <TextView
-                            android:id="@+id/date"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="2022.12.12~2023.03.30"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
                             android:gravity="right"
-                            android:textSize="15dp"
-                            android:textColor="#84A7E4"
-                            android:textStyle="bold"
-                            android:singleLine="true"
-                            android:padding="1dp" />
+                            android:layout_marginRight="10dp">
+                            <TextView
+                                android:id="@+id/startDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2022.12.12"
+                                android:gravity="right"
+                                android:textSize="15dp"
+                                android:textColor="#84A7E4"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:padding="1dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="~"
+                                android:gravity="right"
+                                android:textSize="15dp"
+                                android:textColor="#84A7E4"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:padding="1dp" />
+                            <TextView
+                                android:id="@+id/endDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2023.03.30"
+                                android:gravity="right"
+                                android:textSize="15dp"
+                                android:textColor="#84A7E4"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:padding="1dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
         </LinearLayout>

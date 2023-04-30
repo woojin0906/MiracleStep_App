@@ -3,6 +3,8 @@ package kr.co.company.healthapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -22,9 +24,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 public class VolunteerActivity extends Fragment {
+    private RecyclerView recyclerView;                                  // 리사이클러뷰
+    private VolunteerAdapter adapter;                               // 리사이클러뷰 어댑터
+    private LinearLayoutManager linearLayoutManager;
+    private ArrayList<VolunteerData> arrayList;
 
     EditText edit;
     TextView text;
@@ -39,37 +46,56 @@ public class VolunteerActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_volunteer, container, false);
 
+        // List 설정
+        recyclerView = rootView.findViewById(R.id.rvVolunteerList);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        arrayList = new ArrayList<>();
+
+        adapter = new VolunteerAdapter(arrayList);
+        recyclerView.setAdapter(adapter);
+
         edit= rootView.findViewById(R.id.edit);
-        text= rootView.findViewById(R.id.result);
+//        text= rootView.findViewById(R.id.result);
         button= rootView.findViewById(R.id.button);
 
-
-        button.setOnClickListener(new View.OnClickListener() {
+        new Thread() {
             @Override
-            public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        data=getXmlData();
-
-                        ((MainActivity) getContext()).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                text.setText(data);
-                            }
-                        });
-                    }
-                }).start();
+            public void run() {
+                getXmlData();
             }
-        });
+        }.start();
+
+
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        data=getXmlData();
+//
+//                        ((MainActivity) getContext()).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                text.setText(data);
+//                            }
+//                        });
+//                    }
+//                }).start();
+//            }
+//        });
 
         return rootView;
-    }
+   }
 
-    public String getXmlData(){
-        StringBuffer buffer=new StringBuffer();
+    public ArrayList<VolunteerData> getXmlData() {
         // String str= edit.getText().toString(); // 검색어 가져오기
         // String search = URLEncoder.encode(str); // encoding
+
+        ArrayList<VolunteerData> volunteerData = new ArrayList<VolunteerData>();
+
 
         String queryUrl="https://openapi.gg.go.kr/ServicPartcptnInfo?KEY="+key+"";
         try{
@@ -80,14 +106,14 @@ public class VolunteerActivity extends Fragment {
             XmlPullParser xpp= factory.newPullParser();
             xpp.setInput( new InputStreamReader(is, "UTF-8") ); //inputstream 으로부터 xml 입력받기
 
-            String tag;
+            String tag, titleName = null, company = null, startDate = null, endDate = null, state = null;
 
             xpp.next();
             int eventType= xpp.getEventType();
             while( eventType != XmlPullParser.END_DOCUMENT ){
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
-                        buffer.append("파싱 시작...\n\n");
+//                        buffer.append("파싱 시작...\n\n");
                         break;
 
                     case XmlPullParser.START_TAG:
@@ -95,34 +121,39 @@ public class VolunteerActivity extends Fragment {
 
                         if(tag.equals("row")) ;// 첫번째 검색결과
                         else if(tag.equals("SERVIC_TITLE")){
-                            buffer.append("제목 : ");
+//                            buffer.append("제목 : ");
                             xpp.next();
-                            buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
+//                            buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
+//                            buffer.append("\n"); //줄바꿈 문자 추가
+                            titleName = xpp.getText();
                         }
                         else if(tag.equals("RECRUT_INST_NM")){
-                            buffer.append("기관 : ");
+//                            buffer.append("기관 : ");
                             xpp.next();
-                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
+//                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+//                            buffer.append("\n");//줄바꿈 문자 추가
+                            company = xpp.getText();
                         }
                         else if(tag.equals("SERVIC_BEGIN_DE")){
-                            buffer.append("시작일 : ");
+//                            buffer.append("시작일 : ");
                             xpp.next();
-                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
+//                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+//                            buffer.append("\n");//줄바꿈 문자 추가
+                            startDate = xpp.getText();
                         }
                         else if(tag.equals("SERVIC_END_DE")){
-                            buffer.append("종료일 : ");
+//                            buffer.append("종료일 : ");
                             xpp.next();
-                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
+//                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+//                            buffer.append("\n");//줄바꿈 문자 추가
+                            endDate = xpp.getText();
                         }
                         else if(tag.equals("RECRUT_STATE_NM")){
-                            buffer.append("상태 : ");
+//                            buffer.append("상태 : ");
                             xpp.next();
-                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
+//                            buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+//                            buffer.append("\n");//줄바꿈 문자 추가
+                            state = xpp.getText();
                         }
                         break;
 
@@ -132,7 +163,24 @@ public class VolunteerActivity extends Fragment {
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName(); //테그 이름 얻어오기
 
-                        if(tag.equals("row")) buffer.append("\n");// 첫번째 검색결과종료..줄바꿈
+                        if(tag.equals("row")) {
+                            VolunteerData entity = new VolunteerData();
+                            entity.setTitle(titleName);
+                            entity.setCompany(company);
+                            entity.setStartDate(startDate);
+                            entity.setEndDate(endDate);
+                            entity.setState(state);
+                            VolunteerData mainData = new VolunteerData(titleName, company, startDate, endDate, state);
+                            mainData.setTitle(titleName);
+                            mainData.setCompany(company);
+                            mainData.setStartDate(startDate);
+                            mainData.setEndDate(endDate);
+                            mainData.setState(state);
+                            arrayList.add(mainData);
+
+                            Log.d(">>>titlename", mainData.getTitle().toString());
+//                            buffer.append("\n");
+                        }// 첫번째 검색결과종료..줄바꿈
                         break;
                 }
 
@@ -143,8 +191,8 @@ public class VolunteerActivity extends Fragment {
             e.printStackTrace();
         }
 
-        buffer.append("파싱 끝\n");
-        return buffer.toString();//StringBuffer 문자열 객체 반환
+//        buffer.append("파싱 끝\n");
+        return volunteerData; //StringBuffer 문자열 객체 반환
 
     }
 
