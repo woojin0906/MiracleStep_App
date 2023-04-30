@@ -179,8 +179,9 @@ public class CampaignListActivity extends AppCompatActivity {
                         String startDate = jsonObject.getString("startDate");
                         String maxStep = jsonObject.getString("maxStep");
                         String dNum = jsonObject.getString("dNum");
+                        String contentImage = jsonObject.getString("contentImage");
 
-                        DonationData mainData = new DonationData(dNum, titleName, name, nowStep, R.drawable.bear2, content, date, startDate, maxStep);
+                        DonationData mainData = new DonationData(dNum, titleName, name, nowStep, contentImage, content, date, startDate, maxStep);
                         arrayList.add(mainData);
                     }
 
