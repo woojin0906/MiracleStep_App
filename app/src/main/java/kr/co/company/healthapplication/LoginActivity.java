@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private String rememberID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         if(!rememberID.equals("_")) {
             Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            //intent.putExtra("UserID", rememberID);
             startActivity(intent);
             finish();
         }
@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userId = etId.getText().toString();
                 String userPassword = etPwd.getText().toString();
-                Log.d("1111", "ㅇㅇ");
                 login(userId, userPassword);
             }
         });
@@ -127,23 +126,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String userId, String userPassword) {
-        Log.d("2222", "ㅇㅇ");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("4444", "ㅇㅇ");
                     JSONObject jsonObject = new JSONObject(response);   // 결과 값을 리턴받음.
                     boolean success = jsonObject.getBoolean("success"); // php를 통해서 "success"를 전송받음.
                     String userID = jsonObject.getString("id");
-                    Log.d("확인된 아이디", userID);
-                    //String jsonString = jsonObject.toString();
-                    //Log.d("전송여부", jsonString);
 
                     // 로그인에 성공한 경우.
                     if(success) {
-                        //String userPassword = jsonObject.getString("userPassword");
-
                         try {
                             // 아이디 저장버튼을 누른 경우.
                             if (cbIdSave.isChecked()) {
@@ -177,7 +169,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
-        Log.d("3333", "ㅇㅇ");
         LoginRequest loginRequest = new LoginRequest(userId, userPassword, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);

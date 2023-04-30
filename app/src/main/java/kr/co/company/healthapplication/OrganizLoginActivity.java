@@ -1,8 +1,10 @@
 package kr.co.company.healthapplication;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,15 +26,21 @@ import org.json.JSONObject;
 
 import kr.co.company.healthapplication.request.OrganizLoginRequest;
 
-
+// 기업 로그인  (04.29 인범)
 public class OrganizLoginActivity extends AppCompatActivity {
     private EditText etId, etPwd;
     private Button btnLogin, btnJoin;
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organiz_login);
+
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
 
         // GPS 권한 요청 (2023-01-07 인범)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -86,9 +94,11 @@ public class OrganizLoginActivity extends AppCompatActivity {
 
                     // 로그인에 성공한 경우.
                     if(success) {
+                        editor.putString("organizId", OrganizId);
+                        editor.apply();
+
                         Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OrganizLoginActivity.this, CampaignListActivity.class);
-                        intent.putExtra("userID", oID);
                         startActivity(intent);
                         finish();
                     }

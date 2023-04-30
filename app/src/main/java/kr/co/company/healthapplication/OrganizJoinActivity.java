@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import kr.co.company.healthapplication.request.OrganizJoinRequest;
 
+// 기업 회원가입  (04.29 인범)
 public class OrganizJoinActivity extends AppCompatActivity {
     private EditText etId, etPwd, etCFPwd, etName, etProposer;
     private Button btnJoin;
