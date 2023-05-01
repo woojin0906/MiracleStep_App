@@ -106,10 +106,11 @@
                 <TextView
                     android:id="@+id/name"
                     android:padding="16dp"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
-                    android:hint="정보 받아올 예정" />
+                    android:text="정보 받아올 예정" />
             </LinearLayout>
 
             <LinearLayout

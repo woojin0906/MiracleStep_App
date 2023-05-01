@@ -207,7 +207,7 @@
                 android:orientation="vertical"
                 android:padding="8dp" >
                 <Button
-                    android:id="@+id/testButton"
+                    android:id="@+id/UpdateButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="수정하기"

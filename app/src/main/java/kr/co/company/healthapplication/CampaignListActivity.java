@@ -32,10 +32,7 @@ public class CampaignListActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<DonationData> arrayList;
 
-    private Button peopleBtn, environmentBtn, animalBtn, campaignAddBtn;
-
-    private Button btnMyinfo;
-
+    private Button peopleBtn, environmentBtn, animalBtn, campaignAddBtn, btnMyinfo;
     private String category = "people";
 
     @Override

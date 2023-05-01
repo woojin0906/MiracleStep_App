@@ -63,14 +63,20 @@ public class CampaignWriterActivity extends AppCompatActivity {
     private Uri uri;
     private ImageView campaign_imageView;
     private Bitmap bitmap;
+    // Preferences Shared
+    private SharedPreferences pref;
+    private SharedPreferences.Editor  editor;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_writer);
 
-        Intent receiveIntent = getIntent();
-        final String userId = receiveIntent.getStringExtra("userID");
+        // 이용자 정보 가져오기.
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+        userId = pref.getString("organizId", "_");
 
         edtitleName = findViewById(R.id.titleName);
         tname = findViewById(R.id.name);

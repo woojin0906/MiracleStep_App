@@ -26,7 +26,7 @@ import java.net.URI;
 // 캠페인 게시글 액티비티 (2023-04-06 우진)
 public class CampaignPostActivity extends AppCompatActivity {
 
-    private Button testButton;
+    private Button updateButton;
     private ImageButton backBtn;
     private TextView tvTitleName, tvName, tvNowStep, tvDate, tvMaxStep, tvContent, tvStartDate;
     private ImageView img;
@@ -39,7 +39,6 @@ public class CampaignPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_post);
-
 
         // 이용자 정보 가져오기.
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
@@ -54,7 +53,7 @@ public class CampaignPostActivity extends AppCompatActivity {
         tvMaxStep = (TextView) findViewById(R.id.maxStep);
         tvContent = (TextView) findViewById(R.id.content);
         tvStartDate = (TextView) findViewById(R.id.startdate);
-        testButton = findViewById(R.id.testButton);
+        updateButton = findViewById(R.id.UpdateButton);
 
         Intent receiveIntent = getIntent();
         final String titleName = receiveIntent.getStringExtra("titleName");
@@ -82,8 +81,8 @@ public class CampaignPostActivity extends AppCompatActivity {
         Log.d(">>> name", name);
 
         if(userId.equals(name)) {
-            testButton.setVisibility(View.VISIBLE);
-            testButton.setOnClickListener(new View.OnClickListener() {
+            updateButton.setVisibility(View.VISIBLE);
+            updateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(CampaignPostActivity.this, CampaignUpdateActivity.class);
@@ -94,6 +93,7 @@ public class CampaignPostActivity extends AppCompatActivity {
                     intent.putExtra("content", content);
                     intent.putExtra("maxStep", maxStep);
                     intent.putExtra("name", name);
+                    intent.putExtra("contentImage", ivDonationProfile);
 
                     startActivity(intent);
                 }
@@ -108,7 +108,6 @@ public class CampaignPostActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
     }
 
