@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.net.http.HttpResponseCache;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,16 @@ import com.github.angads25.toggle.widget.LabeledSwitch;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import kr.co.company.healthapplication.request.OrganizLoginRequest;
 
 // 기업 로그인  (04.29 인범)
@@ -38,6 +51,17 @@ public class OrganizLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organiz_login);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    chatbotTest("현재 날씨 알려줘");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
@@ -118,6 +142,60 @@ public class OrganizLoginActivity extends AppCompatActivity {
         OrganizLoginRequest organizLoginRequest = new OrganizLoginRequest(OrganizId, OrganizPw, responseListener);
         RequestQueue queue = Volley.newRequestQueue(OrganizLoginActivity.this);
         queue.add(organizLoginRequest);
+    }
+
+    // 챗봇 테스트
+    private void chatbotTest(String userInput) throws Exception {
+        try {
+            URL url = new URL("https://chatbot-api.run.goorm.site/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            JSONObject data = new JSONObject();
+            data.put("user_input", userInput);
+
+            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+            out.write(data.toString());
+            out.flush();
+            out.close();
+
+            String temp = "";
+            String content = "";
+            InputStream responseBody = conn.getInputStream();
+            InputStreamReader responseBodyReader =
+                    new InputStreamReader(responseBody, "UTF-8");
+            BufferedReader br = new BufferedReader( responseBodyReader );
+            while ((temp = br.readLine()) != null) {
+                content += temp;
+            }
+            JSONObject responseJson = new JSONObject(content);
+            Log.d("chatGPT 응답", responseJson.toString(2));
+            br.close();
+
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+
+                //System.out.println(response.toString());
+            } else {
+                Log.d("HTTP error code : ", String.valueOf(responseCode));
+                //System.out.println("HTTP error code : " + responseCode);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

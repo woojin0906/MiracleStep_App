@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import kr.co.company.healthapplication.ChatbotActivity;
 import kr.co.company.healthapplication.R;
 import kr.co.company.healthapplication.RunActivity;
 import kr.co.company.healthapplication.request.AstepSelectRequest;
@@ -50,6 +52,7 @@ public class HomeActivity extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private TextView noSchedule;
+    private ImageButton btnChatbot;
 
     // 유저 정보
     private TextView tvAvilableStep, tvTodayWalk, tvTotalContributionStep;
@@ -78,6 +81,15 @@ public class HomeActivity extends Fragment {
         selectAstep(userID);
 
         selectCheckList(nowDate);
+
+        btnChatbot = rootView.findViewById(R.id.btnChatbot);
+        btnChatbot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
