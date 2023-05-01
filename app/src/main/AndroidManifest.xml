@@ -14,6 +14,13 @@
         android:theme="@style/Theme.HealthApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChatbotActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".OrganizMypageActivity"
             android:exported="false">
             <meta-data
