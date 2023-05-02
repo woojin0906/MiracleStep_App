@@ -21,10 +21,9 @@
         android:layout_height="wrap_content"
         android:text="전송"/>
 
-    <TextView
-        android:id="@+id/tvResponse"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatbotList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="8pt"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

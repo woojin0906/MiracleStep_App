@@ -1,6 +1,8 @@
 package kr.co.company.healthapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,8 +20,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ChatbotActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private ChatbotAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
+    private ArrayList<ChatbotData> arrayList;
 
     private EditText etUserInput;
     private Button btnSend;
@@ -31,17 +39,31 @@ public class ChatbotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
 
-        tvResponse = findViewById(R.id.tvResponse);
         etUserInput = findViewById(R.id.etUserInput);
         btnSend = findViewById(R.id.btnSend);
+
+        // List 설정
+        recyclerView = (RecyclerView) findViewById(R.id.chatbotList);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        arrayList = new ArrayList<>();
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String userInput = etUserInput.getText().toString();
 
+                ChatbotData mainData = new ChatbotData(userInput);
+
+                arrayList.add(mainData);
+
+                adapter = new ChatbotAdapter(arrayList);
+                recyclerView.setAdapter(adapter);
+
                 new Thread(new Runnable() {
                     String result = "";
+
                     @Override
                     public void run() {
                         try {
@@ -53,8 +75,10 @@ public class ChatbotActivity extends AppCompatActivity {
                         (ChatbotActivity.this).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tvResponse.setText(result);
-//                                text.setText(data);
+
+                                adapter = new ChatbotAdapter(arrayList);
+                                recyclerView.setAdapter(adapter);
+
                                 //adapter.notifyDataSetChanged();
                             }
                         });
@@ -62,9 +86,6 @@ public class ChatbotActivity extends AppCompatActivity {
                 }).start();
             }
         });
-
-
-
 
     }
 
@@ -98,7 +119,24 @@ public class ChatbotActivity extends AppCompatActivity {
             Log.d("chatGPT 응답", responseJson.toString(2));
             br.close();
 
-            return responseJson.toString(2);
+            StringBuilder sb = new StringBuilder(responseJson.toString(2));
+
+            String[] arr = sb.toString().split("");
+
+            for(int i=0; i<arr.length; i++) {
+                if(arr[i].equals("{") || arr[i].equals("}") || arr[i].equals("\"")) {
+                    arr[i] = "";
+                }
+            }
+
+            String chat = String.join("", arr);
+            Log.d(">>>> text", chat);
+
+            ChatbotData mainData = new ChatbotData(chat);
+
+            arrayList.add(mainData);
+
+            return chat;
 
         } catch (Exception e) {
             e.printStackTrace();
