@@ -45,7 +45,8 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_gravity="center"
-                android:src="@drawable/infoimg" />
+                android:src="@drawable/infoimg"
+                android:scaleType="fitXY"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -26,7 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/bear2" />
+                    android:background="@drawable/bear2"
+                    android:scaleType="fitXY"/>
 
                 <ImageButton
                     android:id="@+id/backBtn"

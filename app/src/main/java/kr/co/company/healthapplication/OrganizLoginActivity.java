@@ -34,6 +34,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -68,8 +69,9 @@ public class OrganizLoginActivity extends AppCompatActivity {
 
         // GPS 권한 요청 (2023-01-07 인범)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, 1);
         }
+
 
         etId = findViewById(R.id.etId);
         etPwd = findViewById(R.id.etPwd);
