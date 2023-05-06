@@ -207,7 +207,4 @@ public class CampaignWriterActivity extends AppCompatActivity {
                 }
             });
 
-
-
-
 }

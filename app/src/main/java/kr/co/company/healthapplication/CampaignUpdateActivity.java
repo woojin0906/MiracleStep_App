@@ -1,14 +1,22 @@
 package kr.co.company.healthapplication;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +28,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import kr.co.company.healthapplication.request.CampaignUpdateRequest;
 import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 
@@ -27,11 +38,14 @@ import kr.co.company.healthapplication.request.UserStepUpdateRequest;
 public class CampaignUpdateActivity extends AppCompatActivity {
 
     private ImageButton backBtn;
-    private Button campaign_update_btn;
+    private Button campaign_update_btn, campaign_picture_btn;
     private EditText edtitleName, edstartdate, eddate, edmaxStep, edcontent;
     private TextView tname;
-    private String titleName, startdate, date, content, smaxStep, rNum, rtitleName, rdate, rmaxStep, rcontent, rstartdate, rname;
+    private String ivDonationProfile, titleName, startdate, date, content, smaxStep, rNum, rtitleName, rdate, rmaxStep, rcontent, rstartdate, rname;
     private int maxStep;
+    private Uri uri;
+    private ImageView campaign_imageView;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +57,7 @@ public class CampaignUpdateActivity extends AppCompatActivity {
         rNum = receiveIntent.getStringExtra("dNum");
         rtitleName = receiveIntent.getStringExtra("titleName");
         rname = receiveIntent.getStringExtra("name");
-        //final String ivDonationProfile = receiveIntent.getStringExtra("ivDonationProfile");
+        ivDonationProfile = receiveIntent.getStringExtra("contentImage");
         rdate = receiveIntent.getStringExtra("date");
         rstartdate = receiveIntent.getStringExtra("startDate");
         rmaxStep = receiveIntent.getStringExtra("maxStep").replace(",", "");
@@ -55,6 +69,7 @@ public class CampaignUpdateActivity extends AppCompatActivity {
         eddate = findViewById(R.id.date);
         edmaxStep = findViewById(R.id.maxStep);
         edcontent = findViewById(R.id.content);
+        campaign_imageView = findViewById(R.id.campaign_imageView);
 
         edtitleName.setText(rtitleName);
         tname.setText(rname);
@@ -63,6 +78,15 @@ public class CampaignUpdateActivity extends AppCompatActivity {
         edmaxStep.setText(rmaxStep);
         edcontent.setText(rcontent);
 
+        campaign_picture_btn = findViewById(R.id.campaign_picture_btn);
+        campaign_picture_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityResult.launch(intent);
+            }
+        });
 
         // campaign_update_btn 클릭 시 DonationActivity 이동
         campaign_update_btn = findViewById(R.id.campaign_update_btn);
@@ -118,6 +142,7 @@ public class CampaignUpdateActivity extends AppCompatActivity {
 
                     // 저장 성공인 경우.
                     if (success) {
+
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         finish();
 
@@ -134,9 +159,31 @@ public class CampaignUpdateActivity extends AppCompatActivity {
         };
 
         // 서버로 Volley를 이용해서 요청을 함.
-        CampaignUpdateRequest campaignUpdateRequest = new CampaignUpdateRequest(Integer.parseInt(rNum), titleName, startdate, date, maxStep, content, responseListener);
+        CampaignUpdateRequest campaignUpdateRequest = new CampaignUpdateRequest(Integer.parseInt(rNum), titleName, startdate, date, maxStep, content, ivDonationProfile, responseListener);
         RequestQueue queue = Volley.newRequestQueue(CampaignUpdateActivity.this);
         queue.add(campaignUpdateRequest);
 
     }
+
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        uri = result.getData().getData();
+                        ivDonationProfile = uri.toString();
+                        Log.d(">>>>>> ", String.valueOf(uri));
+                        try {
+                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            campaign_imageView.setImageBitmap(bitmap);
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
 }

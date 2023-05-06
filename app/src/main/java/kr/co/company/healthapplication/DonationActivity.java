@@ -136,8 +136,8 @@ public class DonationActivity extends Fragment {
                 animalBtn.setBackgroundResource(R.drawable.btnclickback);
 
                 peopleBtn.setTextColor(Color.rgb(184, 184, 184));
-                environmentBtn.setTextColor(Color.rgb(55, 85, 190));
-                animalBtn.setTextColor(Color.rgb(132, 167, 228));
+                environmentBtn.setTextColor(Color.rgb(184, 184, 184));
+                animalBtn.setTextColor(Color.rgb(55, 85, 190));
 
                 // 데이터 초기화 시켜주는 과정
                 arrayList = new ArrayList<>();

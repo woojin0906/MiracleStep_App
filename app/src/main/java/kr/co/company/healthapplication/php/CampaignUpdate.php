@@ -16,15 +16,19 @@
     $content = isset($_POST["content"]) ? $_POST["content"] : "";
     $maxStep = isset($_POST["maxStep"]) ? $_POST["maxStep"] : "";
     $campaignIndex = isset($_POST["dNum"]) ? $_POST["dNum"] : "";
+    $ivDonationProfile = isset($_POST["contentImage"]) ? $_POST["contentImage"] : "";
 
 /* (3) DB안에 insert하는 문장. (User) */
-    $statement = mysqli_prepare($con, "UPDATE CampaignList SET title = ?, startDate = ?, lastDate = ?, maxDonation = ?, content = ? Where campaignIndex = ?");
-    mysqli_stmt_bind_param($statement, "sssisi", $titleName, $startdate, $date, $maxStep, $content, $campaignIndex);
+    $statement = mysqli_prepare($con, "UPDATE CampaignList SET title = ?, startDate = ?, lastDate = ?, maxDonation = ?, content = ? , contentImage = ? Where campaignIndex = ?");
+    mysqli_stmt_bind_param($statement, "sssissi", $titleName, $startdate, $date, $maxStep, $content, $ivDonationProfile, $campaignIndex);
     mysqli_stmt_execute($statement);
 
 /* (4) 성공 여부 전송. */
     $response = array();
     $response["success"] = true;
+    $response["dNum"] = $campaignIndex;
+    $response["contentImage"] = $ivDonationProfile;
+
 
     echo json_encode($response);
 ?>
