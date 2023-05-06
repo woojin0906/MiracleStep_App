@@ -92,7 +92,7 @@ public class ChatbotActivity extends AppCompatActivity {
     // chatbotAPI 요청
     private String chatbotTest(String userInput) throws Exception {
         try {
-            URL url = new URL("https://chatbot-api.run.goorm.site/");
+            URL url = new URL("https://chatbotapi-gpt-inofu.run.goorm.site/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
