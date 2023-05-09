@@ -52,7 +52,7 @@ public class ChatbotActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userInput = etUserInput.getText().toString();
+                String userInput = "me: "+(etUserInput.getText().toString());
 
                 ChatbotData mainData = new ChatbotData(userInput);
 
@@ -92,7 +92,7 @@ public class ChatbotActivity extends AppCompatActivity {
     // chatbotAPI 요청
     private String chatbotTest(String userInput) throws Exception {
         try {
-            URL url = new URL("https://chatbotapi-gpt-inofu.run.goorm.site/");
+            URL url = new URL("https://chatbotapi-gpt-inofu.run.goorm.site/ms");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
