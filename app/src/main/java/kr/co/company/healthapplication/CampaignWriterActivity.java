@@ -45,6 +45,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 
@@ -67,6 +68,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor  editor;
     private String userId;
+    private InputStream in;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,7 @@ public class CampaignWriterActivity extends AppCompatActivity {
             public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityResult.launch(intent);
                 }
         });
@@ -197,12 +200,20 @@ public class CampaignWriterActivity extends AppCompatActivity {
                         try {
                             bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             campaign_imageView.setImageBitmap(bitmap);
+//                        try {
+//                            in = getContentResolver().openInputStream(result.getData().getData());
+//                            Log.d(">>>>>> ", String.valueOf(in));
+//                            bitmap = BitmapFactory.decodeStream(in);
+//                            campaign_imageView.setImageBitmap(bitmap);
+//                            Log.d(">>>>>>bitmap ", String.valueOf(bitmap));
 
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else if(result.getResultCode() == RESULT_CANCELED) {
+                        Toast.makeText(getApplicationContext(), "사진 선택 취소", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

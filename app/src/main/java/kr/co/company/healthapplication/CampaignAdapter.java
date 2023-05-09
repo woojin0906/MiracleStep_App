@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -54,6 +57,11 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Custom
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getIvDonationProfile())
                 .into(holder.ivDonationProfile);
+
+//        InputStream in = new ByteArrayInputStream(arrayList.get(position).getIvDonationProfile().getBytes());
+//        Bitmap bitmap = BitmapFactory.decodeStream(in);
+//        holder.ivDonationProfile.setImageBitmap(bitmap);
+//        Log.d("...bit", String.valueOf(bitmap));
 //        holder.ivDonationProfile.setImageBitmap(StringToBitmap(arrayList.get(position).getIvDonationProfile()));
         // 리사이클러뷰 클릭이벤트(선택된 리사이클러뷰 화면으로 이동)
         holder.itemView.setOnClickListener(new View.OnClickListener() {
